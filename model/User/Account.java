@@ -1,4 +1,4 @@
-package model;
+package model.User;
 
 public class Account {
     private String Mail;

@@ -1,4 +1,4 @@
-package model;
+package model.Finance;
 
 public class Finance {
     private String ID;
@@ -6,6 +6,9 @@ public class Finance {
     private String Type;
     private java.util.Date Date; //java.sql.Date;
 
+    public Finance(){
+        
+    }
     public String getID() {
         return ID;
     }

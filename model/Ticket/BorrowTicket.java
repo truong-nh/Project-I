@@ -1,6 +1,9 @@
-package model;
+package model.Ticket;
 
 import java.util.Date;
+
+import model.Book.Book;
+import model.User.User;
 
 public class BorrowTicket extends Ticket{
     private User Borrower;

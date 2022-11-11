@@ -1,4 +1,4 @@
-package model;
+package model.Ticket;
 
 import java.util.Date;
 

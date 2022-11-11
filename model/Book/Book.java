@@ -1,4 +1,4 @@
-package model;
+package model.Book;
 
 public class Book {
     private int ID;

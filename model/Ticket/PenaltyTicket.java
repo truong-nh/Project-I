@@ -1,4 +1,4 @@
-package model;
+package model.Ticket;
 
 public class PenaltyTicket extends Ticket{
     private Long Penalty;
