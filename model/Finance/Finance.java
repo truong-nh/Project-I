@@ -1,10 +1,12 @@
 package model.Finance;
 
+import java.util.Date;
+
 public class Finance {
     private String ID;
     private Long Value;
     private String Type;
-    private java.util.Date Date; //java.sql.Date;
+    private Date Date; //java.sql.Date;
 
     public Finance(){
         
@@ -18,7 +20,7 @@ public class Finance {
     public String getType() {
         return Type;
     }
-    public java.util.Date getDate() {
+    public Date getDate() {
         return Date;
     }
     public void setID(String iD) {
