@@ -1,0 +1,6 @@
+controller\test.class
+model\user\User.class
+model\book\Book.class
+model\book\Location.class
+model\user\Account.class
+model\finance\Finance.class
