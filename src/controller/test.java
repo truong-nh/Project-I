@@ -10,20 +10,11 @@ import model.user.User;
  *
  * @author Admin
  */
-public class TicketController {
-      private User user;
-
-    public TicketController(User user) {
-        this.user = user;
+public class test {
+    public static void main(String[] args) {
+        User user= new User();
+        AccountController ac= new AccountController(user);
+         System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    
+   
 }
