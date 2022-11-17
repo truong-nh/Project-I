@@ -27,9 +27,12 @@ public class AccountController {
         this.user = user;
     }
     
+    
    public void addUser(User user){
        DBUser.addUser(user);
    }
+   
+   
    
    public List<User> getListUser(){
        return DBUser.getListUsers();
@@ -38,7 +41,7 @@ public class AccountController {
    public void updateUser(int iduser,User user){
       DBUser.updateUser(iduser, user);
    }
-   
+ 
    public User getUserByUserName(String userName){
        for(User user : this.getListUser()){
            if(user.getAccount().getUsername().equals(userName)){
