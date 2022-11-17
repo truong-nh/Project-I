@@ -10,11 +10,20 @@ import model.user.User;
  *
  * @author Admin
  */
-public class AccountController {
-     private User user;
+public class FinanceController {
+      private User user;
 
-    public AccountController(User user) {
+    public FinanceController(User user) {
         this.user = user;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     
 }

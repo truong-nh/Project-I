@@ -10,12 +10,20 @@ import model.user.User;
  *
  * @author Admin
  */
-public class BookController {
-    private User user;
+public class TicketController {
+      private User user;
 
-    public BookController(User user) {
+    public TicketController(User user) {
         this.user = user;
     }
 
-        
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
 }
