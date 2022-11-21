@@ -14,7 +14,10 @@ public class test {
     public static void main(String[] args) {
         User user= new User();
         AccountController ac= new AccountController(user);
-         System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
+        ac.getListUser();
+        // System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
+        System.out.println(ac.getCurrentIdAccount()); 
+        ac.addUser("name", 0, "phone", "idCard", "mail", "username", "password", "role");
     }
-   
+    
 }

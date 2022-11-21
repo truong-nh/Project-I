@@ -33,17 +33,35 @@ public class AccountController {
        DBUser.addUser(user);
    }
    
+   public int getCurrentIdAccount(){
+       int maxIdCurrent=0;
+       for(User user:this.getListUser()){
+          if( user.getAccount().getIdAccount()>=maxIdCurrent ){
+             maxIdCurrent= user.getAccount().getIdAccount();
+          }
+       }
+       return  maxIdCurrent;
+   }
+   
    public void addUser(String name, int yearBirthday, String phoneNumber, String idCard, Account account){
        DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
+   }
+   
+   // add user tat ca thuoc tinh; thuoc tinh id tu dong tang
+    public void addUser(String name, int yearBirthday, String phoneNumber, String idCard,
+            String mail, String username, String password, String role){
+         Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
+        DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
    }
    
    public List<User> getListUser(){
        return DBUser.getListUsers();
    }
    
-   public void addAccount(String mail, String username, String password, int idAccount, String role){
-       DBUser.addAccount(new Account(mail, username, password, idAccount, role));
+   public void addAccount(String mail, String username, String password,  String role){
+       DBUser.addAccount(new Account(mail, username, password, this.getCurrentIdAccount()+1, role));
    }
+   
    
    public void addAccount(Account account){
        DBUser.addAccount(account);
@@ -52,6 +70,7 @@ public class AccountController {
    public void updateUser(int iduser,User user){
       DBUser.updateUser(iduser, user);
    }
+   
  
    public User getUserByUserName(String userName){
        for(User user : this.getListUser()){
