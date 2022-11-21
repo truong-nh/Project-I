@@ -16,6 +16,14 @@ public class Account {
     private String role;
 
     public Account() {
+        
+    }
+    public Account(String mail, String username, String password, int idAccount, String role) {
+        this.mail = mail;
+        this.username = username;
+        this.password = password;
+        this.idAccount = idAccount;
+        this.role = role;
     }
 
     public String getMail() {

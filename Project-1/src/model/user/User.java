@@ -15,8 +15,19 @@ public class User {
     private String idCard;
     private Account account;
     
+    public User(String name, int yearBirthday, String phoneNumber, String idCard, Account account){
+        this.name = name;
+        this.yearBirthday = yearBirthday;
+        this.phoneNumber = phoneNumber;
+        this.idCard = idCard;
+        this.account = account;
+    }
     public User(){
-        
+        this.name = null;
+        this.yearBirthday = 0;
+        this.phoneNumber = null;
+        this.idCard = null;
+        this.account = null;
     }
 
     public String getName() {
