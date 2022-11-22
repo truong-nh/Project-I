@@ -54,6 +54,7 @@ public class AccountController {
         DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
    }
    
+   //test
    public List<User> getListUser(){
        return DBUser.getListUsers();
    }
