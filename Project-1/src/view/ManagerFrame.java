@@ -41,7 +41,7 @@ public class ManagerFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         pn_main = new javax.swing.JPanel();
         btn_logout = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_edituser = new javax.swing.JButton();
         lb_hellouser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,8 +83,13 @@ public class ManagerFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Chỉnh sửa thông tin");
+        btn_edituser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_edituser.setText("Chỉnh sửa thông tin");
+        btn_edituser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_edituserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,7 +101,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_searchuser)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(266, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -121,7 +126,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                             .addComponent(btn_searchuser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -148,6 +153,16 @@ public class ManagerFrame extends javax.swing.JFrame {
         LoginFrame lf = new  LoginFrame();
         lf.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void btn_edituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_edituserActionPerformed
+        User useredit = new User();
+        SearchUserForm suf = new SearchUserForm(useredit);
+        useredit = suf.SelectUser(useredit);
+        EditUserForm euf = new EditUserForm(useredit);
+        pn_main.removeAll();
+        pn_main.add(euf);
+        this.pack();
+    }//GEN-LAST:event_btn_edituserActionPerformed
     
     /**
      * @param args the command line arguments
@@ -186,9 +201,9 @@ public class ManagerFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_createuser;
+    private javax.swing.JButton btn_edituser;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_searchuser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lb_hellouser;
     private javax.swing.JPanel pn_main;

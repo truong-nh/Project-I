@@ -10,20 +10,25 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
+import model.user.Account;
+import model.user.User;
 
 /**
  *
  * @author Administrator
  */
 public class SearchUserForm extends javax.swing.JPanel {
-
+    private User user;
     /**
      * Creates new form SearchUserForm
      */
     public SearchUserForm() {
         initComponents();
     }
-
+    
+    public SearchUserForm(User user){
+        this.user = user;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -269,7 +274,24 @@ public class SearchUserForm extends javax.swing.JPanel {
         DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
         tbmodel.setRowCount(0);
     }
-
+    
+    public User SelectUser(User user){
+        Account accountedit = new Account();
+        DefaultTableModel model = (DefaultTableModel)tb_user.getModel();
+        int selectedRowIndex = tb_user.getSelectedRow();
+        user.setName(model.getValueAt(selectedRowIndex, 1).toString());
+        user.setYearBirthday(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 2)));
+        user.setPhoneNumber(model.getValueAt(selectedRowIndex, 3).toString());
+        user.setIdCard(model.getValueAt(selectedRowIndex, 4).toString());
+        accountedit.setMail(model.getValueAt(selectedRowIndex, 5).toString());
+        accountedit.setUsername(model.getValueAt(selectedRowIndex, 6).toString());
+        accountedit.setPassword(model.getValueAt(selectedRowIndex, 7).toString());
+        accountedit.setIdAccount(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 0)));
+        accountedit.setRole(model.getValueAt(selectedRowIndex, 8).toString());
+        user.setAccount(accountedit);
+        return user;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel1;
