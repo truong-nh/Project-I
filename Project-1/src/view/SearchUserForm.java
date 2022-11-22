@@ -275,7 +275,7 @@ public class SearchUserForm extends javax.swing.JPanel {
         tbmodel.setRowCount(0);
     }
     
-    public void SelectUser(User user){
+    public User SelectUser(User user){
         Account accountedit = new Account();
         DefaultTableModel model = (DefaultTableModel)tb_user.getModel();
         int selectedRowIndex = tb_user.getSelectedRow();
@@ -287,7 +287,9 @@ public class SearchUserForm extends javax.swing.JPanel {
         accountedit.setUsername(model.getValueAt(selectedRowIndex, 6).toString());
         accountedit.setPassword(model.getValueAt(selectedRowIndex, 7).toString());
         accountedit.setIdAccount(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 0)));
+        accountedit.setRole(model.getValueAt(selectedRowIndex, 8).toString());
         user.setAccount(accountedit);
+        return user;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
