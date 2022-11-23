@@ -221,8 +221,13 @@ public class CreateUserForm extends javax.swing.JFrame {
         String mail = tf_mail.getText();
         String phone = tf_phone.getText();
         String userName = tf_username.getText();
-        int yearbd = Integer.parseInt( tf_yearbd.getText());
-        accountController.addUser(name, yearbd, phone, idCard, mail, userName, password, phone);
+        String yearbd = tf_yearbd.getText();
+        if(name.equals("") || password.equals("") || idCard.equals("") || mail.equals("") 
+                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("")){
+            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
+            rnd.setVisible(true);
+        }
+        else accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, phone);
     }//GEN-LAST:event_btn_createuserActionPerformed
 
     /**

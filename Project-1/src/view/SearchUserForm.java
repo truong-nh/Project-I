@@ -49,6 +49,7 @@ public class SearchUserForm extends javax.swing.JPanel {
         tf_searchidcard = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tf_searchaccount = new javax.swing.JTextField();
+        btn_edituser = new javax.swing.JButton();
 
         tb_user.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,24 +101,33 @@ public class SearchUserForm extends javax.swing.JPanel {
 
         jLabel3.setText("Tìm theo tài khoản");
 
+        btn_edituser.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btn_edituser.setText("Chỉnh sửa");
+        btn_edituser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_edituserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_search)
-                .addGap(23, 23, 23))
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_searchaccount, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_searchidcard)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_serachname, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_searchidcard)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_serachname, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -135,8 +145,10 @@ public class SearchUserForm extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_searchaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_search, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btn_edituser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(23, 23, 23))
         );
 
@@ -269,6 +281,13 @@ public class SearchUserForm extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_searchActionPerformed
+
+    private void btn_edituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_edituserActionPerformed
+        User edituser = new User();
+        SelectUser(edituser);
+        EditUserForm euf = new EditUserForm(edituser);
+        euf.setVisible(true);
+    }//GEN-LAST:event_btn_edituserActionPerformed
     
     public void ClearDataTable(){
         DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
@@ -278,21 +297,31 @@ public class SearchUserForm extends javax.swing.JPanel {
     public User SelectUser(User user){
         Account accountedit = new Account();
         DefaultTableModel model = (DefaultTableModel)tb_user.getModel();
+        
         int selectedRowIndex = tb_user.getSelectedRow();
-        user.setName(model.getValueAt(selectedRowIndex, 1).toString());
-        user.setYearBirthday(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 2)));
-        user.setPhoneNumber(model.getValueAt(selectedRowIndex, 3).toString());
-        user.setIdCard(model.getValueAt(selectedRowIndex, 4).toString());
-        accountedit.setMail(model.getValueAt(selectedRowIndex, 5).toString());
-        accountedit.setUsername(model.getValueAt(selectedRowIndex, 6).toString());
-        accountedit.setPassword(model.getValueAt(selectedRowIndex, 7).toString());
-        accountedit.setIdAccount(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 0)));
-        accountedit.setRole(model.getValueAt(selectedRowIndex, 8).toString());
-        user.setAccount(accountedit);
+        
+        if(selectedRowIndex == -1){
+            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn 1 người để chỉnh sửa");
+            rnd.setVisible(true);
+        }
+        else{
+            user.setName(model.getValueAt(selectedRowIndex, 1).toString());
+            user.setYearBirthday(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 2)));
+            user.setPhoneNumber(model.getValueAt(selectedRowIndex, 3).toString());
+            user.setIdCard(model.getValueAt(selectedRowIndex, 4).toString());
+            accountedit.setMail(model.getValueAt(selectedRowIndex, 5).toString());
+            accountedit.setUsername(model.getValueAt(selectedRowIndex, 6).toString());
+            accountedit.setPassword(model.getValueAt(selectedRowIndex, 7).toString());
+            accountedit.setIdAccount(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 0)));
+            accountedit.setRole(model.getValueAt(selectedRowIndex, 8).toString());
+        
+            user.setAccount(accountedit);
+        }
         return user;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_edituser;
     private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
