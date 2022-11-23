@@ -135,10 +135,9 @@ public class ManagerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_createuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createuserActionPerformed
-        pn_main.removeAll();
         CreateUserForm cuf = new CreateUserForm();
-        pn_main.add(cuf);
-        this.pack();
+        cuf.setVisible(true);
+//        cuf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btn_createuserActionPerformed
 
     private void btn_searchuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchuserActionPerformed
