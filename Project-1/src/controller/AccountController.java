@@ -16,6 +16,10 @@ import model.user.User;
 public class AccountController {
      private User user;
 
+    public AccountController() {
+        
+    }
+     
     public AccountController(User user) {
         this.user = user;
     }
