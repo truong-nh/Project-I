@@ -16,9 +16,6 @@ import model.user.User;
 public class AccountController {
      private User user;
 
-    public AccountController() {
-    }
-    
     public AccountController(User user) {
         this.user = user;
     }
@@ -51,13 +48,12 @@ public class AccountController {
    }
    
    // add user tat ca thuoc tinh; thuoc tinh id tu dong tang
-    public  void addUser(String name, int yearBirthday, String phoneNumber, String idCard,
+    public void addUser(String name, int yearBirthday, String phoneNumber, String idCard,
             String mail, String username, String password, String role){
          Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
         DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
    }
    
-   //test
    public List<User> getListUser(){
        return DBUser.getListUsers();
    }
