@@ -4,6 +4,9 @@
  */
 package view;
 
+import controller.AccountController;
+import javax.swing.JOptionPane;
+import model.user.Account;
 import model.user.User;
 
 /**
@@ -105,6 +108,11 @@ public class EditUserForm extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Đồng ý");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -220,6 +228,30 @@ public class EditUserForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        AccountController accountController = new AccountController();
+        
+        Account account = this.user.getAccount();
+        String name = tf_name.getText();
+        String password = tf_password.getText();
+        String idCard = tf_idcard.getText();
+        String mail = tf_mail.getText();
+        String phone = tf_phone.getText();
+        String userName = tf_username.getText();
+        int yearbd = Integer.parseInt(tf_yearbd.getText());
+        Account accountAfterUpdate = new Account(mail, userName, password, account.getIdAccount(), account.getRole());
+        User userAfterUpdate= new User(name, yearbd, phone, idCard, accountAfterUpdate);
+        if (accountController.updateUser(this.user.getAccount().getIdAccount(), userAfterUpdate)){
+        this.setVisible(false);
+        }
+        else{
+                    JOptionPane.showMessageDialog(null, "chỉnh sửa khong hợp lệ");
+        }
+                
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

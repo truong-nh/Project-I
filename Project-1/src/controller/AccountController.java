@@ -52,12 +52,19 @@ public class AccountController {
    }
    
    // add user tat ca thuoc tinh; thuoc tinh id tu dong tang
-    public void addUser(String name, int yearBirthday, String phoneNumber, String idCard,
+    public boolean addUser(String name, int yearBirthday, String phoneNumber, String idCard,
             String mail, String username, String password, String role){
          Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
-        DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
+         try {
+            DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
    }
    
+    
    public List<User> getListUser(){
        return DBUser.getListUsers();
    }
@@ -71,8 +78,14 @@ public class AccountController {
        DBUser.addAccount(account);
    }
    
-   public void updateUser(int iduser,User user){
-      DBUser.updateUser(iduser, user);
+   public boolean updateUser(int iduser,User user){
+       try {
+           DBUser.updateUser(iduser, user);
+           return true;
+       } catch (Exception e) {
+           return false;
+       }
+       
    }
    
  
