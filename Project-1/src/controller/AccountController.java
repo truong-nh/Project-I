@@ -52,6 +52,7 @@ public class AccountController {
    }
    
    // add user tat ca thuoc tinh; thuoc tinh id tu dong tang
+   //ham can chinh sua
     public boolean addUser(String name, int yearBirthday, String phoneNumber, String idCard,
             String mail, String username, String password, String role){
          Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
@@ -78,6 +79,7 @@ public class AccountController {
        DBUser.addAccount(account);
    }
    
+   //ham can chinh sua
    public boolean updateUser(int iduser,User user){
        try {
            DBUser.updateUser(iduser, user);
@@ -88,7 +90,6 @@ public class AccountController {
        
    }
    
- 
    public User getUserByUserName(String userName){
        for(User user : this.getListUser()){
            if(user.getAccount().getUsername().equals(userName)){
