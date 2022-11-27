@@ -37,7 +37,7 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
         lb_errornofi = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -45,7 +45,6 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
         lb_errornofi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         lb_errornofi.setForeground(new java.awt.Color(255, 0, 0));
         lb_errornofi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_errornofi.setText("Vui lòng điền đầy đủ thông tin!");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +116,8 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ErrorNofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

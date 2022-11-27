@@ -58,14 +58,15 @@ public class MyButton extends JButton {
     public void setRadius(int radius) {
         this.radius = radius;
     }
-
+    
+    
     public MyButton() {
         //  Init Color
 
         setColor(Color.WHITE);
         colorOver = new Color(179, 250, 160);
         colorClick = new Color(152, 184, 144);
-        borderColor = new Color(30, 136, 56);
+        borderColor = new Color(255,255,255);
         setContentAreaFilled(false);
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
@@ -104,7 +105,7 @@ public class MyButton extends JButton {
     private Color colorClick;
     private Color borderColor;
     private int radius = 0;
-
+    
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
