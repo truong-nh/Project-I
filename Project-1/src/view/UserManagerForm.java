@@ -49,7 +49,6 @@ public class UserManagerForm extends javax.swing.JPanel {
         btn_search = new view.MyButton();
         btn_edituser = new view.MyButton();
         btn_createuser = new view.MyButton();
-        btn_showpass = new view.MyButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_user = new javax.swing.JTable();
@@ -122,23 +121,6 @@ public class UserManagerForm extends javax.swing.JPanel {
             }
         });
 
-        btn_showpass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btn_showpass.setText("Hiện mật khẩu");
-        btn_showpass.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_showpass.setColorOver(new java.awt.Color(255, 255, 255));
-        btn_showpass.setDefaultCapable(false);
-        btn_showpass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_showpass.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_showpassMouseEntered(evt);
-            }
-        });
-        btn_showpass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_showpassActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -159,8 +141,6 @@ public class UserManagerForm extends javax.swing.JPanel {
                         .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(btn_showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,8 +169,7 @@ public class UserManagerForm extends javax.swing.JPanel {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -280,14 +259,6 @@ public class UserManagerForm extends javax.swing.JPanel {
     private void btn_createuserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_createuserMouseEntered
          btn_createuser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btn_createuserMouseEntered
-
-    private void btn_showpassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_showpassMouseEntered
-        btn_showpass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_showpassMouseEntered
-
-    private void btn_showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_showpassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_showpassActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try{
@@ -451,12 +422,9 @@ public class UserManagerForm extends javax.swing.JPanel {
     private view.MyButton btn_createuser;
     private view.MyButton btn_edituser;
     private view.MyButton btn_search;
-    private view.MyButton btn_showpass;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
