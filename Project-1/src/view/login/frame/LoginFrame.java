@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package view.login.frame;
 
 import constand.MySQLConstand;
 import java.sql.Connection;
@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import model.user.Account;
 import model.user.User;
+import view.manager.frame.ManagerFrame;
+import view.user.frame.UserFrame;
 
 /**
  *

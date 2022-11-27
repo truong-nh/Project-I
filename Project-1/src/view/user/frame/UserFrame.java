@@ -2,34 +2,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package view.user.frame;
 
+import view.login.frame.LoginFrame;
 import java.awt.Frame;
 import model.user.User;
+import view.user.form.CheckInfoForm;
+import view.user.form.SearchBookForm;
 import view.clock.ClockThread;
 
 /**
  *
  * @author Administrator
  */
-public class ManagerFrame extends javax.swing.JFrame {
+public class UserFrame extends javax.swing.JFrame {
     private User user;
     /**
-     * Creates new form ManagerFrame
+     * Creates new form UserFrame
      */
-    public ManagerFrame() {
+    public UserFrame() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public ManagerFrame(User user) {
+    public UserFrame(User user) {
+        this.user = user;
         initComponents();
         setLocationRelativeTo(null);
         lb_hello.setText("Xin chào, " + user.getName());
         ClockThread th= new ClockThread(lb_clock);
         th.start();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,15 +46,15 @@ public class ManagerFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lb_hello = new javax.swing.JLabel();
-        myButton1 = new view.MyButton();
+        myButton1 = new view.other.MyButton();
         jPanel6 = new javax.swing.JPanel();
-        lb_usermanager = new javax.swing.JLabel();
+        lb_searchbook = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        lb_bookmanager = new javax.swing.JLabel();
+        lb_checkbookborrow = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        lb_ticketmanager = new javax.swing.JLabel();
+        lb_checkticket = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        lb_financemanager = new javax.swing.JLabel();
+        lb_checkinfo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,13 +106,13 @@ public class ManagerFrame extends javax.swing.JFrame {
                     .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)))
         );
 
-        lb_usermanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lb_usermanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_usermanager.setText("Quản lý người dùng");
-        lb_usermanager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lb_usermanager.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_searchbook.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lb_searchbook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_searchbook.setText("Tìm kiếm sách");
+        lb_searchbook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_searchbook.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_usermanagerMouseClicked(evt);
+                lb_searchbookMouseClicked(evt);
             }
         });
 
@@ -117,56 +120,64 @@ public class ManagerFrame extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_usermanager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lb_searchbook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_usermanager, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(lb_searchbook, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        lb_bookmanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lb_bookmanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_bookmanager.setText("Quản lý sách");
+        lb_checkbookborrow.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lb_checkbookborrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_checkbookborrow.setText("Thông tin sách mượn");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_bookmanager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lb_checkbookborrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_bookmanager, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(lb_checkbookborrow, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        lb_ticketmanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lb_ticketmanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_ticketmanager.setText("Quản lý phiếu");
+        lb_checkticket.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lb_checkticket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_checkticket.setText("Thông tin phiếu");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_ticketmanager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lb_checkticket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_ticketmanager, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(lb_checkticket, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        lb_financemanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lb_financemanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_financemanager.setText("Quản lý tài chính");
+        lb_checkinfo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lb_checkinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_checkinfo.setText("Kiểm tra thông tin");
+        lb_checkinfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_checkinfoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lb_checkinfoMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_financemanager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lb_checkinfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_financemanager, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+            .addComponent(lb_checkinfo, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -190,7 +201,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -237,7 +248,7 @@ public class ManagerFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(lb_clock, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,23 +314,15 @@ public class ManagerFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 1230, 791);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.setState(Frame.ICONIFIED);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void lb_usermanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_usermanagerMouseClicked
-        UserManagerForm umf = new UserManagerForm();
-        pn_main.add(umf);
+    private void lb_searchbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_searchbookMouseClicked
+        pn_main.removeAll();
+        SearchBookForm sbf = new SearchBookForm();
+        pn_main.add(sbf);
         pack();
-    }//GEN-LAST:event_lb_usermanagerMouseClicked
-    
+    }//GEN-LAST:event_lb_searchbookMouseClicked
     
     private int xMouse,yMouse;
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
@@ -333,6 +336,14 @@ public class ManagerFrame extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         this.dispose();
         LoginFrame lf = new  LoginFrame();
@@ -342,6 +353,17 @@ public class ManagerFrame extends javax.swing.JFrame {
     private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
         myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_myButton1MouseEntered
+
+    private void lb_checkinfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_checkinfoMouseEntered
+         lb_checkinfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lb_checkinfoMouseEntered
+
+    private void lb_checkinfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_checkinfoMouseClicked
+        pn_main.removeAll();
+        CheckInfoForm cif = new CheckInfoForm(user);
+        pn_main.add(cif);
+        pack();
+    }//GEN-LAST:event_lb_checkinfoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -360,20 +382,20 @@ public class ManagerFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagerFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManagerFrame().setVisible(true);
+                new UserFrame().setVisible(true);
             }
         });
     }
@@ -391,13 +413,13 @@ public class ManagerFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JLabel lb_bookmanager;
+    private javax.swing.JLabel lb_checkbookborrow;
+    private javax.swing.JLabel lb_checkinfo;
+    private javax.swing.JLabel lb_checkticket;
     private javax.swing.JLabel lb_clock;
-    private javax.swing.JLabel lb_financemanager;
     private javax.swing.JLabel lb_hello;
-    private javax.swing.JLabel lb_ticketmanager;
-    private javax.swing.JLabel lb_usermanager;
-    private view.MyButton myButton1;
+    private javax.swing.JLabel lb_searchbook;
+    private view.other.MyButton myButton1;
     private javax.swing.JPanel pn_main;
     // End of variables declaration//GEN-END:variables
 }

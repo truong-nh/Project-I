@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view;
+package view.user.form;
 
 import model.user.User;
 
@@ -63,7 +63,7 @@ public class CheckInfoForm extends javax.swing.JPanel {
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         tf_yearbd = new javax.swing.JTextField();
-        myButton1 = new view.MyButton();
+        myButton1 = new view.other.MyButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -406,7 +406,7 @@ public class CheckInfoForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private view.MyButton myButton1;
+    private view.other.MyButton myButton1;
     private javax.swing.JTextField tf_idcard;
     private javax.swing.JTextField tf_mail;
     private javax.swing.JTextField tf_name;

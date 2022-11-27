@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package view.login.frame;
 
+import view.login.frame.LoginFrame;
 import java.awt.Frame;
 
 /**
@@ -32,7 +33,7 @@ public class NoLoginFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        myButton3 = new view.MyButton();
+        myButton3 = new view.other.MyButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -48,7 +49,7 @@ public class NoLoginFrame extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        myButton2 = new view.MyButton();
+        myButton2 = new view.other.MyButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -407,7 +408,7 @@ public class NoLoginFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private view.MyButton myButton2;
-    private view.MyButton myButton3;
+    private view.other.MyButton myButton2;
+    private view.other.MyButton myButton3;
     // End of variables declaration//GEN-END:variables
 }

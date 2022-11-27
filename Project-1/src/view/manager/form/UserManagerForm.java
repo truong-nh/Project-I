@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view;
+package view.manager.form;
 
 import constand.MySQLConstand;
 import java.sql.Connection;
@@ -12,6 +12,9 @@ import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import model.user.Account;
 import model.user.User;
+import view.other.ErrorNofiDialog;
+import view.manager.frame.CreateUserFrame;
+import view.manager.frame.EditUserFrame;
 
 /**
  *
@@ -46,9 +49,9 @@ public class UserManagerForm extends javax.swing.JPanel {
         tf_searchname = new javax.swing.JTextField();
         tf_searchidcard = new javax.swing.JTextField();
         tf_searchaccount = new javax.swing.JTextField();
-        btn_search = new view.MyButton();
-        btn_edituser = new view.MyButton();
-        btn_createuser = new view.MyButton();
+        btn_search = new view.other.MyButton();
+        btn_edituser = new view.other.MyButton();
+        btn_createuser = new view.other.MyButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_user = new javax.swing.JTable();
@@ -419,9 +422,9 @@ public class UserManagerForm extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.MyButton btn_createuser;
-    private view.MyButton btn_edituser;
-    private view.MyButton btn_search;
+    private view.other.MyButton btn_createuser;
+    private view.other.MyButton btn_edituser;
+    private view.other.MyButton btn_search;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

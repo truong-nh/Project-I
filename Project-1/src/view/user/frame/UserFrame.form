@@ -127,7 +127,7 @@
                     <Property name="text" type="java.lang.String" value="hello"/>
                   </Properties>
                 </Component>
-                <Component class="view.MyButton" name="myButton1">
+                <Component class="view.other.MyButton" name="myButton1">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
