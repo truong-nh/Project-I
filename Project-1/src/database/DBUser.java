@@ -188,7 +188,7 @@ public class DBUser {
         
         return users;
     }
-    
+        
         public static void addUser(User user) {
         Connection connection = JDBCConnection.getJDBCConnection();
         PreparedStatement pst = null;

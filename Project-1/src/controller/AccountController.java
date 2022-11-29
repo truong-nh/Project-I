@@ -5,6 +5,7 @@
 package controller;
 
 import database.DBUser;
+import java.util.ArrayList;
 import java.util.List;
 import model.user.Account;
 import model.user.User;
@@ -50,13 +51,47 @@ public class AccountController {
    public void addUser(String name, int yearBirthday, String phoneNumber, String idCard, Account account){
        DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
    }
-   
+     
    // add user tat ca thuoc tinh; thuoc tinh id tu dong tang
    //ham can chinh sua
     public boolean addUser(String name, int yearBirthday, String phoneNumber, String idCard,
-            String mail, String username, String password, String role){
-         Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
-         try {
+        String mail, String username, String password, String role){
+        Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
+        
+        // check number
+        if (phoneNumber.length() != 10 || !phoneNumber.substring(0,1).equals("0")){
+            return false;
+        }
+        
+        // check idcard
+        if (idCard.length() != 9){
+            if (idCard.length() != 12){
+                return false;
+            }
+        }
+        
+        // check mail
+        int z = 0;
+        for (int i = 0; i<mail.length(); i++){
+            if (mail.substring(i,1).equals("@")){
+                z = 1;
+            }
+        }
+        if (z == 0) return false;
+        
+        // check legit account
+        List<User> ListCheck = new ArrayList<User>();
+        ListCheck = getListUser();
+        for (User ListElement : ListCheck) {
+            Account accountcheck = new Account();
+            accountcheck = ListElement.getAccount();
+            if (accountcheck.getUsername().equals(username)){
+                return false;
+            }
+        }
+
+        
+        try {
             DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
             return true;
         } catch (Exception e) {
@@ -81,6 +116,21 @@ public class AccountController {
    
    //ham can chinh sua
    public boolean updateUser(int iduser,User user){
+       String phoneNumber = user.getPhoneNumber();
+       String idCard = user.getIdCard();
+       
+       // check number
+        if (phoneNumber.length() != 10 || !phoneNumber.substring(0,1).equals("0")){
+            return false;
+        }
+        
+        // check idcard
+        if (idCard.length() != 9){
+            if (idCard.length() != 12){
+                return false;
+            }
+        }
+       
        try {
            DBUser.updateUser(iduser, user);
            return true;
