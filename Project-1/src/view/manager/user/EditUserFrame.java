@@ -2,25 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.manager.frame;
+package view.manager.user;
 
 import controller.AccountController;
+import javax.swing.JOptionPane;
+import model.user.Account;
 import model.user.User;
-import view.other.ErrorNofiDialog;
 
 /**
  *
  * @author Administrator
  */
-public class CreateUserFrame extends javax.swing.JFrame {
+public class EditUserFrame extends javax.swing.JFrame {
     private User user;
-    private AccountController accountController = new AccountController();
     /**
-     * Creates new form CreateUserFrame
+     * Creates new form EditUserFrame
      */
-    public CreateUserFrame() {
+    public EditUserFrame() {
         initComponents();
         setLocationRelativeTo(null);
+    }
+    public EditUserFrame(User user) {
+        this.user = user;
+        initComponents();
+        setLocationRelativeTo(null);
+        tf_username.setText(user.getAccount().getUsername());
+        if(user.getAccount().getRole().equals("manager")){
+            tf_password.setEnabled(false);
+        }
+        tf_password.setText(user.getAccount().getPassword());
+        tf_name.setText(user.getName());
+        tf_idcard.setText(user.getIdCard());
+        tf_yearbd.setText(String.valueOf(user.getYearBirthday()));
+        tf_phone.setText(user.getPhoneNumber());
+        tf_mail.setText(user.getAccount().getMail());
     }
 
     /**
@@ -32,7 +47,6 @@ public class CreateUserFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,10 +73,6 @@ public class CreateUserFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         tf_yearbd = new javax.swing.JTextField();
         myButton1 = new view.other.MyButton();
-        jPanel16 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        ManagerjRadioButton1 = new javax.swing.JRadioButton();
-        UserjRadioButton1 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -86,7 +96,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -112,7 +122,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -138,7 +148,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_idcard, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_idcard, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -155,6 +165,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
         jLabel5.setText("Tài khoản");
 
         tf_username.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_username.setEnabled(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -164,7 +175,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -190,7 +201,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -216,7 +227,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -242,8 +253,8 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_yearbd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addComponent(tf_yearbd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +266,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
         );
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        myButton1.setText("Tạo");
+        myButton1.setText("Đồng ý");
         myButton1.setColorClick(new java.awt.Color(153, 153, 153));
         myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -269,41 +280,6 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 myButton1ActionPerformed(evt);
             }
         });
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel12.setText("Role");
-
-        buttonGroup1.add(ManagerjRadioButton1);
-        ManagerjRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        ManagerjRadioButton1.setText("Manager");
-
-        buttonGroup1.add(UserjRadioButton1);
-        UserjRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        UserjRadioButton1.setText("User");
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(ManagerjRadioButton1)
-                .addGap(18, 18, 18)
-                .addComponent(UserjRadioButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ManagerjRadioButton1)
-                    .addComponent(UserjRadioButton1))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -321,13 +297,12 @@ public class CreateUserFrame extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addGap(37, 37, 37))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,11 +321,9 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(97, 97, 97))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -363,13 +336,12 @@ public class CreateUserFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Tạo người dùng mới");
-        jLabel4.setToolTipText("");
+        jLabel4.setText("Chỉnh sửa người dùng");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -416,34 +388,24 @@ public class CreateUserFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_myButton1MouseEntered
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
+        AccountController accountController = new AccountController();
+        
+        Account account = this.user.getAccount();
         String name = tf_name.getText();
         String password = tf_password.getText();
         String idCard = tf_idcard.getText();
         String mail = tf_mail.getText();
         String phone = tf_phone.getText();
         String userName = tf_username.getText();
-        String yearbd = tf_yearbd.getText();
-        String role="";
-        if(ManagerjRadioButton1.isSelected()){
-        role += "manager";
+        int yearbd = Integer.parseInt(tf_yearbd.getText());
+        Account accountAfterUpdate = new Account(mail, userName, password, account.getIdAccount(), account.getRole());
+        User userAfterUpdate= new User(name, yearbd, phone, idCard, accountAfterUpdate);
+        if (accountController.updateUser(this.user.getAccount().getIdAccount(), userAfterUpdate)){
+        this.setVisible(false);
         }
         else{
-            role += "user";
+                    JOptionPane.showMessageDialog(null, "Chỉnh sửa không hợp lệ");
         }
-                
-        if(name.equals("") || password.equals("") || idCard.equals("") || mail.equals("") 
-                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("")){
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
-            rnd.setVisible(true);
-        }
-        else
-            if(accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)){
-            this.setVisible(false);
-            }
-            else{
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Nhập thông tin không hợp lệ");
-            rnd.setVisible(true);
-            }
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**
@@ -463,32 +425,28 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateUserFrame().setVisible(true);
+                new EditUserFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton ManagerjRadioButton1;
-    private javax.swing.JRadioButton UserjRadioButton1;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -498,7 +456,6 @@ public class CreateUserFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

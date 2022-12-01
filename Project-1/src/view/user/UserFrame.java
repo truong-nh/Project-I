@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.user.frame;
+package view.user;
 
 import view.login.frame.LoginFrame;
 import java.awt.Frame;
 import model.user.User;
-import view.user.form.CheckInfoForm;
-import view.user.form.SearchBookForm;
+import view.user.checkinfo.CheckInfoForm;
+import view.user.search.SearchBookForm;
 import view.clock.ClockThread;
 
 /**

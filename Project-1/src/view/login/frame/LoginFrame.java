@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import model.user.Account;
 import model.user.User;
-import view.manager.frame.ManagerFrame;
-import view.user.frame.UserFrame;
+import view.manager.ManagerFrame;
+import view.user.UserFrame;
 
 /**
  *

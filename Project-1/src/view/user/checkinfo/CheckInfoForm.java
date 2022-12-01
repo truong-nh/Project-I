@@ -1,38 +1,33 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.manager.frame;
+package view.user.checkinfo;
 
-import controller.AccountController;
-import javax.swing.JOptionPane;
-import model.user.Account;
 import model.user.User;
 
 /**
  *
  * @author Administrator
  */
-public class EditUserFrame extends javax.swing.JFrame {
-    private User user;
+public class CheckInfoForm extends javax.swing.JPanel {
+
     /**
-     * Creates new form EditUserFrame
+     * Creates new form CheckInfoForm
      */
-    public EditUserFrame() {
+    public CheckInfoForm() {
         initComponents();
-        setLocationRelativeTo(null);
     }
-    public EditUserFrame(User user) {
-        this.user = user;
+    
+    public CheckInfoForm(User user) {
         initComponents();
-        setLocationRelativeTo(null);
-        tf_idcard.setText(user.getIdCard());
-        tf_mail.setText(user.getAccount().getMail());
         tf_name.setText(user.getName());
-        tf_password.setText(user.getAccount().getPassword());
-        tf_phone.setText(user.getPhoneNumber());
-        tf_username.setText(user.getAccount().getUsername());
         tf_yearbd.setText(String.valueOf(user.getYearBirthday()));
+        tf_phone.setText(user.getPhoneNumber());
+        tf_idcard.setText(user.getIdCard());
+        tf_username.setText(user.getAccount().getUsername());
+        tf_password.setText(user.getAccount().getPassword());
+        tf_mail.setText(user.getAccount().getMail());
     }
 
     /**
@@ -44,7 +39,6 @@ public class EditUserFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
@@ -73,9 +67,6 @@ public class EditUserFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
-
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
@@ -84,6 +75,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel1.setText("Mật khẩu");
 
         tf_password.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_password.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_password.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -110,6 +103,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel2.setText("Họ & Tên");
 
         tf_name.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_name.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_name.setEnabled(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -136,6 +131,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel3.setText("CCCD/CMND");
 
         tf_idcard.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_idcard.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_idcard.setEnabled(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -162,6 +159,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel5.setText("Tài khoản");
 
         tf_username.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_username.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tf_username.setEnabled(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -189,6 +187,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel7.setText("SĐT");
 
         tf_phone.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_phone.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_phone.setEnabled(false);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -215,6 +215,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel10.setText("Mail");
 
         tf_mail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_mail.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_mail.setEnabled(false);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -241,6 +243,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         jLabel11.setText("Năm sinh");
 
         tf_yearbd.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_yearbd.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_yearbd.setEnabled(false);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -251,7 +255,7 @@ public class EditUserFrame extends javax.swing.JFrame {
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_yearbd, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(560, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,18 +267,13 @@ public class EditUserFrame extends javax.swing.JFrame {
         );
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        myButton1.setText("Đồng ý");
+        myButton1.setText("Yêu cầu chỉnh sửa");
         myButton1.setColorClick(new java.awt.Color(153, 153, 153));
         myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         myButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 myButton1MouseEntered(evt);
-            }
-        });
-        myButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButton1ActionPerformed(evt);
             }
         });
 
@@ -298,8 +297,8 @@ public class EditUserFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(276, 276, 276))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,9 +317,9 @@ public class EditUserFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -329,116 +328,63 @@ public class EditUserFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
         );
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Chỉnh sửa người dùng");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 367, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Kiểm tra thông tin");
+        jLabel4.setToolTipText("");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(157, 157, 157)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(158, 158, 158)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(42, 42, 42)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(243, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
         myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_myButton1MouseEntered
 
-    private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        AccountController accountController = new AccountController();
-        
-        Account account = this.user.getAccount();
-        String name = tf_name.getText();
-        String password = tf_password.getText();
-        String idCard = tf_idcard.getText();
-        String mail = tf_mail.getText();
-        String phone = tf_phone.getText();
-        String userName = tf_username.getText();
-        int yearbd = Integer.parseInt(tf_yearbd.getText());
-        Account accountAfterUpdate = new Account(mail, userName, password, account.getIdAccount(), account.getRole());
-        User userAfterUpdate= new User(name, yearbd, phone, idCard, accountAfterUpdate);
-        if (accountController.updateUser(this.user.getAccount().getIdAccount(), userAfterUpdate)){
-        this.setVisible(false);
-        }
-        else{
-                    JOptionPane.showMessageDialog(null, "Chỉnh sửa không hợp lệ");
-        }
-    }//GEN-LAST:event_myButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditUserFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditUserFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -449,7 +395,6 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.manager.form;
+package view.manager.user;
 
 import constand.MySQLConstand;
 import java.sql.Connection;
@@ -13,8 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import model.user.Account;
 import model.user.User;
 import view.other.ErrorNofiDialog;
-import view.manager.frame.CreateUserFrame;
-import view.manager.frame.EditUserFrame;
 
 /**
  *
@@ -181,14 +179,14 @@ public class UserManagerForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Họ & Tên", "Năm sinh", "SĐT", "CCCD/CMND", "Mail", "Tài khoản", "Mật khẩu", "Vai trò"
+                "ID", "Họ & Tên", "Năm sinh", "SĐT", "CCCD/CMND", "Mail", "Tài khoản", "Vai trò"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -199,6 +197,7 @@ public class UserManagerForm extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tb_user.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_user);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -256,11 +255,11 @@ public class UserManagerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_searchMouseEntered
 
     private void btn_edituserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_edituserMouseEntered
-         btn_edituser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_edituser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btn_edituserMouseEntered
 
     private void btn_createuserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_createuserMouseEntered
-         btn_createuser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_createuser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_btn_createuserMouseEntered
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
@@ -273,7 +272,6 @@ public class UserManagerForm extends javax.swing.JPanel {
             String searchname = tf_searchname.getText().trim();
             String searchidcard = tf_searchidcard.getText().trim();
             String searchaccount = tf_searchaccount.getText().trim();
-            
             
             String sql = "select * from user";
             if(searchname.equals("")){
@@ -299,18 +297,11 @@ public class UserManagerForm extends javax.swing.JPanel {
                 
                 String tmpData[] = {id,name,yearbd,phone,idcard};
                 
-                if(searchaccount.equals("") == false){
-                    String tbData[] = searchAccountData(id,searchaccount,tmpData);
-                    DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
-                    if(tbData[5] != null){
-                        tbmodel.addRow(tbData);
-                    }
-                }
-                else{
-                    String tbData[] = searchAccountData(id,tmpData);
-                    DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
+                String tbData[] = addAccountData(id,searchaccount,tmpData);
+                DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
+                if(tbData[5] != null){
                     tbmodel.addRow(tbData);
-                } 
+                }
             }
             conn.close();
         }catch(Exception e){
@@ -320,9 +311,11 @@ public class UserManagerForm extends javax.swing.JPanel {
 
     private void btn_edituserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_edituserActionPerformed
         User edituser = new User();
-        SelectUser(edituser);
-        EditUserFrame euf = new EditUserFrame(edituser);
-        euf.setVisible(true);
+        edituser = SelectUser(edituser);
+        if(edituser != null){
+            EditUserFrame euf = new EditUserFrame(edituser);
+            euf.setVisible(true);
+        }
     }//GEN-LAST:event_btn_edituserActionPerformed
 
     private void btn_createuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createuserActionPerformed
@@ -335,8 +328,8 @@ public class UserManagerForm extends javax.swing.JPanel {
         tbmodel.setRowCount(0);
     }
     
-    public String[] searchAccountData(String id, String searchaccount, String tmpData[]){
-        String tbData[] = new String[tmpData.length + 4];
+    public String[] addAccountData(String id, String searchaccount, String tmpData[]){
+        String tbData[] = new String[tmpData.length + 3];
         System.arraycopy(tmpData, 0, tbData, 0, tmpData.length);
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
@@ -344,49 +337,22 @@ public class UserManagerForm extends javax.swing.JPanel {
                 .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
             Statement st  = conn.createStatement();
             
-            String sql = "select * from account where idUser='"+id+"'"+" and username like '%"+searchaccount+"%'";
-            ResultSet rs = st.executeQuery(sql);
-            
-            if(rs.next()){
-                String mail = rs.getString("mail");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String role = rs.getString("role");
-                
-                tbData[tmpData.length] = mail;
-                tbData[tmpData.length+1] = username;
-                tbData[tmpData.length+2] = password;
-                tbData[tmpData.length+3] = role;
+            String sql;
+            if(searchaccount.equals("")){
+                sql = "select * from account where idUser='"+id+"'";
             }
-            conn.close();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return tbData;
-    }
-    
-    public String[] searchAccountData(String id, String tmpData[]){
-        String tbData[] = new String[tmpData.length + 4];
-        System.arraycopy(tmpData, 0, tbData, 0, tmpData.length);
-        try{
-            Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
-            Statement st  = conn.createStatement();
+            else sql = "select * from account where idUser='"+id+"'"+" and username like '%"+searchaccount+"%'";
             
-            String sql = "select * from account where idUser='"+id+"'";
             ResultSet rs = st.executeQuery(sql);
             
             if(rs.next()){
                 String mail = rs.getString("mail");
                 String username = rs.getString("username");
-                String password = rs.getString("password");
                 String role = rs.getString("role");
                 
                 tbData[tmpData.length] = mail;
                 tbData[tmpData.length+1] = username;
-                tbData[tmpData.length+2] = password;
-                tbData[tmpData.length+3] = role;
+                tbData[tmpData.length+2] = role;
             }
             conn.close();
         }catch(Exception e){
@@ -396,31 +362,82 @@ public class UserManagerForm extends javax.swing.JPanel {
     }
     
     public User SelectUser(User user){
-        Account accountedit = new Account();
         DefaultTableModel model = (DefaultTableModel)tb_user.getModel();
-        
         int selectedRowIndex = tb_user.getSelectedRow();
         
         if(selectedRowIndex == -1){
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn 1 người để chỉnh sửa");
+            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn người để chỉnh sửa");
             rnd.setVisible(true);
+            return null;
         }
         else{
-            user.setName(model.getValueAt(selectedRowIndex, 1).toString());
-            user.setYearBirthday(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 2)));
-            user.setPhoneNumber(model.getValueAt(selectedRowIndex, 3).toString());
-            user.setIdCard(model.getValueAt(selectedRowIndex, 4).toString());
-            accountedit.setMail(model.getValueAt(selectedRowIndex, 5).toString());
-            accountedit.setUsername(model.getValueAt(selectedRowIndex, 6).toString());
-            accountedit.setPassword(model.getValueAt(selectedRowIndex, 7).toString());
-            accountedit.setIdAccount(Integer.parseInt((String) model.getValueAt(selectedRowIndex, 0)));
-            accountedit.setRole(model.getValueAt(selectedRowIndex, 8).toString());
-        
-            user.setAccount(accountedit);
+            String id = model.getValueAt(selectedRowIndex, 0).toString();
+            user = searchUserByID(id);
+            Account account = searchAccountByID(id);
+            user.setAccount(account);
         }
         return user;
     }
-
+    
+    public User searchUserByID(String ID){
+        User user = new User();
+        try{
+            Class.forName(MySQLConstand.CLASS_NAME);
+            Connection conn = DriverManager
+                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Statement st  = conn.createStatement();
+            
+            String sql = "select * from user where idUser='"+ID+"'";
+            
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                String name = rs.getString("name");
+                String yearbd = rs.getString("yearbirthday");
+                String phone = rs.getString("phonenumber");
+                String idcard = rs.getString("idcard");
+                
+                user.setName(name);
+                user.setYearBirthday(Integer.parseInt(yearbd));
+                user.setPhoneNumber(phone);
+                user.setIdCard(idcard);
+            }
+            conn.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return user;
+    }
+    
+    public Account searchAccountByID(String ID){
+        Account account = new Account();
+        try{
+            Class.forName(MySQLConstand.CLASS_NAME);
+            Connection conn = DriverManager
+                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Statement st  = conn.createStatement();
+            
+            String sql = "select * from account where idUser='"+ID+"'";
+            
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                int id = rs.getInt("idUser");
+                String mail = rs.getString("mail");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                account.setIdAccount(id);
+                account.setMail(mail);
+                account.setUsername(username);
+                account.setPassword(password);
+                account.setRole(role);
+            }
+            conn.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return account;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.other.MyButton btn_createuser;
     private view.other.MyButton btn_edituser;

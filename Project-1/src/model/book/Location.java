@@ -39,7 +39,11 @@ public class Location {
     public void setRow(int row) {
         this.row = row;
     }
-
+    
+    public String getLocation(){
+        String location = room +"-"+shelf+"-"+row;
+        return location;
+    }
     
 }
 
