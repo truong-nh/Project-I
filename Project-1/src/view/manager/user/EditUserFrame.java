@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.manager.frame;
+package view.manager.user;
 
 import controller.AccountController;
 import javax.swing.JOptionPane;
@@ -26,13 +26,16 @@ public class EditUserFrame extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         setLocationRelativeTo(null);
-        tf_idcard.setText(user.getIdCard());
-        tf_mail.setText(user.getAccount().getMail());
-        tf_name.setText(user.getName());
-        tf_password.setText(user.getAccount().getPassword());
-        tf_phone.setText(user.getPhoneNumber());
         tf_username.setText(user.getAccount().getUsername());
+        if(user.getAccount().getRole().equals("manager")){
+            tf_password.setEnabled(false);
+        }
+        tf_password.setText(user.getAccount().getPassword());
+        tf_name.setText(user.getName());
+        tf_idcard.setText(user.getIdCard());
         tf_yearbd.setText(String.valueOf(user.getYearBirthday()));
+        tf_phone.setText(user.getPhoneNumber());
+        tf_mail.setText(user.getAccount().getMail());
     }
 
     /**
@@ -329,7 +332,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

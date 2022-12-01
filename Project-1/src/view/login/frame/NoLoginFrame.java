@@ -4,8 +4,14 @@
  */
 package view.login.frame;
 
+import constand.MySQLConstand;
 import view.login.frame.LoginFrame;
 import java.awt.Frame;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,13 +52,13 @@ public class NoLoginFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        tf_searchname = new javax.swing.JTextField();
+        tf_searchauthor = new javax.swing.JTextField();
+        tf_searchcategory = new javax.swing.JTextField();
         myButton2 = new view.other.MyButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_book = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -179,11 +185,11 @@ public class NoLoginFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel7.setText("Tìm theo thể loại");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_searchname.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_searchauthor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_searchcategory.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         myButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton2.setText("Tìm kiếm");
@@ -196,6 +202,11 @@ public class NoLoginFrame extends javax.swing.JFrame {
                 myButton2MouseEntered(evt);
             }
         });
+        myButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -205,16 +216,16 @@ public class NoLoginFrame extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_searchname, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_searchauthor, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_searchcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -229,22 +240,37 @@ public class NoLoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
+                    .addComponent(tf_searchname, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(tf_searchauthor)
+                    .addComponent(tf_searchcategory)
                     .addComponent(myButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_book.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID sách", "Tên", "Code", "Tác giả", "Thể loại", "Năm xuất bản", "Nhà xuất bản", "Trạng thái"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_book);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -254,7 +280,7 @@ public class NoLoginFrame extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -351,6 +377,75 @@ public class NoLoginFrame extends javax.swing.JFrame {
         lf.setVisible(true);
     }//GEN-LAST:event_myButton3ActionPerformed
 
+    private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
+        try{
+            Class.forName(MySQLConstand.CLASS_NAME);
+            Connection conn = DriverManager
+                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Statement st  = conn.createStatement();
+            
+            String searchname = tf_searchname.getText().trim();
+            String searchauthor = tf_searchauthor.getText().trim();
+            String searchcategory = tf_searchcategory.getText().trim();
+            
+            String sql = "select * from book";
+            if(searchname.equals("")){
+                if(searchauthor.equals("")){
+                    if(searchcategory.equals("") == false){
+                        sql = sql + " where category like '%"+searchcategory+"%'";
+                    }
+                }
+                else{
+                    sql = sql + " where author like '%"+searchauthor+"%'";
+                    if(searchcategory.equals("") == false){
+                        sql = sql + " and category like '%"+searchcategory+"%'";
+                    }
+                }
+            }
+            else{
+                sql = sql + " where name like '%"+searchname+"%'";
+                if(searchauthor.equals("")){
+                    if(searchcategory.equals("") == false){
+                        sql = sql + " and category like '%"+searchcategory+"%'";
+                    }
+                }
+                else{
+                    sql = sql + " and author like '%"+searchauthor+"%'";
+                    if(searchcategory.equals("") == false){
+                        sql = sql + " and category like '%"+searchcategory+"%'";
+                    }
+                }
+            }
+            
+            ResultSet rs = st.executeQuery(sql);
+            ClearDataTable();
+            while(rs.next()){
+                String id = String.valueOf(rs.getInt("idBook"));
+                String name = rs.getString("name");
+                String code = rs.getString("code");
+                String author = rs.getString("author");
+                String category = rs.getString("category");
+                String year = rs.getString("year");
+                String publisher = rs.getString("publisher");
+                String status = rs.getString("status");
+                
+                String tbData[] = {id,name,code,author,category,year,publisher,status};
+                
+                DefaultTableModel tbmodel = (DefaultTableModel)tb_book.getModel();
+                tbmodel.addRow(tbData);
+                
+            }
+            conn.close();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_myButton2ActionPerformed
+    
+    public void ClearDataTable(){
+        DefaultTableModel tbmodel = (DefaultTableModel)tb_book.getModel();
+        tbmodel.setRowCount(0);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -404,11 +499,11 @@ public class NoLoginFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private view.other.MyButton myButton2;
     private view.other.MyButton myButton3;
+    private javax.swing.JTable tb_book;
+    private javax.swing.JTextField tf_searchauthor;
+    private javax.swing.JTextField tf_searchcategory;
+    private javax.swing.JTextField tf_searchname;
     // End of variables declaration//GEN-END:variables
 }

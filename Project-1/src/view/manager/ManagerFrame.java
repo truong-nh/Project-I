@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.manager.frame;
+package view.manager;
 
-import view.manager.form.UserManagerForm;
+import view.manager.user.UserManagerForm;
 import view.login.frame.LoginFrame;
 import java.awt.Frame;
 import model.user.User;
 import view.clock.ClockThread;
+import view.manager.book.BookManagerForm;
 
 /**
  *
@@ -129,6 +130,12 @@ public class ManagerFrame extends javax.swing.JFrame {
         lb_bookmanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lb_bookmanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_bookmanager.setText("Quản lý sách");
+        lb_bookmanager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_bookmanager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_bookmanagerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -317,6 +324,7 @@ public class ManagerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void lb_usermanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_usermanagerMouseClicked
+        pn_main.removeAll();
         UserManagerForm umf = new UserManagerForm();
         pn_main.add(umf);
         pack();
@@ -344,6 +352,13 @@ public class ManagerFrame extends javax.swing.JFrame {
     private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
         myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
     }//GEN-LAST:event_myButton1MouseEntered
+
+    private void lb_bookmanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_bookmanagerMouseClicked
+        pn_main.removeAll();
+        BookManagerForm bmf = new BookManagerForm();
+        pn_main.add(bmf);
+        pack();
+    }//GEN-LAST:event_lb_bookmanagerMouseClicked
 
     /**
      * @param args the command line arguments
