@@ -57,27 +57,43 @@ public class AccountController {
     public boolean addUser(String name, int yearBirthday, String phoneNumber, String idCard,
         String mail, String username, String password, String role){
         Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
-        
-        // check number
-        if (phoneNumber.length() != 10 || !phoneNumber.substring(0,1).equals("0")){
+
+        try {
+            DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
+            return true;
+        } catch (Exception e) {
             return false;
+        }
+        
+   }
+        
+    /// check error
+        public List<String> checkErrorCreateAccount(String name, int yearBirthday, String phoneNumber, String idCard,
+        String mail, String username, String password, String role){
+        Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
+        
+                List<String> listStringError = new ArrayList<>();
+
+        // check number        
+        if (phoneNumber.length() != 10 || !phoneNumber.substring(0,1).equals("0")){
+            listStringError.add("phone");
         }
         
         // check idcard
         if (idCard.length() != 9){
             if (idCard.length() != 12){
-                return false;
+                listStringError.add("idcard");
             }
         }
         
         // check mail
         int z = 0;
         for (int i = 0; i<mail.length(); i++){
-            if (mail.substring(i,1).equals("@")){
+            if (mail.substring(i,i+1).equals("@")){
                 z = 1;
             }
         }
-        if (z == 0) return false;
+        if (z == 0)  listStringError.add("mail");
         
         // check legit account
         List<User> ListCheck = new ArrayList<User>();
@@ -86,17 +102,11 @@ public class AccountController {
             Account accountcheck = new Account();
             accountcheck = ListElement.getAccount();
             if (accountcheck.getUsername().equals(username)){
-                return false;
+                listStringError.add("account");
             }
         }
 
-        
-        try {
-            DBUser.addUser(new User(name, yearBirthday, phoneNumber, idCard, account));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return listStringError;
         
    }
    

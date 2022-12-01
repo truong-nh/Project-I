@@ -422,7 +422,7 @@ public class CreateUserFrame extends javax.swing.JFrame {
         String mail = tf_mail.getText();
         String phone = tf_phone.getText();
         String userName = tf_username.getText();
-        String yearbd = tf_yearbd.getText();
+        int yearbd= Integer.parseInt(tf_yearbd.getText());
         String role="";
         if(ManagerjRadioButton1.isSelected()){
         role += "manager";
@@ -432,18 +432,34 @@ public class CreateUserFrame extends javax.swing.JFrame {
         }
                 
         if(name.equals("") || password.equals("") || idCard.equals("") || mail.equals("") 
-                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("")){
+                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("") || role.equals("")){
             ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
             rnd.setVisible(true);
         }
-        else
-            if(accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)){
+        else{
+            if(accountController.checkErrorCreateAccount(name, yearbd, phone, idCard, mail, userName, password, role).isEmpty()==false){
+                String errorString="Vui long kiểm tra: ";
+                System.out.println("view.manager.frame.CreateUserFrame.myButton1ActionPerformed()");
+                for(String string : accountController.checkErrorCreateAccount(name, yearbd, phone, idCard, mail, userName, password, role)){
+                    errorString = errorString+string+"  "; 
+                }
+                ErrorNofiDialog rnd = new ErrorNofiDialog(errorString);
+                rnd.setVisible(true);
+            } 
+            
+            else{
+            if(accountController.addUser(name, yearbd, phone, idCard, mail, userName, password, role)){
             this.setVisible(false);
             }
             else{
             ErrorNofiDialog rnd = new ErrorNofiDialog("Nhập thông tin không hợp lệ");
             rnd.setVisible(true);
             }
+            }   
+        }
+        
+        
+ 
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**

@@ -17,7 +17,8 @@ public class test {
         ac.getListUser();
         // System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
         System.out.println(ac.getCurrentIdAccount()); 
-        ac.addUser("name", 0, "phone", "idCard", "mail", "username", "password", "role");
+        System.out.println(ac.addUser("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role"));
+        System.out.println(ac.checkErrorCreateAccount("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role").isEmpty());
     }
     
 }
