@@ -4,9 +4,9 @@
  */
 package view.manager.book;
 
+import static config.JDBCConnection.getJDBCConnection;
 import constand.MySQLConstand;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
@@ -14,13 +14,21 @@ import model.book.Book;
 import model.book.Location;
 import view.other.ErrorNofiDialog;
 
-
 /**
  *
  * @author Administrator
  */
 public class BookManagerForm extends javax.swing.JPanel {
 
+    private int count;
+    
+    public void setCountToZ(){
+        this.count = 0;
+    }
+    
+    public int getCount(){
+        return count;
+    }
     /**
      * Creates new form BookManagerForm
      */
@@ -51,6 +59,7 @@ public class BookManagerForm extends javax.swing.JPanel {
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_book = new javax.swing.JTable();
+        lb_checknumber = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(965, 743));
 
@@ -61,7 +70,7 @@ public class BookManagerForm extends javax.swing.JPanel {
         jLabel6.setText("Tìm theo tác giả");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel7.setText("Tìm theo thể loại");
+        jLabel7.setText("Tìm theo category");
 
         tf_searchname.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -198,15 +207,24 @@ public class BookManagerForm extends javax.swing.JPanel {
         tb_book.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_book);
 
+        lb_checknumber.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(lb_checknumber, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_checknumber, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -261,48 +279,45 @@ public class BookManagerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_createbookMouseEntered
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        try{
+        try {
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
-            Statement st  = conn.createStatement();
-            
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
             String searchname = tf_searchname.getText().trim();
             String searchauthor = tf_searchauthor.getText().trim();
             String searchcategory = tf_searchcategory.getText().trim();
-            
+
             String sql = "select * from book";
-            if(searchname.equals("")){
-                if(searchauthor.equals("")){
-                    if(searchcategory.equals("") == false){
-                        sql = sql + " where category like '%"+searchcategory+"%'";
+            if (searchname.equals("")) {
+                if (searchauthor.equals("")) {
+                    if (searchcategory.equals("") == false) {
+                        sql = sql + " where category like '%" + searchcategory + "%'";
+                    }
+                } else {
+                    sql = sql + " where author like '%" + searchauthor + "%'";
+                    if (searchcategory.equals("") == false) {
+                        sql = sql + " and category like '%" + searchcategory + "%'";
                     }
                 }
-                else{
-                    sql = sql + " where author like '%"+searchauthor+"%'";
-                    if(searchcategory.equals("") == false){
-                        sql = sql + " and category like '%"+searchcategory+"%'";
+            } else {
+                sql = sql + " where name like '%" + searchname + "%'";
+                if (searchauthor.equals("")) {
+                    if (searchcategory.equals("") == false) {
+                        sql = sql + " and category like '%" + searchcategory + "%'";
                     }
-                }
-            }
-            else{
-                sql = sql + " where name like '%"+searchname+"%'";
-                if(searchauthor.equals("")){
-                    if(searchcategory.equals("") == false){
-                        sql = sql + " and category like '%"+searchcategory+"%'";
-                    }
-                }
-                else{
-                    sql = sql + " and author like '%"+searchauthor+"%'";
-                    if(searchcategory.equals("") == false){
-                        sql = sql + " and category like '%"+searchcategory+"%'";
+                } else {
+                    sql = sql + " and author like '%" + searchauthor + "%'";
+                    if (searchcategory.equals("") == false) {
+                        sql = sql + " and category like '%" + searchcategory + "%'";
                     }
                 }
             }
-            
+
             ResultSet rs = st.executeQuery(sql);
             ClearDataTable();
-            while(rs.next()){
+            setCountToZ();
+            while (rs.next()) {
                 String id = String.valueOf(rs.getInt("idBook"));
                 String name = rs.getString("name");
                 String code = rs.getString("code");
@@ -311,18 +326,19 @@ public class BookManagerForm extends javax.swing.JPanel {
                 String year = rs.getString("year");
                 String publisher = rs.getString("publisher");
                 String status = rs.getString("status");
-                
-                String tmpData[] = {id,name,code,author,category,year,publisher,status};
-                
-                String tbData[] = addLocationData(id,tmpData);
-                DefaultTableModel tbmodel = (DefaultTableModel)tb_book.getModel();
-                if(tbData[8] != null){
+
+                String tmpData[] = {id, name, code, author, category, year, publisher, status};
+
+                String tbData[] = addLocationData(id, tmpData);
+                DefaultTableModel tbmodel = (DefaultTableModel) tb_book.getModel();
+                if (tbData[8] != null) {
                     tbmodel.addRow(tbData);
+                    count++;
                 }
-                
             }
             conn.close();
-        }catch(Exception e){
+            lb_checknumber.setText("Tìm được " + count + " sách!");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_searchActionPerformed
@@ -330,23 +346,23 @@ public class BookManagerForm extends javax.swing.JPanel {
     private void btn_editbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editbookActionPerformed
         Book editbook = new Book();
         editbook = SelectUser(editbook);
-        if(editbook != null){
+        if (editbook != null) {
             EditBookFrame ebf = new EditBookFrame(editbook);
             ebf.setVisible(true);
         }
     }//GEN-LAST:event_btn_editbookActionPerformed
 
     private void btn_createbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createbookActionPerformed
-        // TODO add your handling code here:
+        CreateBookFrame cbf = new CreateBookFrame();
+        cbf.setVisible(true);
     }//GEN-LAST:event_btn_createbookActionPerformed
 
-    public void ClearDataTable(){
-        DefaultTableModel tbmodel = (DefaultTableModel)tb_book.getModel();
+    public void ClearDataTable() {
+        DefaultTableModel tbmodel = (DefaultTableModel) tb_book.getModel();
         tbmodel.setRowCount(0);
     }
-    
-    
-    public String[] addLocationData(String id, String tmpData[]){
+
+    public String[] addLocationData(String id, String tmpData[]) {
         String tbData[] = new String[tmpData.length + 1];
         System.arraycopy(tmpData, 0, tbData, 0, tmpData.length);
         Location location = searchLocationByID(id);
@@ -354,17 +370,16 @@ public class BookManagerForm extends javax.swing.JPanel {
         tbData[tmpData.length] = lc;
         return tbData;
     }
-            
-    public Book SelectUser(Book book){
-        DefaultTableModel model = (DefaultTableModel)tb_book.getModel();
+
+    public Book SelectUser(Book book) {
+        DefaultTableModel model = (DefaultTableModel) tb_book.getModel();
         int selectedRowIndex = tb_book.getSelectedRow();
-        
-        if(selectedRowIndex == -1){
+
+        if (selectedRowIndex == -1) {
             ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn sách để chỉnh sửa");
             rnd.setVisible(true);
             return null;
-        }
-        else{
+        } else {
             String id = model.getValueAt(selectedRowIndex, 0).toString();
             book = searchBookByID(id);
             Location location = searchLocationByID(id);
@@ -372,19 +387,18 @@ public class BookManagerForm extends javax.swing.JPanel {
         }
         return book;
     }
-    
-    public Book searchBookByID(String ID){
+
+    public Book searchBookByID(String ID) {
         Book book = new Book();
-        try{
+        try {
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
-            Statement st  = conn.createStatement();
-            
-            String sql = "select * from book where idBook='"+ID+"'";
-            
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from book where idBook='" + ID + "'";
+
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 String name = rs.getString("name");
                 String code = rs.getString("code");
                 String author = rs.getString("author");
@@ -392,7 +406,7 @@ public class BookManagerForm extends javax.swing.JPanel {
                 Short year = rs.getShort("year");
                 String publisher = rs.getString("publisher");
                 String status = rs.getString("status");
-                
+
                 book.setName(name);
                 book.setCode(code);
                 book.setAuthor(author);
@@ -402,39 +416,38 @@ public class BookManagerForm extends javax.swing.JPanel {
                 book.setStatus(status);
             }
             conn.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return book;
     }
-    
-    public Location searchLocationByID(String ID){
+
+    public Location searchLocationByID(String ID) {
         Location location = new Location();
-        try{
+        try {
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
-            Statement st  = conn.createStatement();
-            
-            String sql = "select * from location where idBook='"+ID+"'";
-            
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from location where idBook='" + ID + "'";
+
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 String room = rs.getString("room");
                 String shelf = rs.getString("shelf");
                 int row = rs.getInt("row");
-                
+
                 location.setRoom(room);
                 location.setShelf(shelf);
                 location.setRow(row);
             }
             conn.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return location;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.other.MyButton btn_createbook;
     private view.other.MyButton btn_editbook;
@@ -446,6 +459,7 @@ public class BookManagerForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_checknumber;
     private javax.swing.JTable tb_book;
     private javax.swing.JTextField tf_searchauthor;
     private javax.swing.JTextField tf_searchcategory;

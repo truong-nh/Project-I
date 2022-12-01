@@ -4,9 +4,9 @@
  */
 package view.manager.user;
 
+import static config.JDBCConnection.getJDBCConnection;
 import constand.MySQLConstand;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
@@ -265,8 +265,7 @@ public class UserManagerForm extends javax.swing.JPanel {
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Connection conn = getJDBCConnection();
             Statement st  = conn.createStatement();
             
             String searchname = tf_searchname.getText().trim();
@@ -333,8 +332,7 @@ public class UserManagerForm extends javax.swing.JPanel {
         System.arraycopy(tmpData, 0, tbData, 0, tmpData.length);
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Connection conn = getJDBCConnection();
             Statement st  = conn.createStatement();
             
             String sql;
@@ -383,8 +381,7 @@ public class UserManagerForm extends javax.swing.JPanel {
         User user = new User();
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Connection conn = getJDBCConnection();
             Statement st  = conn.createStatement();
             
             String sql = "select * from user where idUser='"+ID+"'";
@@ -412,8 +409,7 @@ public class UserManagerForm extends javax.swing.JPanel {
         Account account = new Account();
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection conn = DriverManager
-                .getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Connection conn = getJDBCConnection();
             Statement st  = conn.createStatement();
             
             String sql = "select * from account where idUser='"+ID+"'";

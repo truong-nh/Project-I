@@ -4,9 +4,10 @@
  */
 package view.login.frame;
 
+import static config.JDBCConnection.getJDBCConnection;
 import constand.MySQLConstand;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import model.user.Account;
@@ -107,6 +108,11 @@ public class LoginFrame extends javax.swing.JFrame {
         tf_username.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         tf_password.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_passwordKeyPressed(evt);
+            }
+        });
 
         btn_login.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_login.setText("Đăng nhập");
@@ -205,8 +211,8 @@ public class LoginFrame extends javax.swing.JFrame {
         try{
             checkAccount();
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection con = DriverManager.getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
-            Statement stm = con.createStatement();
+            Connection conn = getJDBCConnection();
+            Statement stm = conn.createStatement();
 
             String idUser = String.valueOf(account.getIdAccount());
             String role = account.getRole();
@@ -227,11 +233,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 }
                 dispose();
             }
-            con.close();
+            conn.close();
         } catch(Exception e){
             System.out.println(e.getMessage());
         }
-
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -239,15 +244,49 @@ public class LoginFrame extends javax.swing.JFrame {
         NoLoginFrame nlf = new NoLoginFrame();
         nlf.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tf_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_passwordKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            try{
+            checkAccount();
+            Class.forName(MySQLConstand.CLASS_NAME);
+            Connection conn = getJDBCConnection();
+            Statement stm = conn.createStatement();
+
+            String idUser = String.valueOf(account.getIdAccount());
+            String role = account.getRole();
+
+            String sql = "select * from user where idUser='" + idUser + "'";
+            ResultSet rs = stm.executeQuery(sql);
+
+            if(rs.next()){
+                user.setAccount(account);
+                user.setName(rs.getString("name"));
+                user.setYearBirthday(Integer.parseInt(rs.getString("yearbirthday")));
+                user.setPhoneNumber(rs.getString("phonenumber"));
+                user.setIdCard(rs.getString("idcard"));
+                if (role.equals("manager")) {
+                    new ManagerFrame(user).setVisible(true);
+                } else {
+                    new UserFrame(user).setVisible(true);
+                }
+                dispose();
+            }
+            conn.close();
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        }
+    }//GEN-LAST:event_tf_passwordKeyPressed
     
     public void checkAccount(){
         try {
             Class.forName(MySQLConstand.CLASS_NAME);
-            Connection con = DriverManager.getConnection(MySQLConstand.URL, MySQLConstand.USER_NAME, MySQLConstand.PASSWORD);
+            Connection conn = getJDBCConnection();
             String username = tf_username.getText();
             String password = tf_password.getText();
 
-            Statement stm = con.createStatement();
+            Statement stm = conn.createStatement();
 
             String sql = "select * from account where username='" + username + "' and password='" + password + "'";
             ResultSet rs = stm.executeQuery(sql);
@@ -263,7 +302,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 account.setUsername(username);
                 account.setPassword(password);
             }
-            con.close();
+            conn.close();
             
         } catch (Exception e) {
             System.out.println(e.getMessage());

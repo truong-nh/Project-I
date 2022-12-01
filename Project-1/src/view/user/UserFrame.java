@@ -30,7 +30,7 @@ public class UserFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         lb_hello.setText("Xin chào, " + user.getName());
-        ClockThread th= new ClockThread(lb_clock);
+        ClockThread th = new ClockThread(lb_clock);
         th.start();
     }
     /**
