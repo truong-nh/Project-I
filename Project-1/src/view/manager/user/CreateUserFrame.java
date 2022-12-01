@@ -13,8 +13,10 @@ import view.other.ErrorNofiDialog;
  * @author Administrator
  */
 public class CreateUserFrame extends javax.swing.JFrame {
+
     private User user;
     private AccountController accountController = new AccountController();
+
     /**
      * Creates new form CreateUserFrame
      */
@@ -422,44 +424,41 @@ public class CreateUserFrame extends javax.swing.JFrame {
         String mail = tf_mail.getText();
         String phone = tf_phone.getText();
         String userName = tf_username.getText();
-        int yearbd= Integer.parseInt(tf_yearbd.getText());
-        String role="";
-        if(ManagerjRadioButton1.isSelected()){
-        role += "manager";
+        String yearbd = tf_yearbd.getText();
+        String role = "";
+        if (ManagerjRadioButton1.isSelected()) {
+            role += "manager";
+        } else {
+            if (UserjRadioButton1.isSelected()) {
+                role += "user";
+            }
+
         }
-        else{
-            role += "user";
-        }
-                
-        if(name.equals("") || password.equals("") || idCard.equals("") || mail.equals("") 
-                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("") || role.equals("")){
+
+        if (name.equals("") || password.equals("") || idCard.equals("") || mail.equals("")
+                || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("") || role.equals("")) {
             ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
             rnd.setVisible(true);
-        }
-        else{
-            if(accountController.checkErrorCreateAccount(name, yearbd, phone, idCard, mail, userName, password, role).isEmpty()==false){
-                String errorString="Vui long kiểm tra: ";
+        } else {
+            if (accountController.checkErrorCreateAccount(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role).isEmpty() == false) {
+                String errorString = "";
                 System.out.println("view.manager.frame.CreateUserFrame.myButton1ActionPerformed()");
-                for(String string : accountController.checkErrorCreateAccount(name, yearbd, phone, idCard, mail, userName, password, role)){
-                    errorString = errorString+string+"  "; 
+                for (String string : accountController.checkErrorCreateAccount(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)) {
+                    errorString = errorString + string + "  ";
                 }
                 ErrorNofiDialog rnd = new ErrorNofiDialog(errorString);
                 rnd.setVisible(true);
-            } 
-            
-            else{
-            if(accountController.addUser(name, yearbd, phone, idCard, mail, userName, password, role)){
-            this.setVisible(false);
+            } else {
+                if (accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)) {
+                    this.setVisible(false);
+                } else {
+                    ErrorNofiDialog rnd = new ErrorNofiDialog("Nhập thông tin không hợp lệ");
+                    rnd.setVisible(true);
+                }
             }
-            else{
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Nhập thông tin không hợp lệ");
-            rnd.setVisible(true);
-            }
-            }   
         }
-        
-        
- 
+
+
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**
