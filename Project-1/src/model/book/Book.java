@@ -14,7 +14,7 @@ public class Book {
     private String code;
     private String author;
     private String category;
-    private Short  year;
+    private Short year;
     private String publisher;
     private String status;
     private Location location;
