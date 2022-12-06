@@ -68,7 +68,7 @@ public class AccountController {
    }
         
     /// check error
-        public List<String> checkErrorCreateAccount(String name, int yearBirthday, String phoneNumber, String idCard,
+    public List<String> checkErrorCreateAccount(String name, int yearBirthday, String phoneNumber, String idCard,
         String mail, String username, String password, String role){
         Account account= new Account(mail, username, password, this.getCurrentIdAccount()+1, role);
         

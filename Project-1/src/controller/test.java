@@ -4,6 +4,7 @@
  */
 package controller;
 
+import model.book.Book;
 import model.user.User;
 
 /**
@@ -12,13 +13,17 @@ import model.user.User;
  */
 public class test {
     public static void main(String[] args) {
-        User user= new User();
-        AccountController ac= new AccountController(user);
-        ac.getListUser();
-        // System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
-        System.out.println(ac.getCurrentIdAccount()); 
-        System.out.println(ac.addUser("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role"));
-        System.out.println(ac.checkErrorCreateAccount("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role").isEmpty());
+//        User user= new User();
+//        AccountController ac= new AccountController(user);
+//        ac.getListUser();
+//        // System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
+//        System.out.println(ac.getCurrentIdAccount()); 
+//        System.out.println(ac.addUser("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role"));
+//        System.out.println(ac.checkErrorCreateAccount("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role").isEmpty());
+        
+        for (Book books : BookController.searchBook("", "", "")){
+            System.out.println(books.getName());
+        }
     }
     
 }

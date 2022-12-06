@@ -39,7 +39,7 @@ public class test {
         DBBook.updateBook(book);
 //        DBBook.addBook(book);
         for(Book books:DBBook.getListBooks()){
-            System.out.println(books.getName());;
+            System.out.println(books.getName());
         }
     }
 }
