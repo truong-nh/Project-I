@@ -5,6 +5,7 @@
 package database;
 
 import model.book.Book;
+import model.book.Location;
 import model.user.Account;
 import model.user.User;
 
@@ -31,8 +32,14 @@ public class test {
 //        user.setPhoneNumber("0000009");
 //        user.setIdCard("1010101019");
 //        DBUser.updateUser(3,user);
-        for(Book book:DBBook.getListBooks()){
-            System.out.println(book.getName());;
+        
+        Location location = new Location("2", "2", 2);
+        short a = 2019;
+        Book book = new Book(2, "30", "20", "Katachi", "LN", a, "Kadokawa", "BTh", location);
+        DBBook.updateBook(book);
+//        DBBook.addBook(book);
+        for(Book books:DBBook.getListBooks()){
+            System.out.println(books.getName());;
         }
     }
 }

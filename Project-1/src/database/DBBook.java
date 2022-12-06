@@ -26,7 +26,7 @@ public class DBBook {
         Connection connection = JDBCConnection.getJDBCConnection();
         PreparedStatement pst= null;
         
-        String sql ="SELECT b.idBook, b.name, b.code, b.author, b.category, b.year, b.publisher, b.status, l.room, l.shelf, l.row FROM pj1.book as b left join pj1.location as l on b.idBook = l.idBook;";
+        String sql ="SELECT b.idBook, b.name, b.code, b.author, b.category, b.year, b.publisher, b.status, l.room, l.shelf, l.line FROM pj1.book as b left join pj1.location as l on b.idBook = l.idBook;";
         
         try {
             pst = connection.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class DBBook {
                 
                 Location location = new Location();
                 location.setRoom(rs.getString("room"));
-                location.setRow(rs.getInt("row"));
+                location.setRow(rs.getInt("line"));
                 location.setShelf(rs.getString("shelf"));
          
                 book.setLocation(location);
@@ -73,43 +73,124 @@ public class DBBook {
         } 
         return books;
     }
-//    public static void addBook(Book book) {
-//        Connection connection = JDBCConnection.getJDBCConnection();
-//        PreparedStatement pst = null;
-//        String sql = "INSERT INTO user (idBook, name, code, author, category, year, publisher, status)"
-//                + "VALUE(?,?,?,?,?)";
-//
-// 
-//        try {
-//            pst = connection.prepareStatement(sql);
-//
-//            pst.setInt(1,user.getAccount().getIdAccount() );
-//            pst.setString(2,user.getName() );
-//            pst.setInt(3,user.getYearBirthday() );
-//            pst.setString(4,user.getPhoneNumber() );
-//            pst.setString(5,user.getIdCard() );
-//            DBUser.addAccount(user.getAccount());
-//                    
-//            int rs = pst.executeUpdate();
-//            System.out.println(rs);
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        } finally {
-//            if (pst != null) {
-//                try {
-//                    pst.close();
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//            if (connection != null) {
-//                try {
-//                    connection.close();
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    public static void addBook(Book book) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        PreparedStatement pstb = null;
+        String sql = "INSERT INTO book(idBook, name, code, author, category, year, publisher, status)"
+                + "VALUE(?,?,?,?,?,?,?,?)";
+        
+        try {
+            pstb = connection.prepareStatement(sql);
+
+            pstb.setInt(1,book.getId());
+            pstb.setString(2,book.getName() );
+            pstb.setString(3,book.getCode() );
+            pstb.setString(4,book.getAuthor() );
+            pstb.setString(5,book.getCategory() );
+            pstb.setShort(6,book.getYear() );
+            pstb.setString(7,book.getPublisher() );
+            pstb.setString(8,book.getStatus() );
+                    
+            int rs = pstb.executeUpdate();
+            System.out.println(rs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pstb != null) {
+                try {
+                    pstb.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        
+        Location location = new Location();
+        location = book.getLocation();
+        
+        addLocation(book.getId(), location);
+    }
+    public static void addLocation(int idBook, Location location){
+        String sqll = "INSERT INTO location (idBook, room, shelf, line)"
+                + "VALUE(?,?,?,?)";
+        Connection connectionl = JDBCConnection.getJDBCConnection();
+        PreparedStatement pstl = null;
+        try {
+            pstl = connectionl.prepareStatement(sqll);
+
+            pstl.setInt(1,idBook);
+            pstl.setString(2,location.getRoom() );
+            pstl.setString(3,location.getShelf() );
+            pstl.setInt(4,location.getRow() );
+
+            int rsl = pstl.executeUpdate();
+            System.out.println(rsl);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pstl != null) {
+                try {
+                    pstl.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connectionl != null) {
+                try {
+                    connectionl.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    public static void updateBook(Book book) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        PreparedStatement pst = null;
+        String sql = "UPDATE pj1.book set name = ?, code = ?, author =?,category = ?,year = ?, publisher = ?,status = ? WHERE idBook = ?";
+
+ 
+        try {
+            pst = connection.prepareStatement(sql);
+
+            pst.setString(1,book.getName());
+            pst.setString(2,book.getCode());
+            pst.setString(3,book.getAuthor());
+            pst.setString(4,book.getCategory());
+            pst.setShort(5,book.getYear());
+            pst.setString(6,book.getPublisher());
+            pst.setString(7,book.getStatus());
+            pst.setInt(8, book.getId());
+            int rs = pst.executeUpdate();
+            System.out.println(rs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
 }

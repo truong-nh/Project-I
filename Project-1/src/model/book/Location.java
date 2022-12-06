@@ -15,6 +15,12 @@ public class Location {
 
     public Location() {
     }
+    
+    public Location(String room, String shelf, int row) {
+        this.room = room;
+        this.shelf = shelf;
+        this.row = row;
+    }
 
     public String getRoom() {
         return room;

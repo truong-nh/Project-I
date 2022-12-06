@@ -19,7 +19,31 @@ public class Book {
     private String status;
     private Location location;
 
+    public Book(int id, String name, String code, String author, String category, Short year, String publisher, String status, Location location) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.author = author;
+        this.category = category;
+        this.year = year;
+        this.publisher = publisher;
+        this.status = status;
+        this.location = location;
+    }
+    public Book(int id, String name, String code, String author, String category, Short year, String publisher, String status, String room, String shelf, int row) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.author = author;
+        this.category = category;
+        this.year = year;
+        this.publisher = publisher;
+        this.status = status;
+        Location location = new Location(room, shelf, row);
+        this.location = location;
+    }
     public Book() {
+        
     }
 
     public int getId() {
