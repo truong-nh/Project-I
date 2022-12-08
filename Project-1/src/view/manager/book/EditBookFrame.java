@@ -3,13 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view.manager.book;
+import controller.BookController;
 import model.book.Book;
+import model.book.Location;
+import view.other.ErrorNofiDialog;
 /**
  *
  * @author Administrator
  */
 public class EditBookFrame extends javax.swing.JFrame {
     private Book book;
+    private BookController bookController= new BookController();
+    
     /**
      * Creates new form EditBookFrame
      */
@@ -28,7 +33,18 @@ public class EditBookFrame extends javax.swing.JFrame {
         tf_category.setText(book.getCategory());
         tf_year.setText(String.valueOf(book.getYear()));
         tf_publisher.setText(book.getPublisher());
-        tf_status.setText(book.getStatus());
+        String status= book.getStatus();
+        if(status.equals("Khả dụng")){
+          khadungjRadioButton1.setSelected(true);
+        }
+        else{
+          if(status.equals("Đang mượn")){
+          dangmuonjRadioButton2.setSelected(true);
+        }
+          else{
+          kotontaijRadioButton3.setSelected(true);
+          }
+        }
         tf_room.setText(book.getLocation().getRoom());
         tf_shelf.setText(book.getLocation().getShelf());
         tf_row.setText(String.valueOf(book.getLocation().getRow()));
@@ -42,6 +58,7 @@ public class EditBookFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,7 +80,9 @@ public class EditBookFrame extends javax.swing.JFrame {
         tf_publisher = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        tf_status = new javax.swing.JTextField();
+        khadungjRadioButton1 = new javax.swing.JRadioButton();
+        dangmuonjRadioButton2 = new javax.swing.JRadioButton();
+        kotontaijRadioButton3 = new javax.swing.JRadioButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         tf_year = new javax.swing.JTextField();
@@ -221,7 +240,14 @@ public class EditBookFrame extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Trạng thái");
 
-        tf_status.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        buttonGroup1.add(khadungjRadioButton1);
+        khadungjRadioButton1.setText("Khả dụng");
+
+        buttonGroup1.add(dangmuonjRadioButton2);
+        dangmuonjRadioButton2.setText("Đang mượn");
+
+        buttonGroup1.add(kotontaijRadioButton3);
+        kotontaijRadioButton3.setText("Không tồn tại");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -231,15 +257,21 @@ public class EditBookFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_status, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(khadungjRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dangmuonjRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(kotontaijRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(tf_status, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(khadungjRadioButton1)
+                    .addComponent(dangmuonjRadioButton2)
+                    .addComponent(kotontaijRadioButton3))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -443,24 +475,38 @@ public class EditBookFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_myButton1MouseEntered
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-//        AccountController accountController = new AccountController();
-//
-//        Account account = this.user.getAccount();
-//        String name = tf_name.getText();
-//        String password = tf_password.getText();
-//        String idCard = tf_idcard.getText();
-//        String mail = tf_mail.getText();
-//        String phone = tf_phone.getText();
-//        String userName = tf_username.getText();
-//        int yearbd = Integer.parseInt(tf_yearbd.getText());
-//        Account accountAfterUpdate = new Account(mail, userName, password, account.getIdAccount(), account.getRole());
-//        User userAfterUpdate= new User(name, yearbd, phone, idCard, accountAfterUpdate);
-//        if (accountController.updateUser(this.user.getAccount().getIdAccount(), userAfterUpdate)){
-//            this.setVisible(false);
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(null, "Chỉnh sửa không hợp lệ");
-//        }
+        String author = tf_author.getText();
+        String code = tf_code.getText();
+        String category = tf_category.getText();
+        String status = "";
+        String publiser = tf_publisher.getText();
+        String name = tf_bookname.getText();
+        String year = tf_year.getText();
+        String room = tf_room.getText();
+        String shelf = tf_shelf.getText();
+        String row = tf_row.getText();
+        
+        if(khadungjRadioButton1.isSelected()){
+           status += "Khả dụng";
+        }
+        if(kotontaijRadioButton3.isSelected()){
+           status += "Không tồn tại";   
+        }
+        if(dangmuonjRadioButton2.isSelected()){
+           status += "Đang mượn";   
+        }
+        
+        if (name.equals("") || author.equals("") || code.equals("") || category.equals("")
+            || publiser.equals("") || status.equals("") || year.equals("") 
+                || room.equals("") || shelf.equals("") || row.equals("") ) 
+        {
+            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
+            rnd.setVisible(true);
+        } else {
+           Location  location= new Location(room, shelf, Integer.parseInt(row));
+           Book newBook = new Book(book.getId(), name, code, author, category, Short.valueOf(year), publiser, status, location);
+           bookController.updateBook(newBook);
+        }          
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**
@@ -499,6 +545,8 @@ public class EditBookFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton dangmuonjRadioButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -524,6 +572,8 @@ public class EditBookFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton khadungjRadioButton1;
+    private javax.swing.JRadioButton kotontaijRadioButton3;
     private view.other.MyButton myButton1;
     private javax.swing.JTextField tf_author;
     private javax.swing.JTextField tf_bookname;
@@ -533,7 +583,6 @@ public class EditBookFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_room;
     private javax.swing.JTextField tf_row;
     private javax.swing.JTextField tf_shelf;
-    private javax.swing.JTextField tf_status;
     private javax.swing.JTextField tf_year;
     // End of variables declaration//GEN-END:variables
 }

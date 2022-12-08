@@ -4,6 +4,9 @@
  */
 package view.manager.book;
 
+import controller.BookController;
+import model.book.Location;
+import model.user.User;
 import view.other.ErrorNofiDialog;
 
 /**
@@ -11,13 +14,16 @@ import view.other.ErrorNofiDialog;
  * @author Administrator
  */
 public class CreateBookFrame extends javax.swing.JFrame {
-
+     private User user;
+     private BookController bookController = new BookController();
+     
     /**
      * Creates new form CreateBookFrame
      */
     public CreateBookFrame() {
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -29,6 +35,7 @@ public class CreateBookFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -50,7 +57,8 @@ public class CreateBookFrame extends javax.swing.JFrame {
         tf_publisher = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        tf_status = new javax.swing.JTextField();
+        khadungjRadioButton1 = new javax.swing.JRadioButton();
+        kotontaijRadioButton2 = new javax.swing.JRadioButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         tf_year = new javax.swing.JTextField();
@@ -206,7 +214,11 @@ public class CreateBookFrame extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Trạng thái");
 
-        tf_status.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        buttonGroup1.add(khadungjRadioButton1);
+        khadungjRadioButton1.setText("Khả dụng");
+
+        buttonGroup1.add(kotontaijRadioButton2);
+        kotontaijRadioButton2.setText("Không tồn tại");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -215,16 +227,19 @@ public class CreateBookFrame extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tf_status, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(khadungjRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addComponent(kotontaijRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(tf_status, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(khadungjRadioButton1)
+                    .addComponent(kotontaijRadioButton2))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -305,7 +320,7 @@ public class CreateBookFrame extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tf_row, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,27 +447,37 @@ public class CreateBookFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_myButton1MouseEntered
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        String name = tf_author.getText();
-        String password = tf_code.getText();
-        String idCard = tf_category.getText();
-        String mail = tf_status.getText();
-        String phone = tf_publisher.getText();
-        String userName = tf_name.getText();
+        String author = tf_author.getText();
+        String code = tf_code.getText();
+        String category = tf_category.getText();
+        String status = "";
+        String publiser = tf_publisher.getText();
+        String name = tf_name.getText();
         String year = tf_year.getText();
         String room = tf_room.getText();
         String shelf = tf_shelf.getText();
         String row = tf_row.getText();
         
-        if (name.equals("") || password.equals("") || idCard.equals("") || mail.equals("")
-            || phone.equals("") || userName.equals("") || year.equals("") 
+        if(khadungjRadioButton1.isSelected()){
+           status += "Khả dụng";
+        }
+        if(kotontaijRadioButton2.isSelected()){
+           status += "Không tồn tại";
+           
+           
+        }
+        if (name.equals("") || author.equals("") || code.equals("") || category.equals("")
+            || publiser.equals("") || status.equals("") || year.equals("") 
                 || room.equals("") || shelf.equals("") || row.equals("") ) 
         {
             ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
             rnd.setVisible(true);
         } else {
-            
+           Location  location= new Location(room, shelf, Integer.parseInt(row));
+           bookController.addBook(name, code, author, category, Short.valueOf(year), publiser, status, location);
         }
-
+        
+        
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**
@@ -491,6 +516,7 @@ public class CreateBookFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -516,6 +542,8 @@ public class CreateBookFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton khadungjRadioButton1;
+    private javax.swing.JRadioButton kotontaijRadioButton2;
     private view.other.MyButton myButton1;
     private javax.swing.JTextField tf_author;
     private javax.swing.JTextField tf_category;
@@ -525,7 +553,6 @@ public class CreateBookFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_room;
     private javax.swing.JTextField tf_row;
     private javax.swing.JTextField tf_shelf;
-    private javax.swing.JTextField tf_status;
     private javax.swing.JTextField tf_year;
     // End of variables declaration//GEN-END:variables
 }

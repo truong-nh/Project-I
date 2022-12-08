@@ -23,6 +23,10 @@ public class BookController {
         this.user = user;
     }
 
+    public BookController() {
+    }
+    
+    
     public User getUser() {
         return user;
     }
@@ -64,8 +68,11 @@ public class BookController {
            return true;
        } catch (Exception e) {
            return false;
+          
        }
     } 
+    
+ 
     
     public static List<Book> searchBook(String name, String author, String category){
         List<Book> books = new ArrayList<>();

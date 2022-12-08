@@ -5,6 +5,7 @@
 package controller;
 
 import model.book.Book;
+import model.book.Location;
 import model.user.User;
 
 /**
@@ -21,9 +22,14 @@ public class test {
 //        System.out.println(ac.addUser("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role"));
 //        System.out.println(ac.checkErrorCreateAccount("name", 0, "0111111111", "111111111", "mail@s", "username", "password", "role").isEmpty());
         
-        for (Book books : BookController.searchBook("", "", "")){
-            System.out.println(books.getName());
-        }
+//        for (Book books : BookController.searchBook("", "", "")){
+//            System.out.println(books.getName());
+//        }
+      Location location = new Location("8", "8", 8);
+      Book book = new Book(7, "name", "code", "author", "category", Short.valueOf("2002"), "publisher", "status", location);
+//      BookController bookController = new BookController();
+//      bookController.updateBook(book);
+
     }
     
 }

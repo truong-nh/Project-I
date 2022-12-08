@@ -406,7 +406,8 @@ public class BookManagerForm extends javax.swing.JPanel {
                 Short year = rs.getShort("year");
                 String publisher = rs.getString("publisher");
                 String status = rs.getString("status");
-
+                
+                book.setId(Integer.valueOf(ID));
                 book.setName(name);
                 book.setCode(code);
                 book.setAuthor(author);
@@ -435,7 +436,7 @@ public class BookManagerForm extends javax.swing.JPanel {
             while (rs.next()) {
                 String room = rs.getString("room");
                 String shelf = rs.getString("shelf");
-                int row = rs.getInt("row");
+                int row = rs.getInt("line");
 
                 location.setRoom(room);
                 location.setShelf(shelf);
