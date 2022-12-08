@@ -192,5 +192,42 @@ public class DBBook {
                 }
             }
         }
+        updateLocation(book.getId(), book.getLocation());
     }
+    public static void updateLocation(int idBook, Location location) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        PreparedStatement pst = null;
+        String sql = "UPDATE pj1.location set room = ?, shelf = ?, line =? WHERE idBook = ?";
+
+ 
+        try {
+            pst = connection.prepareStatement(sql);
+
+            pst.setString(1,location.getRoom());
+            pst.setString(2,location.getShelf());
+            pst.setInt(3,location.getRow());
+            pst.setInt(4,idBook);
+            int rs = pst.executeUpdate();
+            System.out.println(rs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    
 }
