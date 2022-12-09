@@ -285,10 +285,11 @@ public class LoginFrame extends javax.swing.JFrame {
             Connection conn = getJDBCConnection();
             String username = tf_username.getText();
             String password = tf_password.getText();
-
+            String passwordDB= Decode.decodePassword(password);
+            System.out.println(passwordDB);
             Statement stm = conn.createStatement();
 
-            String sql = "select * from account where username='" + username + "' and password='" + password + "'";
+            String sql = "select * from account where username='" + username + "' and password='" + passwordDB + "'";
             ResultSet rs = stm.executeQuery(sql);
             
             if (rs.next()) {

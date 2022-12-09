@@ -33,13 +33,20 @@ public class test {
 //        user.setIdCard("1010101019");
 //        DBUser.updateUser(3,user);
         
-        Location location = new Location("2", "2", 2);
-        short a = 2019;
-        Book book = new Book(2, "30", "20", "Katachi", "LN", a, "Kadokawa", "BTh", location);
-        DBBook.updateBook(book);
-//        DBBook.addBook(book);
-        for(Book books:DBBook.getListBooks()){
-            System.out.println(books.getName());
-        }
+//        Location location = new Location("2", "2", 2);
+//        short a = 2019;
+//        Book book = new Book(2, "30", "20", "Katachi", "LN", a, "Kadokawa", "BTh", location);
+//        DBBook.updateBook(book);
+////        DBBook.addBook(book);
+//        for(Book books:DBBook.getListBooks()){
+//            System.out.println(books.getName());
+//        }
+              Account account= new Account();
+        account.setIdAccount(3);
+        account.setMail("tqt2");
+        account.setUsername("tqt1");
+        account.setPassword("3");
+        account.setRole("user");
+      DBUser.addAccount(account);
     }
 }

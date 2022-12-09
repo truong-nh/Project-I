@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.user.Account;
 import model.user.User;
+import view.login.frame.Decode;
 
 /**
  *
@@ -78,7 +79,7 @@ public class DBUser {
             pst.setInt(1, account.getIdAccount());
             pst.setString(2,account.getMail() );
             pst.setString(3,account.getUsername() );
-            pst.setString(4,account.getPassword() );
+            pst.setString(4,Decode.decodePassword(account.getPassword())  );
             pst.setString(5,account.getRole() );
 
 
