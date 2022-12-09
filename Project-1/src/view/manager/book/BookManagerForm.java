@@ -12,7 +12,7 @@ import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import model.book.Book;
 import model.book.Location;
-import view.other.ErrorNofiDialog;
+import view.other.NofiDialog;
 
 /**
  *
@@ -387,7 +387,7 @@ public class BookManagerForm extends javax.swing.JPanel {
             abf.setVisible(true);
         }
     }//GEN-LAST:event_btn_addbookActionPerformed
-
+    
     public void ClearDataTable() {
         DefaultTableModel tbmodel = (DefaultTableModel) tb_book.getModel();
         tbmodel.setRowCount(0);
@@ -407,8 +407,8 @@ public class BookManagerForm extends javax.swing.JPanel {
         int selectedRowIndex = tb_book.getSelectedRow();
 
         if (selectedRowIndex == -1) {
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn sách để chỉnh sửa");
-            rnd.setVisible(true);
+            NofiDialog nd = new NofiDialog("Vui lòng chọn sách để chỉnh sửa");
+            nd.setVisible(true);
             return null;
         } else {
             String id = model.getValueAt(selectedRowIndex, 0).toString();

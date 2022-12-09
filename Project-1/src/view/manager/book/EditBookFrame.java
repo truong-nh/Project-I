@@ -6,7 +6,7 @@ package view.manager.book;
 import controller.BookController;
 import model.book.Book;
 import model.book.Location;
-import view.other.ErrorNofiDialog;
+import view.other.NofiDialog;
 /**
  *
  * @author Administrator
@@ -500,13 +500,14 @@ public class EditBookFrame extends javax.swing.JFrame {
             || publiser.equals("") || status.equals("") || year.equals("") 
                 || room.equals("") || shelf.equals("") || row.equals("") ) 
         {
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
-            rnd.setVisible(true);
+            NofiDialog nd = new NofiDialog("Vui lòng điền đầy đủ thông tin");
+            nd.setVisible(true);
         } else {
            Location  location= new Location(room, shelf, Integer.parseInt(row));
            Book newBook = new Book(book.getId(), name, code, author, category, Short.valueOf(year), publiser, status, location);
            bookController.updateBook(newBook);
-        }          
+        }
+        this.dispose();
     }//GEN-LAST:event_myButton1ActionPerformed
 
     /**

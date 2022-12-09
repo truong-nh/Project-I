@@ -12,7 +12,7 @@ import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import model.user.Account;
 import model.user.User;
-import view.other.ErrorNofiDialog;
+import view.other.NofiDialog;
 
 /**
  *
@@ -366,8 +366,8 @@ public class UserManagerForm extends javax.swing.JPanel {
         int selectedRowIndex = tb_user.getSelectedRow();
         
         if(selectedRowIndex == -1){
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng chọn người để chỉnh sửa");
-            rnd.setVisible(true);
+            NofiDialog nd = new NofiDialog("Vui lòng chọn người để chỉnh sửa");
+            nd.setVisible(true);
             return null;
         }
         else{

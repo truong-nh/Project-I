@@ -8,20 +8,21 @@ package view.other;
  *
  * @author Administrator
  */
-public class ErrorNofiDialog extends javax.swing.JFrame {
+public class NofiDialog extends javax.swing.JFrame {
 
     /**
      * Creates new form Test
      */
-    public ErrorNofiDialog() {
+    public NofiDialog() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public ErrorNofiDialog(String text){
+    public NofiDialog(String text){
         initComponents();
         setLocationRelativeTo(null);
         lb_errornofi.setText(text);
+        pack();
     }
 
     /**
@@ -43,7 +44,6 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lb_errornofi.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
-        lb_errornofi.setForeground(new java.awt.Color(255, 0, 0));
         lb_errornofi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jButton1.setText("OK");
@@ -108,14 +108,18 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ErrorNofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ErrorNofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ErrorNofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ErrorNofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NofiDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -124,7 +128,7 @@ public class ErrorNofiDialog extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ErrorNofiDialog().setVisible(true);
+                new NofiDialog().setVisible(true);
             }
         });
     }

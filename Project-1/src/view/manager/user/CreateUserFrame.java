@@ -6,7 +6,7 @@ package view.manager.user;
 
 import controller.AccountController;
 import model.user.User;
-import view.other.ErrorNofiDialog;
+import view.other.NofiDialog;
 
 /**
  *
@@ -437,8 +437,8 @@ public class CreateUserFrame extends javax.swing.JFrame {
 
         if (name.equals("") || password.equals("") || idCard.equals("") || mail.equals("")
                 || phone.equals("") || userName.equals("") || tf_yearbd.getText().equals("") || role.equals("")) {
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
-            rnd.setVisible(true);
+            NofiDialog nd = new NofiDialog("Vui lòng điền đầy đủ thông tin");
+            nd.setVisible(true);
         } else {
             if (accountController.checkErrorCreateAccount(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role).isEmpty() == false) {
                 String errorString = "";
@@ -446,14 +446,14 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 for (String string : accountController.checkErrorCreateAccount(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)) {
                     errorString = errorString + string + "  ";
                 }
-                ErrorNofiDialog rnd = new ErrorNofiDialog(errorString);
-                rnd.setVisible(true);
+                NofiDialog nd = new NofiDialog(errorString);
+                nd.setVisible(true);
             } else {
                 if (accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)) {
                     this.setVisible(false);
                 } else {
-                    ErrorNofiDialog rnd = new ErrorNofiDialog("Nhập thông tin không hợp lệ");
-                    rnd.setVisible(true);
+                    NofiDialog nd = new NofiDialog("Nhập thông tin không hợp lệ");
+                    nd.setVisible(true);
                 }
             }
         }

@@ -7,7 +7,7 @@ package view.manager.book;
 import controller.BookController;
 import model.book.Location;
 import model.user.User;
-import view.other.ErrorNofiDialog;
+import view.other.NofiDialog;
 
 /**
  *
@@ -470,8 +470,8 @@ public class CreateBookFrame extends javax.swing.JFrame {
             || publiser.equals("") || status.equals("") || year.equals("") 
                 || room.equals("") || shelf.equals("") || row.equals("") ) 
         {
-            ErrorNofiDialog rnd = new ErrorNofiDialog("Vui lòng điền đầy đủ thông tin");
-            rnd.setVisible(true);
+            NofiDialog nd = new NofiDialog("Vui lòng điền đầy đủ thông tin");
+            nd.setVisible(true);
         } else {
            Location  location= new Location(room, shelf, Integer.parseInt(row));
            bookController.addBook(name, code, author, category, Short.valueOf(year), publiser, status, location);
