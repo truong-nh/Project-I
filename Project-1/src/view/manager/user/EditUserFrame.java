@@ -27,10 +27,6 @@ public class EditUserFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         tf_username.setText(user.getAccount().getUsername());
-        if(user.getAccount().getRole().equals("manager")){
-            tf_password.setEnabled(false);
-        }
-        tf_password.setText(user.getAccount().getPassword());
         tf_name.setText(user.getName());
         tf_idcard.setText(user.getIdCard());
         tf_yearbd.setText(String.valueOf(user.getYearBirthday()));
@@ -52,8 +48,6 @@ public class EditUserFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tf_password = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         tf_name = new javax.swing.JTextField();
@@ -82,30 +76,15 @@ public class EditUserFrame extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel1.setText("Mật khẩu");
-
-        tf_password.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 547, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -392,13 +371,12 @@ public class EditUserFrame extends javax.swing.JFrame {
         
         Account account = this.user.getAccount();
         String name = tf_name.getText();
-        String password = tf_password.getText();
         String idCard = tf_idcard.getText();
         String mail = tf_mail.getText();
         String phone = tf_phone.getText();
         String userName = tf_username.getText();
         int yearbd = Integer.parseInt(tf_yearbd.getText());
-        Account accountAfterUpdate = new Account(mail, userName, password, account.getIdAccount(), account.getRole());
+        Account accountAfterUpdate = new Account(mail, userName, "password", account.getIdAccount(), account.getRole());
         User userAfterUpdate= new User(name, yearbd, phone, idCard, accountAfterUpdate);
         if (accountController.updateUser(this.user.getAccount().getIdAccount(), userAfterUpdate)){
         this.setVisible(false);
@@ -444,7 +422,6 @@ public class EditUserFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -468,7 +445,6 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_idcard;
     private javax.swing.JTextField tf_mail;
     private javax.swing.JTextField tf_name;
-    private javax.swing.JTextField tf_password;
     private javax.swing.JTextField tf_phone;
     private javax.swing.JTextField tf_username;
     private javax.swing.JTextField tf_yearbd;

@@ -4,6 +4,7 @@
  */
 package view.login.frame;
 
+import controller.Decode;
 import java.util.Base64;
 
 /**

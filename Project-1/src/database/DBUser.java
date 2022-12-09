@@ -5,6 +5,7 @@
 package database;
 
 import config.JDBCConnection;
+import controller.Decode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.user.Account;
 import model.user.User;
-import view.login.frame.Decode;
-
 /**
  *
  * @author Admin
@@ -106,10 +105,11 @@ public class DBUser {
         }
     }
         
+        // khong co update mat khau
         public static void updateAccount(int idAccountUpdate,Account account) {
         Connection connection = JDBCConnection.getJDBCConnection();
         PreparedStatement pst = null;
-                String sql = "UPDATE account set mail = ?, username = ? ,password =?, role =? WHERE idUser = ? ";
+                String sql = "UPDATE account set mail = ?, username = ? , role =? WHERE idUser = ? ";
 
  
         try {
@@ -117,10 +117,10 @@ public class DBUser {
 
             pst.setString(1, account.getMail());
             pst.setString(2,account.getUsername());
-            pst.setString(3,account.getPassword());
-            pst.setString(4,account.getRole());
+         //   pst.setString(3,account.getPassword());
+            pst.setString(3,account.getRole());
             
-            pst.setInt(5, idAccountUpdate);
+            pst.setInt(4, idAccountUpdate);
             int rs = pst.executeUpdate();
             System.out.println(rs);
 

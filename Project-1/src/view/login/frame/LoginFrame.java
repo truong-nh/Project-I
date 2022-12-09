@@ -4,6 +4,7 @@
  */
 package view.login.frame;
 
+import controller.Decode;
 import static config.JDBCConnection.getJDBCConnection;
 import constand.MySQLConstand;
 import java.awt.event.KeyEvent;
