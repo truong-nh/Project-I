@@ -14,6 +14,7 @@ import java.sql.Statement;
 import model.user.Account;
 import model.user.User;
 import view.manager.ManagerFrame;
+import view.other.NofiDialog;
 import view.user.UserFrame;
 
 /**
@@ -303,6 +304,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 account.setMail(mail);
                 account.setUsername(username);
                 account.setPassword(password);
+            }
+            else{
+                NofiDialog nd = new NofiDialog("Sai tên đăng nhập hoặc mật khẩu");
+                nd.setVisible(true);
             }
             conn.close();
             

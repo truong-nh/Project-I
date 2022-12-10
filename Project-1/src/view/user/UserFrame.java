@@ -73,14 +73,7 @@ public class UserFrame extends javax.swing.JFrame {
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton1.setText("Đăng xuất");
-        myButton1.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        myButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                myButton1MouseEntered(evt);
-            }
-        });
         myButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myButton1ActionPerformed(evt);
@@ -349,10 +342,6 @@ public class UserFrame extends javax.swing.JFrame {
         LoginFrame lf = new  LoginFrame();
         lf.setVisible(true);
     }//GEN-LAST:event_myButton1ActionPerformed
-
-    private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
-        myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_myButton1MouseEntered
 
     private void lb_checkinfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_checkinfoMouseEntered
          lb_checkinfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

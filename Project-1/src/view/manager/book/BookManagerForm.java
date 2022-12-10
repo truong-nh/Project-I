@@ -81,15 +81,8 @@ public class BookManagerForm extends javax.swing.JPanel {
 
         btn_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_search.setText("Tìm kiếm");
-        btn_search.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_search.setColorOver(new java.awt.Color(255, 255, 255));
         btn_search.setDefaultCapable(false);
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_searchMouseEntered(evt);
-            }
-        });
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_searchActionPerformed(evt);
@@ -98,15 +91,8 @@ public class BookManagerForm extends javax.swing.JPanel {
 
         btn_editbook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_editbook.setText("Chỉnh sửa");
-        btn_editbook.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_editbook.setColorOver(new java.awt.Color(255, 255, 255));
         btn_editbook.setDefaultCapable(false);
         btn_editbook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_editbook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_editbookMouseEntered(evt);
-            }
-        });
         btn_editbook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editbookActionPerformed(evt);
@@ -115,15 +101,8 @@ public class BookManagerForm extends javax.swing.JPanel {
 
         btn_createbook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_createbook.setText("Tạo mới");
-        btn_createbook.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_createbook.setColorOver(new java.awt.Color(255, 255, 255));
         btn_createbook.setDefaultCapable(false);
         btn_createbook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_createbook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_createbookMouseEntered(evt);
-            }
-        });
         btn_createbook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_createbookActionPerformed(evt);
@@ -132,15 +111,8 @@ public class BookManagerForm extends javax.swing.JPanel {
 
         btn_addbook.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_addbook.setText("Thêm sách");
-        btn_addbook.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_addbook.setColorOver(new java.awt.Color(255, 255, 255));
         btn_addbook.setDefaultCapable(false);
         btn_addbook.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_addbook.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_addbookMouseEntered(evt);
-            }
-        });
         btn_addbook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addbookActionPerformed(evt);
@@ -283,18 +255,6 @@ public class BookManagerForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_searchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseEntered
-        btn_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_searchMouseEntered
-
-    private void btn_editbookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editbookMouseEntered
-        btn_editbook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_editbookMouseEntered
-
-    private void btn_createbookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_createbookMouseEntered
-        btn_createbook.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_createbookMouseEntered
-
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try {
             Class.forName(MySQLConstand.CLASS_NAME);
@@ -373,10 +333,6 @@ public class BookManagerForm extends javax.swing.JPanel {
         CreateBookFrame cbf = new CreateBookFrame();
         cbf.setVisible(true);
     }//GEN-LAST:event_btn_createbookActionPerformed
-
-    private void btn_addbookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addbookMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_addbookMouseEntered
 
     private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
         // TODO add your handling code here:

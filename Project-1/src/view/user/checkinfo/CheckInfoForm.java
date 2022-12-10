@@ -268,14 +268,7 @@ public class CheckInfoForm extends javax.swing.JPanel {
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton1.setText("Yêu cầu chỉnh sửa");
-        myButton1.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        myButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                myButton1MouseEntered(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -380,10 +373,6 @@ public class CheckInfoForm extends javax.swing.JPanel {
                     .addContainerGap(243, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
-        myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_myButton1MouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
