@@ -76,13 +76,13 @@ public class AccountController {
 
         // check number        
         if (phoneNumber.length() != 10 || !phoneNumber.substring(0,1).equals("0")){
-            listStringError.add("-Số điện thoại bao gồm 10 số \n");
+            listStringError.add("phone");
         }
         
         // check idcard
         if (idCard.length() != 9){
             if (idCard.length() != 12){
-                listStringError.add("-CCCD/CMT không hợp lệ \n");
+                listStringError.add("idcard");
             }
         }
         
@@ -93,7 +93,7 @@ public class AccountController {
                 z = 1;
             }
         }
-        if (z == 0)  listStringError.add("-Định dạng mail không hợp lệ \n");
+        if (z == 0)  listStringError.add("mail");
         
         // check legit account
         List<User> ListCheck = new ArrayList<User>();
@@ -102,7 +102,7 @@ public class AccountController {
             Account accountcheck = new Account();
             accountcheck = ListElement.getAccount();
             if (accountcheck.getUsername().equals(username)){
-                listStringError.add(" Tài khoản đã tồn tại \n");
+                listStringError.add("account");
             }
         }
 
@@ -157,14 +157,5 @@ public class AccountController {
            }
        }
        return null;
-   }
-   
-   public boolean updatePassWord(int id,String newPassWord){
-      try {
-            DBUser.updatePassWord(id, newPassWord);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
    }
 }

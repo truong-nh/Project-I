@@ -14,8 +14,8 @@ import model.user.User;
  */
 public class test {
     public static void main(String[] args) {
-        User user= new User();
-        AccountController ac= new AccountController(user);
+//        User user= new User();
+//        AccountController ac= new AccountController(user);
 //        ac.getListUser();
 //        // System.out.println(ac.getUserByUserName("truong").getPhoneNumber());
 //        System.out.println(ac.getCurrentIdAccount()); 
@@ -29,7 +29,7 @@ public class test {
       Book book = new Book(7, "name", "code", "author", "category", Short.valueOf("2002"), "publisher", "status", location);
 //      BookController bookController = new BookController();
 //      bookController.updateBook(book);
-  //     ac.updatePassWord(6, "123456");
+
     }
     
 }
