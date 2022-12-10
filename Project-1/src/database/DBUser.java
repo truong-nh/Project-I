@@ -269,4 +269,38 @@ public class DBUser {
         }
     }
 
+         public static void updatePassWord(int idAccountUpdate,String newPassWord) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        PreparedStatement pst = null;
+                String sql = "UPDATE account set password = ? WHERE idUser = ? ";
+
+ 
+        try {
+            pst = connection.prepareStatement(sql);
+            String decodePassWord = Decode.decodePassword(newPassWord);
+            pst.setString(1, decodePassWord);      
+            pst.setInt(2, idAccountUpdate);
+            int rs = pst.executeUpdate();
+            System.out.println(rs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    
 }
