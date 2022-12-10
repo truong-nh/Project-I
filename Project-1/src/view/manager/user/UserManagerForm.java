@@ -50,7 +50,7 @@ public class UserManagerForm extends javax.swing.JPanel {
         btn_search = new view.other.MyButton();
         btn_edituser = new view.other.MyButton();
         btn_createuser = new view.other.MyButton();
-        jButton1 = new javax.swing.JButton();
+        btn_changepass = new view.other.MyButton();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_user = new javax.swing.JTable();
@@ -78,11 +78,6 @@ public class UserManagerForm extends javax.swing.JPanel {
         btn_search.setColorOver(new java.awt.Color(255, 255, 255));
         btn_search.setDefaultCapable(false);
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_search.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_searchMouseEntered(evt);
-            }
-        });
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_searchActionPerformed(evt);
@@ -95,11 +90,6 @@ public class UserManagerForm extends javax.swing.JPanel {
         btn_edituser.setColorOver(new java.awt.Color(255, 255, 255));
         btn_edituser.setDefaultCapable(false);
         btn_edituser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_edituser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_edituserMouseEntered(evt);
-            }
-        });
         btn_edituser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_edituserActionPerformed(evt);
@@ -112,18 +102,23 @@ public class UserManagerForm extends javax.swing.JPanel {
         btn_createuser.setColorOver(new java.awt.Color(255, 255, 255));
         btn_createuser.setDefaultCapable(false);
         btn_createuser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_createuser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_createuserMouseEntered(evt);
-            }
-        });
         btn_createuser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_createuserActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Đổi mật khẩu");
+        btn_changepass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_changepass.setText("Đổi mật khẩu");
+        btn_changepass.setColorClick(new java.awt.Color(153, 153, 153));
+        btn_changepass.setColorOver(new java.awt.Color(255, 255, 255));
+        btn_changepass.setDefaultCapable(false);
+        btn_changepass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_changepass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_changepassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -147,12 +142,17 @@ public class UserManagerForm extends javax.swing.JPanel {
                         .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_searchaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_searchaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(82, 82, 82))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(btn_changepass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +172,8 @@ public class UserManagerForm extends javax.swing.JPanel {
                     .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                    .addComponent(btn_changepass, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         tb_user.setModel(new javax.swing.table.DefaultTableModel(
@@ -252,18 +252,6 @@ public class UserManagerForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_searchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_searchMouseEntered
-        btn_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_searchMouseEntered
-
-    private void btn_edituserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_edituserMouseEntered
-        btn_edituser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_edituserMouseEntered
-
-    private void btn_createuserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_createuserMouseEntered
-        btn_createuser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_btn_createuserMouseEntered
-
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try{
             Class.forName(MySQLConstand.CLASS_NAME);
@@ -323,6 +311,15 @@ public class UserManagerForm extends javax.swing.JPanel {
         CreateUserFrame cuf = new CreateUserFrame();
         cuf.setVisible(true);
     }//GEN-LAST:event_btn_createuserActionPerformed
+
+    private void btn_changepassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changepassActionPerformed
+        User cpuser = new User();
+        cpuser = SelectUser(cpuser);
+        if(cpuser != null){
+            ChangePassFrame cpf = new ChangePassFrame(cpuser);
+        cpf.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_changepassActionPerformed
     
     public void ClearDataTable(){
         DefaultTableModel tbmodel = (DefaultTableModel)tb_user.getModel();
@@ -437,10 +434,10 @@ public class UserManagerForm extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.other.MyButton btn_changepass;
     private view.other.MyButton btn_createuser;
     private view.other.MyButton btn_edituser;
     private view.other.MyButton btn_search;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

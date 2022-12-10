@@ -303,14 +303,7 @@ public class EditBookFrame extends javax.swing.JFrame {
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton1.setText("Đồng ý");
-        myButton1.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        myButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                myButton1MouseEntered(evt);
-            }
-        });
         myButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myButton1ActionPerformed(evt);
@@ -469,10 +462,6 @@ public class EditBookFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void myButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton1MouseEntered
-        myButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_myButton1MouseEntered
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         String author = tf_author.getText();

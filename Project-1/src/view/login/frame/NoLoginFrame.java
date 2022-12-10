@@ -66,15 +66,8 @@ public class NoLoginFrame extends javax.swing.JFrame {
 
         myButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton3.setText("Đăng nhập");
-        myButton3.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton3.setColorOver(new java.awt.Color(255, 255, 255));
         myButton3.setDefaultCapable(false);
         myButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        myButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                myButton3MouseEntered(evt);
-            }
-        });
         myButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myButton3ActionPerformed(evt);
@@ -193,15 +186,8 @@ public class NoLoginFrame extends javax.swing.JFrame {
 
         myButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton2.setText("Tìm kiếm");
-        myButton2.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton2.setColorOver(new java.awt.Color(255, 255, 255));
         myButton2.setDefaultCapable(false);
         myButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        myButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                myButton2MouseEntered(evt);
-            }
-        });
         myButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myButton2ActionPerformed(evt);
@@ -362,14 +348,6 @@ public class NoLoginFrame extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void myButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton2MouseEntered
-        myButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_myButton2MouseEntered
-
-    private void myButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myButton3MouseEntered
-        myButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_myButton3MouseEntered
 
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
         this.dispose();

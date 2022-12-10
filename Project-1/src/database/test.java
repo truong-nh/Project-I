@@ -41,12 +41,13 @@ public class test {
 //        for(Book books:DBBook.getListBooks()){
 //            System.out.println(books.getName());
 //        }
-              Account account= new Account();
-//        account.setIdAccount(3);
-        account.setMail("tqt2");
-        account.setUsername("tqt1");
-        account.setPassword("3");
-        account.setRole("user");
-      DBUser.addAccount(account);
+//              Account account= new Account();
+////        account.setIdAccount(3);
+//        account.setMail("tqt2");
+//        account.setUsername("tqt1");
+//        account.setPassword("3");
+//        account.setRole("user");
+//      DBUser.addAccount(account);
+       DBUser.updatePassWord(7, "123456");
     }
 }
