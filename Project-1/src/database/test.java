@@ -4,8 +4,11 @@
  */
 package database;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import model.book.Book;
 import model.book.Location;
+import model.finance.Finance;
 import model.user.Account;
 import model.user.User;
 
@@ -47,6 +50,21 @@ public class test {
         account.setUsername("tqt1");
         account.setPassword("3");
         account.setRole("user");
-      DBUser.addAccount(account);
+   //   DBUser.addAccount(account);
+
+   Date date = new Date();
+        System.out.println(date);
+        System.out.println(date.getTime());
+        long dates = date.getTime();
+        Date cuDate = new Date(dates);
+        Date fromDate = new Date(223333333);
+        Date toDate = new Date(dates);
+        //Finance newfinance= new Finance(4, 1000, new Date(),"mua", "mua");
+       // DBFinance.addFinance(newfinance);
+        for(Finance finance:DBFinance.getFinanceReport(333, new Date().getTime())){
+        System.out.println(finance.getId());
+        }
+        System.out.println(DBFinance.getCurrentIdFinance());
+        
     }
 }

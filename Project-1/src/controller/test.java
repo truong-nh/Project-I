@@ -4,8 +4,12 @@
  */
 package controller;
 
+import database.DBFinance;
+import java.text.ParseException;
+import java.util.Date;
 import model.book.Book;
 import model.book.Location;
+import model.finance.Finance;
 import model.user.User;
 
 /**
@@ -13,7 +17,7 @@ import model.user.User;
  * @author Admin
  */
 public class test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 //        User user= new User();
 //        AccountController ac= new AccountController(user);
 //        ac.getListUser();
@@ -29,7 +33,13 @@ public class test {
       Book book = new Book(7, "name", "code", "author", "category", Short.valueOf("2002"), "publisher", "status", location);
 //      BookController bookController = new BookController();
 //      bookController.updateBook(book);
+      FinanceController financeController = new FinanceController();
+     // financeController.addFinance(4444,"thu", "tiền phạt");
 
+     for(Finance finance:financeController.getFinanceReport("2022-12-11", "2022-12-11")){
+        System.out.println(finance.getId());
+        } 
+     
     }
     
 }

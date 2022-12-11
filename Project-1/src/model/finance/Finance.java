@@ -12,21 +12,32 @@ import java.util.Date;
  * @author Admin
  */
 public class Finance {
-    private String id;
+    private int id;
     private long value;
     private String type;
     private Date date;
+    private String description;
 
     public Finance() {
     }
 
-    public String getId() {
+    public Finance(int id, long value, Date date, String type, String description) {
+        this.id = id;
+        this.value = value;
+        this.type = type;
+        this.date = date;
+        this.description = description;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+   
 
     public long getValue() {
         return value;
@@ -52,6 +63,15 @@ public class Finance {
         this.date = date;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+   
 
 
     
