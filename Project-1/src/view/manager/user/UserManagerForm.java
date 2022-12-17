@@ -74,8 +74,6 @@ public class UserManagerForm extends javax.swing.JPanel {
 
         btn_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_search.setText("Tìm kiếm");
-        btn_search.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_search.setColorOver(new java.awt.Color(255, 255, 255));
         btn_search.setDefaultCapable(false);
         btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_search.addActionListener(new java.awt.event.ActionListener() {
@@ -86,8 +84,6 @@ public class UserManagerForm extends javax.swing.JPanel {
 
         btn_edituser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_edituser.setText("Chỉnh sửa");
-        btn_edituser.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_edituser.setColorOver(new java.awt.Color(255, 255, 255));
         btn_edituser.setDefaultCapable(false);
         btn_edituser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_edituser.addActionListener(new java.awt.event.ActionListener() {
@@ -98,8 +94,6 @@ public class UserManagerForm extends javax.swing.JPanel {
 
         btn_createuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_createuser.setText("Tạo mới");
-        btn_createuser.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_createuser.setColorOver(new java.awt.Color(255, 255, 255));
         btn_createuser.setDefaultCapable(false);
         btn_createuser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_createuser.addActionListener(new java.awt.event.ActionListener() {
@@ -110,8 +104,6 @@ public class UserManagerForm extends javax.swing.JPanel {
 
         btn_changepass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_changepass.setText("Đổi mật khẩu");
-        btn_changepass.setColorClick(new java.awt.Color(153, 153, 153));
-        btn_changepass.setColorOver(new java.awt.Color(255, 255, 255));
         btn_changepass.setDefaultCapable(false);
         btn_changepass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_changepass.addActionListener(new java.awt.event.ActionListener() {
@@ -142,17 +134,12 @@ public class UserManagerForm extends javax.swing.JPanel {
                         .addComponent(btn_edituser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(btn_createuser, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_searchaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(82, 82, 82))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(btn_changepass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(tf_searchaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_changepass, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,8 +151,8 @@ public class UserManagerForm extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tf_searchaccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                     .addComponent(tf_searchname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_searchaccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_searchidcard, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

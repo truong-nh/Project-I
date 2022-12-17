@@ -141,12 +141,12 @@ public class BookManagerForm extends javax.swing.JPanel {
                         .addComponent(btn_editbook, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(btn_createbook, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_searchcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(btn_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,8 +158,8 @@ public class BookManagerForm extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tf_searchcategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                     .addComponent(tf_searchname, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_searchcategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_searchauthor, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,6 +170,7 @@ public class BookManagerForm extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
 
+        tb_book.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tb_book.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -193,8 +194,17 @@ public class BookManagerForm extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tb_book.setRowHeight(25);
         tb_book.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tb_book);
+        if (tb_book.getColumnModel().getColumnCount() > 0) {
+            tb_book.getColumnModel().getColumn(0).setMinWidth(50);
+            tb_book.getColumnModel().getColumn(0).setMaxWidth(80);
+            tb_book.getColumnModel().getColumn(2).setMinWidth(50);
+            tb_book.getColumnModel().getColumn(2).setMaxWidth(90);
+            tb_book.getColumnModel().getColumn(5).setMinWidth(90);
+            tb_book.getColumnModel().getColumn(5).setMaxWidth(120);
+        }
 
         lb_checknumber.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -202,10 +212,10 @@ public class BookManagerForm extends javax.swing.JPanel {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(lb_checknumber, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 557, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +332,7 @@ public class BookManagerForm extends javax.swing.JPanel {
 
     private void btn_editbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editbookActionPerformed
         Book editbook = new Book();
-        editbook = SelectUser(editbook);
+        editbook = SelectBook(editbook);
         if (editbook != null) {
             EditBookFrame ebf = new EditBookFrame(editbook);
             ebf.setVisible(true);
@@ -337,7 +347,7 @@ public class BookManagerForm extends javax.swing.JPanel {
     private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
         // TODO add your handling code here:
         Book addBook = new Book();
-        addBook = SelectUser(addBook);
+        addBook = SelectBook(addBook);
         if (addBook != null) {
             AddBookFrame abf  = new AddBookFrame(addBook);
             abf.setVisible(true);
@@ -358,7 +368,7 @@ public class BookManagerForm extends javax.swing.JPanel {
         return tbData;
     }
 
-    public Book SelectUser(Book book) {
+    public Book SelectBook(Book book) {
         DefaultTableModel model = (DefaultTableModel) tb_book.getModel();
         int selectedRowIndex = tb_book.getSelectedRow();
 

@@ -464,6 +464,7 @@ public class CreateBookFrame extends javax.swing.JFrame {
         } else {
            Location  location= new Location(room, shelf, Integer.parseInt(row));
            bookController.addBook(name, code, author, category, Short.valueOf(year), publiser, status, location);
+           
         }
         
         

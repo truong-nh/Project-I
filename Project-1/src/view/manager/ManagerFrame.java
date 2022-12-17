@@ -10,6 +10,8 @@ import java.awt.Frame;
 import model.user.User;
 import view.clock.ClockThread;
 import view.manager.book.BookManagerForm;
+import view.manager.ticket.TicketManagerForm;
+import view.other.InfoFrame;
 
 /**
  *
@@ -67,14 +69,24 @@ public class ManagerFrame extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setUndecorated(true);
 
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+
         lb_hello.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lb_hello.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_hello.setText("hello");
+        lb_hello.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_hello.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_helloMouseClicked(evt);
+            }
+        });
 
         myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         myButton1.setText("Đăng xuất");
-        myButton1.setColorClick(new java.awt.Color(153, 153, 153));
-        myButton1.setColorOver(new java.awt.Color(255, 255, 255));
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         myButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,8 +109,10 @@ public class ManagerFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lb_hello, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)))
+                    .addComponent(lb_hello, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         lb_usermanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -146,6 +160,12 @@ public class ManagerFrame extends javax.swing.JFrame {
         lb_ticketmanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lb_ticketmanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_ticketmanager.setText("Quản lý phiếu");
+        lb_ticketmanager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_ticketmanager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_ticketmanagerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -194,7 +214,7 @@ public class ManagerFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -241,7 +261,7 @@ public class ManagerFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(lb_clock, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1191, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -307,7 +327,7 @@ public class ManagerFrame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 1230, 791);
+        setBounds(0, 0, 1386, 791);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -323,6 +343,7 @@ public class ManagerFrame extends javax.swing.JFrame {
         UserManagerForm umf = new UserManagerForm();
         pn_main.add(umf);
         pack();
+        DisInfoFrame();
     }//GEN-LAST:event_lb_usermanagerMouseClicked
     
     
@@ -336,6 +357,7 @@ public class ManagerFrame extends javax.swing.JFrame {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();
+        DisInfoFrame();
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
@@ -349,7 +371,39 @@ public class ManagerFrame extends javax.swing.JFrame {
         BookManagerForm bmf = new BookManagerForm();
         pn_main.add(bmf);
         pack();
+        DisInfoFrame();
     }//GEN-LAST:event_lb_bookmanagerMouseClicked
+
+    int click = 0;
+    private InfoFrame inf;
+    public void ShowInfoFrame(){
+        inf = new InfoFrame(user, lb_hello.getLocationOnScreen().x, lb_hello.getLocationOnScreen().y-305);
+        inf.setVisible(true);
+        click = 1;
+    }
+    public void DisInfoFrame(){
+        if(click == 1){
+            inf.dispose();
+            click = 0;
+        }
+    }
+    
+    private void lb_helloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_helloMouseClicked
+        if(click == 0)ShowInfoFrame();
+        else DisInfoFrame();
+    }//GEN-LAST:event_lb_helloMouseClicked
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        DisInfoFrame();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void lb_ticketmanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_ticketmanagerMouseClicked
+        pn_main.removeAll();
+        TicketManagerForm tmf = new TicketManagerForm();
+        pn_main.add(tmf);
+        pack();
+        DisInfoFrame();
+    }//GEN-LAST:event_lb_ticketmanagerMouseClicked
 
     /**
      * @param args the command line arguments
