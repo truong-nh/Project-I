@@ -72,7 +72,13 @@ public class BookController {
        }
     } 
     
- 
+    public static Book getBookById(int id){
+        Book books = new Book();
+        for (Book book : DBBook.getListBooks()){
+            if (book.getId() == id) books = book;
+        }
+        return books;
+    }
     
     public static List<Book> searchBook(String name, String author, String category){
         List<Book> books = new ArrayList<>();

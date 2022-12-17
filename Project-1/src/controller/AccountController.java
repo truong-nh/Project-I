@@ -167,4 +167,12 @@ public class AccountController {
             return false;
         }
    }
+   public static User getUserById(int id){
+       for(User user : DBUser.getListUsers()){
+           if(user.getAccount().getIdAccount() == id){
+                return user;
+           }
+       }
+       return null;
+   }
 }

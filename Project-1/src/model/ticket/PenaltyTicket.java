@@ -9,18 +9,18 @@ package model.ticket;
  * @author Admin
  */
 public class PenaltyTicket extends Ticket{
-    private long penanty;
+    private long penalty;
     private BorrowTicket borrowTicket;
 
     public PenaltyTicket() {
     }
 
-    public long getPenanty() {
-        return penanty;
+    public long getPenalty() {
+        return penalty;
     }
 
-    public void setPenanty(long penanty) {
-        this.penanty = penanty;
+    public void setPenalty(long penalty) {
+        this.penalty = penalty;
     }
 
     public BorrowTicket getBorrowTicket() {

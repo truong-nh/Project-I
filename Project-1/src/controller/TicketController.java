@@ -4,6 +4,8 @@
  */
 package controller;
 
+import database.DBTicket;
+import model.ticket.BorrowTicket;
 import model.user.User;
 
 /**
@@ -25,5 +27,10 @@ public class TicketController {
         this.user = user;
     }
 
-    
+    public static BorrowTicket getBorrowTicketById(int id){
+        for (BorrowTicket BorrowTicket : DBTicket.getListBorrowTicket()){
+            if (BorrowTicket.getId() == id) return BorrowTicket;
+        }
+        return null;
+    }
 }

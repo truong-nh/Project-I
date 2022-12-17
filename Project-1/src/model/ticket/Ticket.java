@@ -13,11 +13,18 @@ import java.util.Date;
 public abstract class Ticket {
     private int id;
     private Date dateCreate;
-
+    private String status;
     public Ticket(){
         
     }
-
+    
+    
+    public String getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status = status;
+    }
     public int getId() {
         return id;
     }
