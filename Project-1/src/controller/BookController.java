@@ -56,7 +56,7 @@ public class BookController {
     
     public void addBook(String name, String code, String author,  String category, Short year, String publisher, String status, Location location){
        DBBook.addBook(new Book(this.getCurrentIdBook()+1, name, code, author, category, year, publisher, status, location));
-   }
+    }
     
     public List<Book> getListBooks(){
        return DBBook.getListBooks();
