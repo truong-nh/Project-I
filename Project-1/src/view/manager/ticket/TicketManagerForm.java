@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import model.book.Book;
+import model.ticket.BookRequestTicket;
 import model.ticket.BorrowTicket;
 import model.ticket.ExtendTicket;
 import model.ticket.LendTicket;
@@ -107,6 +109,11 @@ public class TicketManagerForm extends javax.swing.JPanel {
         btn_createticket.setText("Tạo mới");
         btn_createticket.setDefaultCapable(false);
         btn_createticket.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_createticket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createticketActionPerformed(evt);
+            }
+        });
 
         jcb_type.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jcb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phiếu mượn", "Phiếu gia hạn", "Phiếu trả", "Phiếu phạt", "Phiếu yêu cầu sách" }));
@@ -175,14 +182,14 @@ public class TicketManagerForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID phiếu", "Tên người dùng", "Loại", "Ngày tạo", "Trạng thái"
+                "ID phiếu", "Loại", "Ngày tạo", "Trạng thái"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -273,7 +280,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
             else if (searchtype.equals("Phiếu trả")) sql = sql + "lendticket";
             else if (searchtype.equals("Phiếu phạt")) sql = sql + "penaltyticket";
             else  sql = sql + "bookrequestticket";
-            sql = sql + " where idTicket like '" + searchid + "%' and status = '" + searchstatus +"'";
+            sql = sql + " where idTicket like '%" + searchid + "%' and status = '" + searchstatus +"'" ;
 
             ResultSet rs = st.executeQuery(sql);
             ClearDataTable();
@@ -281,17 +288,15 @@ public class TicketManagerForm extends javax.swing.JPanel {
             while (rs.next()) {
                 String idticket = String.valueOf(rs.getInt("idTicket"));
                 String type = searchtype;
-                String name = searchUserByID(String.valueOf(rs.getInt("idUser"))).getName();
-                String date = rs.getString("datecreate");
+                String date = rs.getString("dateCreate");
                 String status = rs.getString("status");
 
-                String tbData[] = {idticket,name, type, date, status};
+                String tbData[] = {idticket, type, date, status};
 
                 DefaultTableModel tbmodel = (DefaultTableModel) tb_ticket.getModel();
-                if (tbData[1] != null) {
-                    tbmodel.addRow(tbData);
-                    count++;
-                }
+                tbmodel.addRow(tbData);
+                count++;
+                
             }
             conn.close();
             lb_checknumber.setText("Tìm được " + count + " phiếu!");
@@ -301,33 +306,65 @@ public class TicketManagerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_searchbtn_searchActionPerformed
 
     private void btn_editticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editticketActionPerformed
-        Ticket editticket = null;
-        editticket = SelectTicket(editticket);
+        Ticket editticket = SelectTicket();
         if(editticket != null){
             EditTicketFrame etf = new EditTicketFrame(editticket);
             etf.setVisible(true);
         }
+        else {
+            NofiDialog nd = new NofiDialog("Vui lòng chọn phiếu để chỉnh sửa");
+            nd.setVisible(true);
+        }
     }//GEN-LAST:event_btn_editticketActionPerformed
+
+    private void btn_createticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createticketActionPerformed
+        Ticket createticket = SelectTicket();
+        if(createticket != null){
+            ChooseTypeTicket ctt = new ChooseTypeTicket(createticket);
+            ctt.setVisible(true);
+        }
+        else {
+            ChooseTypeTicket ctt = new ChooseTypeTicket();
+            ctt.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_createticketActionPerformed
     
     public void ClearDataTable() {
         DefaultTableModel tbmodel = (DefaultTableModel) tb_ticket.getModel();
         tbmodel.setRowCount(0);
     }
     
-    public Ticket SelectTicket(Ticket ticket) {
+    public Ticket SelectTicket() {
         DefaultTableModel model = (DefaultTableModel) tb_ticket.getModel();
         int selectedRowIndex = tb_ticket.getSelectedRow();
 
         if (selectedRowIndex == -1) {
-            NofiDialog nd = new NofiDialog("Vui lòng chọn phiếu để chỉnh sửa");
-            nd.setVisible(true);
             return null;
         } else {
             String id = model.getValueAt(selectedRowIndex, 0).toString();
-            String type = model.getValueAt(selectedRowIndex, 2).toString();
-            ticket = searchTicketByID(id,type);
+            String type = model.getValueAt(selectedRowIndex, 1).toString();
+            if(type.equals("Phiếu mượn")){
+                BorrowTicket ticket = searchBorrowTicketByID(id);
+                return ticket;
+            }
+            else if(type.equals("Phiếu gia hạn")){
+                ExtendTicket ticket = searchExtendTicketByID(id);
+                return ticket;
+            }
+            else if(type.equals("Phiếu trả")){
+                LendTicket ticket = searchLendTicketByID(id);
+                return ticket;
+            }
+            else if(type.equals("Phiếu phạt")){
+                PenaltyTicket ticket = searchPenaltyTicketByID(id);
+                return ticket;
+            }
+            else if(type.equals("Phiếu yêu cầu sách")){
+                BookRequestTicket ticket = searchBookRequestTicketByID(id);
+                return ticket;
+            }
         }
-        return ticket;
+        return null;
     }
     
     public User searchUserByID(String ID){
@@ -358,53 +395,68 @@ public class TicketManagerForm extends javax.swing.JPanel {
         return user;
     }
     
-    public Ticket searchTicketByID(String ID,String type) {
-        Ticket ticket = null;
-        switch (type) {
-            case "Phiếu mượn" ->                 {
-                    type = "borrowticket";
-                    ticket = new BorrowTicket();
-                }
-            case "Phiếu gia hạn" ->                 {
-                    type = "extendticket";
-                    ticket = new ExtendTicket();
-                }
-            case "Phiếu trả" ->                 {
-                    type = "lendticket";
-                    ticket = new LendTicket();
-                }
-            case "Phiếu phạt" ->                 {
-                    type = "penaltyticket";
-                    ticket = new PenaltyTicket();
-                }
-            default -> {
-//                    ticket = new BookRequestTicket();
-            }
-        }
+    public Book searchBookByID(String ID) {
+        Book book = new Book();
+        try {
+            Class.forName(MySQLConstand.CLASS_NAME);
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
 
+            String sql = "select * from book where idBook='" + ID + "'";
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String code = rs.getString("code");
+                String author = rs.getString("author");
+                String category = rs.getString("category");
+                Short year = rs.getShort("year");
+                String publisher = rs.getString("publisher");
+                String status = rs.getString("status");
+                
+                book.setId(Integer.valueOf(ID));
+                book.setName(name);
+                book.setCode(code);
+                book.setAuthor(author);
+                book.setCategory(category);
+                book.setYear(year);
+                book.setPublisher(publisher);
+                book.setStatus(status);
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return book;
+    }
+    
+    public BorrowTicket searchBorrowTicketByID(String ID) {
+        BorrowTicket ticket = new BorrowTicket();
+        
         try {
             Connection conn = getJDBCConnection();
             Statement st = conn.createStatement();
 
-            String sql = "select * from " + type + " where idBook='" + ID + "'";
+            String sql = "select * from borrowticket where idTicket='" + ID + "'";
 
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
+                int idTicket = rs.getInt("idTicket");
                 String idBook = rs.getString("idBook");
                 String idUser = rs.getString("idUser");
 //                String dateCreate = rs.getInt("dateCreate");
-//                String dateBorrow = rs.getString("borrowDate");
-//                String dateReturn = rs.getString("returnDate");
-                int idTicket = rs.getInt("idTicket");
+                String dateBorrow = rs.getString("borrowDate");
+                String dateReturn = rs.getString("returnDate");
                 String status = rs.getString("status");
                 
                 ticket.setId(idTicket);
-//                ticket.setStatus();
+                System.out.println(idTicket);
+                ticket.setBook(searchBookByID(idBook));
+                ticket.setBorrower(searchUserByID(idUser));
 //                ticket.setDateCreate(dateCreate);
-                
-                
-                
-                  
+//                ticket.setBorrowedDate(dateBorrow);
+//                ticket.setReturnDate(dateReturn);
+//                ticket.setStatus();
             }
             conn.close();
         } catch (Exception e) {
@@ -412,6 +464,133 @@ public class TicketManagerForm extends javax.swing.JPanel {
         }
         return ticket;
     }
+    
+    public ExtendTicket searchExtendTicketByID(String ID) {
+        ExtendTicket ticket = new ExtendTicket();
+        
+
+        try {
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from extendticket where idTicket='" + ID + "'";
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int idTicket = rs.getInt("idTicket");
+                int idBorrowTicket = rs.getInt("idBorrow");
+                String dateCreate = rs.getString("dateCreate");
+//                String olddateReturn = rs.getString("returnDate");
+                String newDateReturn = rs.getString("newreturnDate");
+                String status = rs.getString("status");
+                
+                ticket.setId(idTicket);
+//                ticket.setBorrowTicket(borrowTicket);
+//                ticket.setDateCreate(dateCreate);
+//                ticket.setNewReturnDate(newDateReturn);
+//                ticket.setStatus();
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ticket;
+    }
+    
+    public LendTicket searchLendTicketByID(String ID) {
+        LendTicket ticket = new LendTicket();
+        
+
+        try {
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from lendticket where idTicket='" + ID + "'";
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int idTicket = rs.getInt("idTicket");
+                int idBorrowTicket = rs.getInt("idBorrow");
+                String dateCreate = rs.getString("dateCreate");
+                String dateLend = rs.getString("lendDate");
+                String status = rs.getString("status");
+                
+                ticket.setId(idTicket);
+//                ticket.setBorrowTicket(borrowTicket);
+//                ticket.setDateCreate(dateCreate);
+//                ticket.setLendDate(dateLend);
+//                ticket.setStatus();
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ticket;
+    }
+    
+    public PenaltyTicket searchPenaltyTicketByID(String ID) {
+        PenaltyTicket ticket = new PenaltyTicket();
+        
+
+        try {
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from penaltyticket where idTicket='" + ID + "'";
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int idTicket = rs.getInt("idTicket");
+                int idBorrowTicket = rs.getInt("idBorrow");
+                String dateCreate = rs.getString("dateCreate");
+//                String dateLend = rs.getString("lendDate");
+                int penalty = rs.getInt("penalty");
+                String status = rs.getString("status");
+                
+                ticket.setId(idTicket);
+//                ticket.setBorrowTicket(borrowTicket);
+//                ticket.setDateCreate(dateCreate);
+                ticket.setPenalty(penalty);
+//                ticket.setStatus();
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ticket;
+    }
+    
+    public BookRequestTicket searchBookRequestTicketByID(String ID) {
+        BookRequestTicket ticket = new BookRequestTicket();
+        
+
+        try {
+            Connection conn = getJDBCConnection();
+            Statement st = conn.createStatement();
+
+            String sql = "select * from bookrequestticket where idTicket='" + ID + "'";
+
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                int idTicket = rs.getInt("idTicket");
+                String dateCreate = rs.getString("dateCreate");
+                String name = rs.getString("name");
+                String author = rs.getString("author");
+                String status = rs.getString("status");
+                
+                ticket.setId(idTicket);
+//                ticket.setDateCreate(dateCreate);
+                ticket.setName(name);
+                ticket.setAuthor(author);
+//                ticket.setStatus();
+            }
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ticket;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.other.MyButton btn_checkticket;

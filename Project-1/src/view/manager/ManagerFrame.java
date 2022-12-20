@@ -364,6 +364,7 @@ public class ManagerFrame extends javax.swing.JFrame {
         this.dispose();
         LoginFrame lf = new  LoginFrame();
         lf.setVisible(true);
+        DisInfoFrame();
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void lb_bookmanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_bookmanagerMouseClicked

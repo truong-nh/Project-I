@@ -4,10 +4,17 @@
  */
 package view.manager.ticket;
 
+import model.ticket.BookRequestTicket;
 import model.ticket.BorrowTicket;
+import model.ticket.ExtendTicket;
+import model.ticket.LendTicket;
+import model.ticket.PenaltyTicket;
 import model.ticket.Ticket;
-import view.manager.ticket.editform.BorrowTicketEditForm;
-import view.other.NofiDialog;
+import view.manager.ticket.form.BookRequestTicketForm;
+import view.manager.ticket.form.BorrowTicketForm;
+import view.manager.ticket.form.ExtendTicketForm;
+import view.manager.ticket.form.LendTicketForm;
+import view.manager.ticket.form.PenaltyTicketForm;
 
 /**
  *
@@ -28,9 +35,24 @@ public class EditTicketFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.ticket = ticket;
         if(ticket instanceof BorrowTicket){
-            BorrowTicketEditForm btef = new BorrowTicketEditForm((BorrowTicket) ticket,this);
+            BorrowTicketForm btef = new BorrowTicketForm((BorrowTicket) ticket,this);
             pn_main.add(btef);
-            
+        }
+        else if(ticket instanceof ExtendTicket){
+            ExtendTicketForm etef = new ExtendTicketForm((ExtendTicket) ticket, this);
+            pn_main.add(etef);
+        }
+        else if(ticket instanceof LendTicket){
+            LendTicketForm ltef = new LendTicketForm((LendTicket) ticket, this);
+            pn_main.add(ltef);
+        }
+        else if(ticket instanceof PenaltyTicket){
+            PenaltyTicketForm ptef = new PenaltyTicketForm((PenaltyTicket) ticket, this);
+            pn_main.add(ptef);
+        }
+        else {
+            BookRequestTicketForm brtf = new BookRequestTicketForm((BookRequestTicket) ticket, this);
+            pn_main.add(brtf);
         }
         pack();
     }
