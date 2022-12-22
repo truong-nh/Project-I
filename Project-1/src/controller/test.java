@@ -29,17 +29,17 @@ public class test {
 //        for (Book books : BookController.searchBook("", "", "")){
 //            System.out.println(books.getName());
 //        }
-      Location location = new Location("8", "8", 8);
-      Book book = new Book(7, "name", "code", "author", "category", Short.valueOf("2002"), "publisher", "status", location);
-//      BookController bookController = new BookController();
-//      bookController.updateBook(book);
-      FinanceController financeController = new FinanceController();
-     // financeController.addFinance(4444,"thu", "tiền phạt");
-
-     for(Finance finance:financeController.getFinanceReport("2022-12-11", "2022-12-11")){
-        System.out.println(finance.getId());
-        } 
-     
-    }
-    
+//      Location location = new Location("8", "8", 8);
+//      Book book = new Book(7, "name", "code", "author", "category", Short.valueOf("2002"), "publisher", "status", location);
+////      BookController bookController = new BookController();
+////      bookController.updateBook(book);
+//      FinanceController financeController = new FinanceController();
+//     // financeController.addFinance(4444,"thu", "tiền phạt");
+//
+//     for(Finance finance:financeController.getFinanceReport("2022-12-11", "2022-12-11")){
+//        System.out.println(finance.getId());
+//        } 
+        System.out.println(TicketController.getCurrentIdTicket());
+   }
+        
 }

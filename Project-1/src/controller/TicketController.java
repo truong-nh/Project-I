@@ -104,42 +104,45 @@ public class TicketController {
     }
     
     //add ticket
-    public void addBorrowTicket(int id, String status, Date dateCreate, User borrower, Book book, Date borrowedDate, Date returnDate){
+    public void addBorrowTicket(String status, int iduser, int idbook, Date borrowedDate){
         BorrowTicket BorrowTicket = new BorrowTicket();
-        BorrowTicket.setId(id);
+        BorrowTicket.setId(TicketController.getCurrentIdTicket()+1);
         BorrowTicket.setStatus(status);
-        BorrowTicket.setDateCreate(dateCreate);
-        BorrowTicket.setBorrower(borrower);
-        BorrowTicket.setBook(book);
+        BorrowTicket.setDateCreate(new Date());
+        BorrowTicket.setBorrower(AccountController.getUserById(iduser));
+        BorrowTicket.setBook(BookController.getBookById(idbook));
         BorrowTicket.setBorrowedDate(borrowedDate);
+        Date returnDate = new Date(borrowedDate.getTime() + 1209600000);
         BorrowTicket.setReturnDate(returnDate);
         DBTicket.addBorrowTicket(BorrowTicket);
     }
-    public void addExtendTicket(int id, String status, Date dateCreate, Date newReturnDate, BorrowTicket borrowTicket){
+    public void addExtendTicket(int idticket){
         ExtendTicket ExtendTicket = new ExtendTicket();
-        ExtendTicket.setId(id);
-        ExtendTicket.setStatus(status);
-        ExtendTicket.setDateCreate(dateCreate);
-        ExtendTicket.setBorrowTicket(borrowTicket);
-        ExtendTicket.setNewReturnDate(newReturnDate);
+        ExtendTicket.setId(TicketController.getCurrentIdTicket()+1);
+        ExtendTicket.setStatus("Đã xử lý");
+        ExtendTicket.setDateCreate(new Date());
+        
+        BorrowTicket bT = TicketController.getBorrowTicketById(idticket);
+        ExtendTicket.setBorrowTicket(bT);
+        ExtendTicket.setNewReturnDate(new Date(bT.getBorrowedDate().getTime() + 604800000L));
         DBTicket.addExtendTicket(ExtendTicket);
     }
-    public void addLendTicket(int id, String status, Date dateCreate, Date lendDate, BorrowTicket borrowTicket){
+    public void addLendTicket(int id, String status, Date lendDate, int idticket){
         LendTicket LendTicket = new LendTicket();
-        LendTicket.setId(id);
+        LendTicket.setId(TicketController.getCurrentIdTicket());
         LendTicket.setStatus(status);
-        LendTicket.setDateCreate(dateCreate);
+        LendTicket.setDateCreate(new Date());
         LendTicket.setLendDate(lendDate);
-        LendTicket.setBorrowTicket(borrowTicket);
+        LendTicket.setBorrowTicket(TicketController.getBorrowTicketById(idticket));
         DBTicket.addLendTicket(LendTicket);
     }
-    public void addPenaltyTicket(int id, String status, Date dateCreate, long penalty, BorrowTicket borrowTicket){
+    public void addPenaltyTicket(long penalty, int idticket){
         PenaltyTicket PenaltyTicket = new PenaltyTicket();
-        PenaltyTicket.setId(id);
-        PenaltyTicket.setStatus(status);
-        PenaltyTicket.setDateCreate(dateCreate);
+        PenaltyTicket.setId(TicketController.getCurrentIdTicket());
+        PenaltyTicket.setStatus("Đã xử lý");
+        PenaltyTicket.setDateCreate(new Date());
         PenaltyTicket.setPenalty(penalty);
-        PenaltyTicket.setBorrowTicket(borrowTicket);
+        PenaltyTicket.setBorrowTicket(TicketController.getBorrowTicketById(idticket));
         DBTicket.addPenaltyTicket(PenaltyTicket);
     }
     

@@ -4,25 +4,24 @@
  */
 package model.ticket;
 import java.util.Date;
+import model.user.User;
 
 /**
  *
  * @author admin
  */
 public class BookRequestTicket extends Ticket{
-    private Date DateCreate;
     private String Name;
     private String Author;
+    private User Requester;
     public BookRequestTicket() {
         super();
     }
-    
-    public Date getDateCreate() {
-        return DateCreate;
+    public void setRequester(User Requester) {
+        this.Requester = Requester;
     }
-
-    public void setDateCreate(Date DateCreate) {
-        this.DateCreate = DateCreate;
+    public User getRequester() {
+        return Requester;
     }
     public String getName(){
         return Name;
