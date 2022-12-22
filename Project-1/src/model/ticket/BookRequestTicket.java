@@ -13,16 +13,16 @@ import model.user.User;
 public class BookRequestTicket extends Ticket{
     private String Name;
     private String Author;
-    private User Requester;
+//    private User Requester;
     public BookRequestTicket() {
         super();
     }
-    public void setRequester(User Requester) {
-        this.Requester = Requester;
-    }
-    public User getRequester() {
-        return Requester;
-    }
+//    public void setRequester(User Requester) {
+//        this.Requester = Requester;
+//    }
+//    public User getRequester() {
+//        return Requester;
+//    }
     public String getName(){
         return Name;
     }
