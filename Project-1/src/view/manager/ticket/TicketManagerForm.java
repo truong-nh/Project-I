@@ -104,6 +104,11 @@ public class TicketManagerForm extends javax.swing.JPanel {
         btn_checkticket.setText("Kiểm tra phiếu");
         btn_checkticket.setDefaultCapable(false);
         btn_checkticket.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_checkticket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_checkticketActionPerformed(evt);
+            }
+        });
 
         btn_createticket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_createticket.setText("Tạo mới");
@@ -328,6 +333,14 @@ public class TicketManagerForm extends javax.swing.JPanel {
             ctt.setVisible(true);
         }
     }//GEN-LAST:event_btn_createticketActionPerformed
+
+    private void btn_checkticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_checkticketActionPerformed
+        Ticket checkticket = SelectTicket();
+        if(checkticket != null){
+            CheckTicketFrame ctf = new CheckTicketFrame();
+            ctf.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_checkticketActionPerformed
     
     public void ClearDataTable() {
         DefaultTableModel tbmodel = (DefaultTableModel) tb_ticket.getModel();
