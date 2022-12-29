@@ -435,6 +435,9 @@ public class DBTicket {
     }
     
     //update
+
+    
+    
     public static void updateBookRequestTicket(BookRequestTicket BookRequestTicket) {
         Connection connection = JDBCConnection.getJDBCConnection();
         PreparedStatement pst = null;
@@ -520,7 +523,7 @@ public class DBTicket {
         try {
             pst = connection.prepareStatement(sql);
             
-            pst.setInt(1,ExtendTicket.getBorrowTicket().getBorrower().getAccount().getIdAccount());
+            pst.setInt(1,ExtendTicket.getBorrowTicket().getId());
             pst.setLong(2,ExtendTicket.getDateCreate().getTime());
             pst.setString(3,ExtendTicket.getStatus());      
             pst.setLong(4,ExtendTicket.getNewReturnDate().getTime());    
@@ -557,7 +560,7 @@ public class DBTicket {
         try {
             pst = connection.prepareStatement(sql);
             
-            pst.setInt(1,LendTicket.getBorrowTicket().getBorrower().getAccount().getIdAccount());
+            pst.setInt(1,LendTicket.getBorrowTicket().getId());
             pst.setLong(2,LendTicket.getDateCreate().getTime());
             pst.setString(3,LendTicket.getStatus());      
             pst.setLong(4,LendTicket.getLendDate().getTime());    
@@ -594,7 +597,7 @@ public class DBTicket {
         try {
             pst = connection.prepareStatement(sql);
             
-            pst.setInt(1,PenaltyTicket.getBorrowTicket().getBorrower().getAccount().getIdAccount());
+            pst.setInt(1,PenaltyTicket.getBorrowTicket().getId());
             pst.setLong(2,PenaltyTicket.getDateCreate().getTime());
             pst.setString(3,PenaltyTicket.getStatus());
             pst.setLong(4,PenaltyTicket.getPenalty());          

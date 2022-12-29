@@ -4,40 +4,47 @@
  */
 package view.manager.ticket.form;
 
+import controller.TicketController;
+import model.ticket.BorrowTicket;
 import model.ticket.ExtendTicket;
+import model.ticket.Ticket;
 import view.manager.ticket.CreateTicketFrame;
 import view.manager.ticket.EditTicketFrame;
+import view.other.NofiDialog;
 
 /**
  *
  * @author Administrator
  */
 public class ExtendTicketForm extends javax.swing.JPanel {
-    
+
     private ExtendTicket extendticket;
     private EditTicketFrame etf;
     private CreateTicketFrame ctf;
+
     /**
      * Creates new form ExtendTicketEditForm
      */
     public ExtendTicketForm() {
         initComponents();
     }
-    
-    public ExtendTicketForm(ExtendTicket ticket,EditTicketFrame etf) {
+
+    public ExtendTicketForm(ExtendTicket ticket, EditTicketFrame etf) {
         initComponents();
         this.etf = etf;
         this.extendticket = ticket;
-      //  tf_idticket.setText(String.valueOf(extendticket.getId()));
-        
+        //  tf_idticket.setText(String.valueOf(extendticket.getId()));
+
     }
-    public ExtendTicketForm(ExtendTicket ticket,CreateTicketFrame ctf) {
+
+    public ExtendTicketForm(ExtendTicket ticket, CreateTicketFrame ctf) {
         initComponents();
         this.ctf = ctf;
         this.extendticket = ticket;
-     //   tf_idticket.setText(String.valueOf(extendticket.getId()));
-        
+        //   tf_idticket.setText(String.valueOf(extendticket.getId()));
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,7 +247,23 @@ public class ExtendTicketForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-
+        int idBorrowTicket = Integer.parseInt(tf_idborrowticket.getText());
+        TicketController ticketController = new TicketController();
+        Ticket ticket = TicketController.getBorrowTicketById(idBorrowTicket);
+        if (ticket == null) {
+            NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin phiếu mượn");
+            nd.setVisible(true);
+        }
+        else{
+            try {
+                ticketController.addExtendTicket(idBorrowTicket);
+                this.setVisible(false);
+                ctf.setVisible(false);
+            } catch (Exception e) {
+                NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin ");
+                nd.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed

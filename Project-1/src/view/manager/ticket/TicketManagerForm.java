@@ -132,7 +132,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
         });
 
         jcb_status.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã xử lý", "Chưa xử lý", " " }));
+        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã xử lý", "Chưa xử lý" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -293,7 +293,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
             else if (searchtype.equals("Phiếu trả")) sql = sql + "lendticket";
             else if (searchtype.equals("Phiếu phạt")) sql = sql + "penaltyticket";
             else  sql = sql + "bookrequestticket";
-            sql = sql + " where idTicket like '%" + searchid + "%' and status = '" + searchstatus +"'" ;
+            sql = sql + " where idTicket like '%" + searchid + "%' and status = '" + searchstatus +"'order by dateCreate desc" ;
 
             ResultSet rs = st.executeQuery(sql);
             ClearDataTable();
@@ -354,7 +354,11 @@ public class TicketManagerForm extends javax.swing.JPanel {
                 ctf.setVisible(true);           
             }
             if (checkticket instanceof  LendTicket){
-                CheckLendTicketFrame ctf = new CheckLendTicketFrame((LendTicket)ticketController.getTicketById(checkticket.getId()));
+                CheckLendTicketFrame ctf = new CheckLendTicketFrame(TicketController.getLendTicketById(checkticket.getId()));
+                ctf.setVisible(true);
+            }
+            if (checkticket instanceof  ExtendTicket){
+                CheckExtendTicketFrame ctf = new CheckExtendTicketFrame(TicketController.getExtendTicketByID(checkticket.getId()));
                 ctf.setVisible(true);
             }
         }

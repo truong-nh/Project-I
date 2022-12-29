@@ -40,7 +40,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
            chuaxulyjRadioButton1.setSelected(true);
         }
         else{
-            daxulyjRadioButton2.setSelected(false);
+            daxulyjRadioButton2.setSelected(true);
         }
     }
     /**

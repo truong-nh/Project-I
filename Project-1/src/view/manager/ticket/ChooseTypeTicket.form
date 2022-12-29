@@ -45,9 +45,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btn_borrow" max="32767" attributes="0"/>
                       <Component id="btn_extend" max="32767" attributes="0"/>
-                      <Component id="btn_lend" max="32767" attributes="0"/>
-                      <Component id="btn_penalty" max="32767" attributes="0"/>
-                      <Component id="btn_bookrequest" pref="200" max="32767" attributes="0"/>
+                      <Component id="btn_lend" pref="200" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="100" max="32767" attributes="0"/>
               </Group>
@@ -69,11 +67,7 @@
                   <Component id="btn_extend" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btn_lend" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_penalty" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_bookrequest" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="174" max="32767" attributes="0"/>
                   <Component id="myButton2" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -116,32 +110,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Phi&#x1ebf;u tr&#x1ea3;"/>
+            <Property name="text" type="java.lang.String" value="Phi&#x1ebf;u tr&#x1ea3; s&#xe1;ch"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lendActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_penalty">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Phi&#x1ebf;u ph&#x1ea1;t"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_penaltyActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_bookrequest">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="18" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Phi&#x1ebf;u y&#xea;u c&#x1ea7;u s&#xe1;ch"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_bookrequestActionPerformed"/>
           </Events>
         </Component>
         <Component class="view.other.MyButton" name="myButton2">

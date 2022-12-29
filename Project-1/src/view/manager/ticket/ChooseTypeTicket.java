@@ -46,8 +46,6 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
         btn_borrow = new javax.swing.JButton();
         btn_extend = new javax.swing.JButton();
         btn_lend = new javax.swing.JButton();
-        btn_penalty = new javax.swing.JButton();
-        btn_bookrequest = new javax.swing.JButton();
         myButton2 = new view.other.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -73,26 +71,10 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
         });
 
         btn_lend.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_lend.setText("Phiếu trả");
+        btn_lend.setText("Phiếu trả sách");
         btn_lend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_lendActionPerformed(evt);
-            }
-        });
-
-        btn_penalty.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_penalty.setText("Phiếu phạt");
-        btn_penalty.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_penaltyActionPerformed(evt);
-            }
-        });
-
-        btn_bookrequest.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_bookrequest.setText("Phiếu yêu cầu sách");
-        btn_bookrequest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_bookrequestActionPerformed(evt);
             }
         });
 
@@ -115,9 +97,7 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_borrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_extend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_lend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_penalty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_bookrequest, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addComponent(btn_lend, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                 .addContainerGap(100, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,11 +115,7 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
                 .addComponent(btn_extend, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_lend, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_penalty, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_bookrequest, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -183,20 +159,6 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
         ctf.setVisible(true);
     }//GEN-LAST:event_btn_lendActionPerformed
 
-    private void btn_penaltyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_penaltyActionPerformed
-        PenaltyTicket pt = new PenaltyTicket();
-        CreateTicketFrame ctf = new CreateTicketFrame(pt);
-        this.dispose();
-        ctf.setVisible(true);
-    }//GEN-LAST:event_btn_penaltyActionPerformed
-
-    private void btn_bookrequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bookrequestActionPerformed
-        BookRequestTicket brt = new BookRequestTicket();
-        CreateTicketFrame ctf = new CreateTicketFrame(brt);
-        this.dispose();
-        ctf.setVisible(true);
-    }//GEN-LAST:event_btn_bookrequestActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -233,11 +195,9 @@ public class ChooseTypeTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_bookrequest;
     private javax.swing.JButton btn_borrow;
     private javax.swing.JButton btn_extend;
     private javax.swing.JButton btn_lend;
-    private javax.swing.JButton btn_penalty;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lb_title;
     private view.other.MyButton myButton2;

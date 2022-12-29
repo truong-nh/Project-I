@@ -4,28 +4,39 @@
  */
 package view.manager.ticket.form;
 
+import controller.AccountController;
+import controller.BookController;
 import controller.TicketController;
 import java.util.Date;
+import model.book.Book;
 import model.ticket.BorrowTicket;
+import model.user.Account;
+import model.user.User;
 import view.manager.ticket.CreateTicketFrame;
 import view.manager.ticket.EditTicketFrame;
+import view.other.NofiDialog;
 
 /**
  *
  * @author Administrator
  */
 public class BorrowTicketForm extends javax.swing.JPanel {
+
     private BorrowTicket borrowticket;
     private EditTicketFrame etf;
     private CreateTicketFrame ctf;
+     TicketController ticketController = new TicketController();
+        AccountController accountController = new AccountController();
+        BookController bookController = new BookController();
+
     /**
      * Creates new form BorrowTicketEditForm
      */
     public BorrowTicketForm() {
         initComponents();
     }
-    
-    public BorrowTicketForm(BorrowTicket ticket,EditTicketFrame etf) {
+
+    public BorrowTicketForm(BorrowTicket ticket, EditTicketFrame etf) {
         initComponents();
         this.etf = etf;
         this.borrowticket = ticket;
@@ -35,15 +46,16 @@ public class BorrowTicketForm extends javax.swing.JPanel {
 //        tf_dateborrow.setText(String.valueOf(borrowticket.getBorrowedDate()));
 //        tf_datelend.setText(String.valueOf(borrowticket.getBorrowedDate()));
 //        chuaxulyjRadioButton1
-        
+
     }
-    
-    public BorrowTicketForm(BorrowTicket ticket,CreateTicketFrame ctf) {
+
+    public BorrowTicketForm(BorrowTicket ticket, CreateTicketFrame ctf) {
         initComponents();
         this.ctf = ctf;
         this.borrowticket = ticket;
 
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,25 +283,54 @@ public class BorrowTicketForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
-        TicketController ticketController = new TicketController();
+       
         int iduser = Integer.parseInt(tf_iduser.getText());
         int idBook = Integer.parseInt(tf_idbook.getText());
-        try {
-            
-            ticketController.addBorrowTicket("đã xử lý", iduser, idBook, new Date());
-            int currentid = TicketController.getCurrentIdTicket();
-            ticketController.addLendTicket("chưa xử lý", new Date(new Date().getTime() + 1209600000),currentid );            
-        } catch (Exception e) {
-            
+        Book book = BookController.getBookById(idBook);
+        User user = AccountController.getUserById(iduser);
+        if (user== null){
+            NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin người dùng");
+            nd.setVisible(true);
         }
-        
+        if (!user.getAccount().getRole().equals("user")) {
+            NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin người dùng");
+            nd.setVisible(true);
+        } else {
+            if (book == null) {
+                NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin sách");
+                nd.setVisible(true);
+            } else {
+                
+                if (!book.getStatus().equals("Khả dụng")){
+                    String str =  book.getStatus();
+                    NofiDialog nd = new NofiDialog("Sách "+str);
+                     nd.setVisible(true);
+                }
+                else{
+                try {
+                    //int a= 0/0;
+                    ticketController.addBorrowTicket("đã xử lý", iduser, idBook, new Date());
+                    int currentid = TicketController.getCurrentIdTicket();
+                    ticketController.addLendTicket("chưa xử lý", new Date(new Date().getTime() + 1209600000), currentid);
+                    this.setVisible(false);
+                    ctf.setVisible(false);
+                } catch (Exception e) {
+                    NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin");
+                    nd.setVisible(true);
+                }
+                }
+            }
+
+        }
+
+
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
-        if(etf != null){
+        if (etf != null) {
             this.etf.dispose();
         }
-        if(ctf != null){
+        if (ctf != null) {
             this.ctf.dispose();
         }
     }//GEN-LAST:event_myButton2ActionPerformed

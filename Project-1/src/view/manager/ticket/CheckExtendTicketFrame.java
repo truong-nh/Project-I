@@ -39,15 +39,15 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
          SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 //         String strDate = formatter.format(ticket.getDateCreate());
 //         tf_datecreate.setText(strDate);
-        tf_dateborrow.setText(formatter.format(ticket.getDateCreate()));
+        tf_dateCreate.setText(formatter.format(ticket.getDateCreate()));
          tf_datelend.setText(formatter.format(ticket.getNewReturnDate()));
 
         
-        if (ticket.getStatus().equals("chưa xử lý")){
+        if (ticket.getStatus().equals("Chưa xử lý")){
            chuaxulyjRadioButton1.setSelected(true);
         }
         else{
-            daxulyjRadioButton2.setSelected(false);
+            daxulyjRadioButton2.setSelected(true);
         }
     }
     /**
@@ -85,7 +85,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
         daxulyjRadioButton2 = new javax.swing.JRadioButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        tf_dateborrow = new javax.swing.JTextField();
+        tf_dateCreate = new javax.swing.JTextField();
         myButton2 = new view.other.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -190,7 +190,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setText("ID Phiếu Trả");
+        jLabel5.setText("ID Phiếu mượn");
 
         tf_idticket.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_idticket.setCaretColor(new java.awt.Color(51, 51, 51));
@@ -233,7 +233,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel7.setText("Ngày trả");
+        jLabel7.setText("Ngày trả mới");
 
         tf_datelend.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_datelend.setCaretColor(new java.awt.Color(51, 51, 51));
@@ -296,11 +296,11 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel11.setText("Ngày mượn");
+        jLabel11.setText("Ngày gia hạn");
 
-        tf_dateborrow.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tf_dateborrow.setCaretColor(new java.awt.Color(51, 51, 51));
-        tf_dateborrow.setEnabled(false);
+        tf_dateCreate.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_dateCreate.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_dateCreate.setEnabled(false);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -310,7 +310,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_dateborrow, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_dateCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -318,7 +318,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_dateborrow, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                    .addComponent(tf_dateCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -475,7 +475,7 @@ public class CheckExtendTicketFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private view.other.MyButton myButton2;
     private javax.swing.JTextField tf_bookname;
-    private javax.swing.JTextField tf_dateborrow;
+    private javax.swing.JTextField tf_dateCreate;
     private javax.swing.JTextField tf_datelend;
     private javax.swing.JTextField tf_idbook;
     private javax.swing.JTextField tf_idborrow;

@@ -229,4 +229,37 @@ public class DBBook {
             }
         }
     }
+    
+    public static void updateStatusBook(int idBook, String newStatus) {
+        Connection connection = JDBCConnection.getJDBCConnection();
+        PreparedStatement pst = null;
+        String sql = "UPDATE pj1.book set status = ? WHERE idBook = ?";
+
+ 
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,newStatus);  
+            pst.setInt(2,idBook);
+            int rs = pst.executeUpdate();
+            System.out.println(rs);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
 }

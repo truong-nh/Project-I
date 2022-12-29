@@ -4,6 +4,7 @@
  */
 package controller;
 
+import database.DBBook;
 import database.DBTicket;
 import java.lang.Math;
 import java.util.ArrayList;
@@ -47,6 +48,26 @@ public class TicketController {
         }
         return null;
     }
+    public static LendTicket getLendTicketById(int id){
+        for (LendTicket lendTicket : DBTicket.getListLendTicket()){
+            if (lendTicket.getId() == id) return lendTicket;
+        }
+        return null;
+    }
+    public static ExtendTicket getExtendTicketByID(int id){
+        for (ExtendTicket extendTicket : DBTicket.getListExtendTicket()){
+            if (extendTicket.getId() == id) return extendTicket;
+        }
+        return null;
+    }
+    
+    public static LendTicket getLendTicketByIdBorrow(int idBorrow){
+        for (LendTicket lendTicket : DBTicket.getListLendTicket()){
+            if (lendTicket.getBorrowTicket().getId() == idBorrow) return lendTicket;
+        }
+        return null;
+    }
+    
     public static int getCurrentIdTicket(){
         int maxz = 0;
         for (BorrowTicket BorrowTicket : DBTicket.getListBorrowTicket()){
@@ -88,6 +109,7 @@ public class TicketController {
         return null;
     }
     
+    
     public static List<Ticket> getTicketByUserId(int id){
         List<Ticket> tickets = new ArrayList<>();
         for (BorrowTicket BorrowTicket : DBTicket.getListBorrowTicket()){
@@ -120,6 +142,14 @@ public class TicketController {
         Date returnDate = new Date(borrowedDate.getTime() + 1209600000);
         BorrowTicket.setReturnDate(returnDate);
         DBTicket.addBorrowTicket(BorrowTicket);
+        DBBook.updateStatusBook(idbook, "Đang mượn");           // cap nhat status sach thanh dang muon
+    }
+    
+    // + 7 ngày khi gia hạn sách
+    public void updateReturnDateLendTicket(int  idBorrowTicket){
+        LendTicket lendTicket = getLendTicketByIdBorrow(idBorrowTicket);
+        lendTicket.setLendDate(new Date(lendTicket.getLendDate().getTime()+604800000L));
+        this.updateLendTicket(lendTicket);
     }
     public void addExtendTicket(int idticket){
         ExtendTicket ExtendTicket = new ExtendTicket();
@@ -127,14 +157,18 @@ public class TicketController {
         ExtendTicket.setStatus("Đã xử lý");
         ExtendTicket.setDateCreate(new Date());
         
-        BorrowTicket bT = TicketController.getBorrowTicketById(idticket);
+        BorrowTicket bT = TicketController.getBorrowTicketById(idticket);        
         ExtendTicket.setBorrowTicket(bT);
-        ExtendTicket.setNewReturnDate(new Date(bT.getBorrowedDate().getTime() + 604800000L));
+        ExtendTicket.setNewReturnDate(new Date(bT.getReturnDate().getTime() + 604800000L));
         DBTicket.addExtendTicket(ExtendTicket);
+        LendTicket lendTicket = TicketController.getLendTicketByIdBorrow(idticket);
+        lendTicket.setLendDate(new Date(lendTicket.getLendDate().getTime() + 604800000L));
+        DBTicket.updateLendTicket(lendTicket);
     }
+    
     public void addLendTicket( String status, Date lendDate, int idBorrowTicket){
         LendTicket LendTicket = new LendTicket();
-        LendTicket.setId(TicketController.getCurrentIdTicket());
+        LendTicket.setId(TicketController.getCurrentIdTicket()+1);
         LendTicket.setStatus(status);
         LendTicket.setDateCreate(new Date());
         LendTicket.setLendDate(lendDate);
