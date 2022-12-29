@@ -4,34 +4,44 @@
  */
 package view.manager.ticket;
 
+import java.text.SimpleDateFormat;
+import model.ticket.BorrowTicket;
 import model.ticket.Ticket;
 
 /**
  *
  * @author Administrator
  */
-public class CheckTicketFrame extends javax.swing.JFrame {
-    private Ticket ticket;
+public class CheckBorrowTicketFrame extends javax.swing.JFrame {
+    private BorrowTicket borrowTicket;
     /**
      * Creates new form CheckInfoFrame
      */
-    public CheckTicketFrame() {
+    public CheckBorrowTicketFrame() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public CheckTicketFrame(Ticket ticket) {
+    public CheckBorrowTicketFrame(BorrowTicket borrowTicket) {
         initComponents();
         setLocationRelativeTo(null);
-        this.ticket = ticket;
-        tf_idticket.setText(String.valueOf(ticket.getId()));
-        tf_iduser.setText("");
-        tf_username.setText("");
-        tf_idbook.setText("");
-        tf_bookname.setText("");
-        tf_datecreate.setText(String.valueOf(ticket.getDateCreate()));
-        tf_dateborrow.setText("");
-        tf_datelend.setText("");
+        this.borrowTicket = borrowTicket;
+        tf_idticket.setText(String.valueOf(borrowTicket.getId()));
+        tf_iduser.setText(String.valueOf(borrowTicket.getBorrower().getAccount().getIdAccount()));
+        tf_username.setText(borrowTicket.getBorrower().getName());
+        tf_idbook.setText(String.valueOf(borrowTicket.getBook().getId()));
+        tf_bookname.setText(borrowTicket.getBook().getName());
+         SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+         String strDate = formatter.format(borrowTicket.getDateCreate());
+        tf_datecreate.setText(strDate);
+        tf_datelend.setText(formatter.format(borrowTicket.getReturnDate()));
+        tf_dateborrow.setText(formatter.format(borrowTicket.getBorrowedDate()));
+        if (borrowTicket.getStatus().equals("chưa xử lý")){
+           chuaxulyjRadioButton1.setSelected(true);
+        }
+        else{
+            daxulyjRadioButton2.setSelected(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -388,21 +398,27 @@ public class CheckTicketFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckBorrowTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckBorrowTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckBorrowTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckBorrowTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CheckTicketFrame().setVisible(true);
+                new CheckBorrowTicketFrame().setVisible(true);
             }
         });
     }

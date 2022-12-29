@@ -4,34 +4,51 @@
  */
 package view.manager.ticket;
 
+import controller.TicketController;
+import java.text.SimpleDateFormat;
+import model.ticket.BorrowTicket;
+import model.ticket.ExtendTicket;
+import model.ticket.LendTicket;
 import model.ticket.Ticket;
 
 /**
  *
  * @author Administrator
  */
-public class CheckTicketFrame extends javax.swing.JFrame {
-    private Ticket ticket;
+public class CheckExtendTicketFrame extends javax.swing.JFrame {
+    private ExtendTicket ticket;
     /**
      * Creates new form CheckInfoFrame
      */
-    public CheckTicketFrame() {
+    TicketController ticketController = new TicketController();
+    public CheckExtendTicketFrame() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public CheckTicketFrame(Ticket ticket) {
+    public CheckExtendTicketFrame(ExtendTicket ticket) {
         initComponents();
         setLocationRelativeTo(null);
         this.ticket = ticket;
         tf_idticket.setText(String.valueOf(ticket.getId()));
-        tf_iduser.setText("");
-        tf_username.setText("");
-        tf_idbook.setText("");
-        tf_bookname.setText("");
-        tf_datecreate.setText(String.valueOf(ticket.getDateCreate()));
-        tf_dateborrow.setText("");
-        tf_datelend.setText("");
+        tf_idborrow.setText(String.valueOf(ticket.getBorrowTicket().getId()));
+        tf_idborrower.setText(String.valueOf(ticket.getBorrowTicket().getBorrower().getAccount().getIdAccount()));
+        tf_nameborrower.setText(ticket.getBorrowTicket().getBorrower().getName() );
+        tf_idbook.setText(String.valueOf(ticket.getBorrowTicket().getBook().getId()));
+        tf_bookname.setText(ticket.getBorrowTicket().getBook().getName());
+         SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//         String strDate = formatter.format(ticket.getDateCreate());
+//         tf_datecreate.setText(strDate);
+        tf_dateborrow.setText(formatter.format(ticket.getDateCreate()));
+         tf_datelend.setText(formatter.format(ticket.getNewReturnDate()));
+
+        
+        if (ticket.getStatus().equals("chưa xử lý")){
+           chuaxulyjRadioButton1.setSelected(true);
+        }
+        else{
+            daxulyjRadioButton2.setSelected(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,21 +61,21 @@ public class CheckTicketFrame extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tf_iduser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tf_username = new javax.swing.JTextField();
+        tf_nameborrower = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tf_idborrower = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         tf_idbook = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tf_bookname = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        tf_datecreate = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         tf_idticket = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tf_idborrow = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         tf_datelend = new javax.swing.JTextField();
@@ -74,46 +91,48 @@ public class CheckTicketFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel1.setText("ID người mượn");
-
-        tf_iduser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tf_iduser.setCaretColor(new java.awt.Color(51, 51, 51));
-        tf_iduser.setEnabled(false);
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Tên người mượn");
 
-        tf_username.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tf_username.setCaretColor(new java.awt.Color(51, 51, 51));
-        tf_username.setEnabled(false);
+        tf_nameborrower.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_nameborrower.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_nameborrower.setEnabled(false);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel3.setText("ID người mượn");
+
+        tf_idborrower.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_idborrower.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_idborrower.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_idborrower.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tf_iduser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
+                .addComponent(jLabel3)
+                .addGap(11, 11, 11)
+                .addComponent(tf_idborrower, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(tf_nameborrower, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(tf_username)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_iduser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tf_nameborrower)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tf_idborrower, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -158,42 +177,33 @@ public class CheckTicketFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel3.setText("Ngày tạo");
-
-        tf_datecreate.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tf_datecreate.setCaretColor(new java.awt.Color(51, 51, 51));
-        tf_datecreate.setEnabled(false);
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tf_datecreate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 943, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_datecreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setText("ID Phiếu mượn");
+        jLabel5.setText("ID Phiếu Trả");
 
         tf_idticket.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_idticket.setCaretColor(new java.awt.Color(51, 51, 51));
         tf_idticket.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tf_idticket.setEnabled(false);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("ID phiếu mượn");
+
+        tf_idborrow.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tf_idborrow.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_idborrow.setEnabled(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -204,6 +214,10 @@ public class CheckTicketFrame extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tf_idticket, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(tf_idborrow, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -211,7 +225,9 @@ public class CheckTicketFrame extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_idticket, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_idborrow, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -348,7 +364,7 @@ public class CheckTicketFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -388,21 +404,51 @@ public class CheckTicketFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckExtendTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckExtendTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckExtendTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CheckTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CheckExtendTicketFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CheckTicketFrame().setVisible(true);
+                new CheckExtendTicketFrame().setVisible(true);
             }
         });
     }
@@ -430,11 +476,11 @@ public class CheckTicketFrame extends javax.swing.JFrame {
     private view.other.MyButton myButton2;
     private javax.swing.JTextField tf_bookname;
     private javax.swing.JTextField tf_dateborrow;
-    private javax.swing.JTextField tf_datecreate;
     private javax.swing.JTextField tf_datelend;
     private javax.swing.JTextField tf_idbook;
+    private javax.swing.JTextField tf_idborrow;
+    private javax.swing.JTextField tf_idborrower;
     private javax.swing.JTextField tf_idticket;
-    private javax.swing.JTextField tf_iduser;
-    private javax.swing.JTextField tf_username;
+    private javax.swing.JTextField tf_nameborrower;
     // End of variables declaration//GEN-END:variables
 }

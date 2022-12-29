@@ -6,9 +6,12 @@ package view.manager.ticket;
 
 import static config.JDBCConnection.getJDBCConnection;
 import constand.MySQLConstand;
+import controller.TicketController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import model.book.Book;
 import model.ticket.BookRequestTicket;
@@ -30,7 +33,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
      * Creates new form TicketManagerForm
      */
     private int count;
-    
+    TicketController ticketController = new TicketController();
     public void setCountToZ(){
         this.count = 0;
     }
@@ -104,6 +107,11 @@ public class TicketManagerForm extends javax.swing.JPanel {
         btn_checkticket.setText("Kiểm tra phiếu");
         btn_checkticket.setDefaultCapable(false);
         btn_checkticket.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_checkticket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_checkticketActionPerformed(evt);
+            }
+        });
 
         btn_createticket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_createticket.setText("Tạo mới");
@@ -117,9 +125,14 @@ public class TicketManagerForm extends javax.swing.JPanel {
 
         jcb_type.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jcb_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Phiếu mượn", "Phiếu gia hạn", "Phiếu trả", "Phiếu phạt", "Phiếu yêu cầu sách" }));
+        jcb_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_typeActionPerformed(evt);
+            }
+        });
 
         jcb_status.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa xử lý", "Đã xử lý" }));
+        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã xử lý", "Chưa xử lý", " " }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -288,10 +301,14 @@ public class TicketManagerForm extends javax.swing.JPanel {
             while (rs.next()) {
                 String idticket = String.valueOf(rs.getInt("idTicket"));
                 String type = searchtype;
-                String date = rs.getString("dateCreate");
+                
+               // String date = rs.getString("dateCreate");
+                SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String strDate = formatter.format(new Date(rs.getLong("dateCreate")) );
+                
                 String status = rs.getString("status");
 
-                String tbData[] = {idticket, type, date, status};
+                String tbData[] = {idticket, type, strDate, status};
 
                 DefaultTableModel tbmodel = (DefaultTableModel) tb_ticket.getModel();
                 tbmodel.addRow(tbData);
@@ -328,6 +345,24 @@ public class TicketManagerForm extends javax.swing.JPanel {
             ctt.setVisible(true);
         }
     }//GEN-LAST:event_btn_createticketActionPerformed
+
+    private void btn_checkticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_checkticketActionPerformed
+        Ticket checkticket = SelectTicket();
+        if(checkticket != null){
+            if (checkticket instanceof BorrowTicket){
+                CheckBorrowTicketFrame ctf = new CheckBorrowTicketFrame((BorrowTicket)ticketController.getTicketById(checkticket.getId()));
+                ctf.setVisible(true);           
+            }
+            if (checkticket instanceof  LendTicket){
+                CheckLendTicketFrame ctf = new CheckLendTicketFrame((LendTicket)ticketController.getTicketById(checkticket.getId()));
+                ctf.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_btn_checkticketActionPerformed
+
+    private void jcb_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_typeActionPerformed
     
     public void ClearDataTable() {
         DefaultTableModel tbmodel = (DefaultTableModel) tb_ticket.getModel();
