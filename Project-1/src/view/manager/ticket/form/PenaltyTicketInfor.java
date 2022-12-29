@@ -42,7 +42,9 @@ public class PenaltyTicketInfor extends javax.swing.JFrame {
         tf_datelend.setText(formatter.format(lendTicket.getLendDate()));
         tf_dateborrow.setText(formatter.format(borrowTicket.getBorrowedDate()));
         tf_datelend1.setText(formatter.format(new Date()));
-        long dateLate = (new Date().getTime() - borrowTicket.getReturnDate().getTime()) / 86400000;
+        long currentDate = new Date().getTime();
+        long returnDate = borrowTicket.getReturnDate().getTime();
+        long dateLate = (returnDate-currentDate) / 86400000;
         if (dateLate <= 0) {
             dateLate = 0;
         }
@@ -64,6 +66,9 @@ public class PenaltyTicketInfor extends javax.swing.JFrame {
             }
         }
         tf_penalty.setText(String.valueOf(penaltyValue));
+        System.out.println(dateLate);
+        System.out.println(currentDate);
+        System.out.println(returnDate);
     }
 
     /**

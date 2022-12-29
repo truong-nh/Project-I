@@ -43,7 +43,7 @@ public class CheckLendTicketFrame extends javax.swing.JFrame {
         
         if (ticket.getStatus().equals("chưa xử lý")){
            chuaxulyjRadioButton1.setSelected(true);
-           tf_datelend.setText("chưa trả sách");
+           tf_datelend.setText(formatter.format(ticket.getLendDate())+"(chưa trả )");
         }
         else{
             daxulyjRadioButton2.setSelected(true);
