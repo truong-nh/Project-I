@@ -10,6 +10,7 @@ import java.awt.Frame;
 import model.user.User;
 import view.clock.ClockThread;
 import view.manager.book.BookManagerForm;
+import view.manager.finance.FinanceManagerForm;
 import view.manager.ticket.TicketManagerForm;
 import view.other.InfoFrame;
 
@@ -85,7 +86,7 @@ public class ManagerFrame extends javax.swing.JFrame {
             }
         });
 
-        myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        myButton1.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         myButton1.setText("Đăng xuất");
         myButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         myButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +182,12 @@ public class ManagerFrame extends javax.swing.JFrame {
         lb_financemanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lb_financemanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_financemanager.setText("Quản lý tài chính");
+        lb_financemanager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_financemanager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_financemanagerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -346,7 +353,6 @@ public class ManagerFrame extends javax.swing.JFrame {
         DisInfoFrame();
     }//GEN-LAST:event_lb_usermanagerMouseClicked
     
-    
     private int xMouse,yMouse;
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
         int x = evt.getXOnScreen();
@@ -405,6 +411,14 @@ public class ManagerFrame extends javax.swing.JFrame {
         pack();
         DisInfoFrame();
     }//GEN-LAST:event_lb_ticketmanagerMouseClicked
+
+    private void lb_financemanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_financemanagerMouseClicked
+        pn_main.removeAll();
+        FinanceManagerForm fmf = new FinanceManagerForm();
+        pn_main.add(fmf);
+        pack();
+        DisInfoFrame();
+    }//GEN-LAST:event_lb_financemanagerMouseClicked
 
     /**
      * @param args the command line arguments
