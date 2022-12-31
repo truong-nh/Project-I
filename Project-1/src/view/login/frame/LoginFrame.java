@@ -31,24 +31,8 @@ public class LoginFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public User user = new User();
-    public Account account = new Account();
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
-    
-    public void setAccount(Account account){
-        this.account = account;
-    }
-    
-    public Account getAccount(){
-        return account;
-    }
+    public User user;
+    public Account account;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -253,7 +237,6 @@ public class LoginFrame extends javax.swing.JFrame {
             String username = tf_username.getText();
             String password = tf_password.getText();
             String passwordDB= Decode.decodePassword(password);
-            System.out.println(passwordDB);
             Statement stm = conn.createStatement();
 
             String sql = "select * from account where username='" + username + "' and password='" + passwordDB + "'";

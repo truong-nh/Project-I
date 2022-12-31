@@ -36,7 +36,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
         tf_datecreate.setText(strDate);
         tf_datelend.setText(formatter.format(borrowTicket.getReturnDate()));
         tf_dateborrow.setText(formatter.format(borrowTicket.getBorrowedDate()));
-        if (borrowTicket.getStatus().equals("chưa xử lý")){
+        if (borrowTicket.getStatus().equals("chưa xử lý")||borrowTicket.getStatus().equals("Chưa xử lý")){
            chuaxulyjRadioButton1.setSelected(true);
         }
         else{
@@ -90,6 +90,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_iduser.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_iduser.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_iduser.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_iduser.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -98,6 +99,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_username.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_username.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_username.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_username.setEnabled(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -132,6 +134,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_idbook.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_idbook.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_idbook.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_idbook.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -140,6 +143,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_bookname.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_bookname.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_bookname.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_bookname.setEnabled(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -174,6 +178,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_datecreate.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_datecreate.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_datecreate.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_datecreate.setEnabled(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -202,7 +207,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_idticket.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_idticket.setCaretColor(new java.awt.Color(51, 51, 51));
-        tf_idticket.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tf_idticket.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_idticket.setEnabled(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -231,6 +236,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_datelend.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_datelend.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_datelend.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_datelend.setEnabled(false);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -294,6 +300,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
 
         tf_dateborrow.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tf_dateborrow.setCaretColor(new java.awt.Color(51, 51, 51));
+        tf_dateborrow.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         tf_dateborrow.setEnabled(false);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -329,10 +336,6 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
             .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -340,6 +343,10 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,9 +365,9 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -371,7 +378,7 @@ public class CheckBorrowTicketFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

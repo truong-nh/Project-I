@@ -62,7 +62,6 @@ public class TicketManagerForm extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         tf_searchid = new javax.swing.JTextField();
         btn_search = new view.other.MyButton();
-        btn_editticket = new view.other.MyButton();
         btn_checkticket = new view.other.MyButton();
         btn_createticket = new view.other.MyButton();
         jcb_type = new javax.swing.JComboBox<>();
@@ -90,16 +89,6 @@ public class TicketManagerForm extends javax.swing.JPanel {
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_searchbtn_searchActionPerformed(evt);
-            }
-        });
-
-        btn_editticket.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btn_editticket.setText("Chỉnh sửa");
-        btn_editticket.setDefaultCapable(false);
-        btn_editticket.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_editticket.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editticketActionPerformed(evt);
             }
         });
 
@@ -132,7 +121,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
         });
 
         jcb_status.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã xử lý", "Chưa xử lý" }));
+        jcb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã xử lý", "Chưa xử lý", "" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -148,18 +137,16 @@ public class TicketManagerForm extends javax.swing.JPanel {
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(74, 74, 74)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(92, 92, 92))
+                            .addComponent(jcb_type, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(btn_editticket, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_createticket, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)))
+                        .addGap(150, 150, 150)
+                        .addComponent(btn_createticket, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(92, 92, 92)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcb_status, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
@@ -184,8 +171,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
                     .addComponent(btn_createticket, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_checkticket, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_editticket, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_checkticket, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
 
@@ -293,7 +279,7 @@ public class TicketManagerForm extends javax.swing.JPanel {
             else if (searchtype.equals("Phiếu trả")) sql = sql + "lendticket";
             else if (searchtype.equals("Phiếu phạt")) sql = sql + "penaltyticket";
             else  sql = sql + "bookrequestticket";
-            sql = sql + " where idTicket like '%" + searchid + "%' and status = '" + searchstatus +"'order by dateCreate desc" ;
+            sql = sql + " where idTicket like '%" + searchid + "%' and status like '%" + searchstatus +"%' order by dateCreate desc" ;
 
             ResultSet rs = st.executeQuery(sql);
             ClearDataTable();
@@ -321,18 +307,6 @@ public class TicketManagerForm extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_searchbtn_searchActionPerformed
-
-    private void btn_editticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editticketActionPerformed
-        Ticket editticket = SelectTicket();
-        if(editticket != null){
-            EditTicketFrame etf = new EditTicketFrame(editticket);
-            etf.setVisible(true);
-        }
-        else {
-            NofiDialog nd = new NofiDialog("Vui lòng chọn phiếu để chỉnh sửa");
-            nd.setVisible(true);
-        }
-    }//GEN-LAST:event_btn_editticketActionPerformed
 
     private void btn_createticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createticketActionPerformed
         Ticket createticket = SelectTicket();
@@ -634,7 +608,6 @@ public class TicketManagerForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.other.MyButton btn_checkticket;
     private view.other.MyButton btn_createticket;
-    private view.other.MyButton btn_editticket;
     private view.other.MyButton btn_search;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel8;

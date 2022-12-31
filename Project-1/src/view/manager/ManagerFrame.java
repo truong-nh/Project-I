@@ -181,6 +181,12 @@ public class ManagerFrame extends javax.swing.JFrame {
         lb_financemanager.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lb_financemanager.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_financemanager.setText("Quản lý tài chính");
+        lb_financemanager.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_financemanager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_financemanagerMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -405,6 +411,10 @@ public class ManagerFrame extends javax.swing.JFrame {
         pack();
         DisInfoFrame();
     }//GEN-LAST:event_lb_ticketmanagerMouseClicked
+
+    private void lb_financemanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_financemanagerMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lb_financemanagerMouseClicked
 
     /**
      * @param args the command line arguments

@@ -8,20 +8,17 @@ import model.ticket.BookRequestTicket;
 import model.ticket.BorrowTicket;
 import model.ticket.ExtendTicket;
 import model.ticket.LendTicket;
-import model.ticket.PenaltyTicket;
 import model.ticket.Ticket;
 import view.manager.ticket.form.BookRequestTicketForm;
 import view.manager.ticket.form.BorrowTicketForm;
 import view.manager.ticket.form.ExtendTicketForm;
 import view.manager.ticket.form.LendTicketForm;
-import view.manager.ticket.form.PenaltyTicketForm;
 
 /**
  *
  * @author Administrator
  */
 public class CreateTicketFrame extends javax.swing.JFrame {
-    private Ticket ticket;
     /**
      * Creates new form CreateTicketFrame
      */
@@ -33,7 +30,6 @@ public class CreateTicketFrame extends javax.swing.JFrame {
     public CreateTicketFrame(Ticket ticket){
         initComponents();
         setLocationRelativeTo(null);
-        this.ticket = ticket;
         if(ticket instanceof BorrowTicket){
             BorrowTicketForm btf = new BorrowTicketForm((BorrowTicket) ticket,this);
             pn_main.add(btf);
@@ -46,15 +42,11 @@ public class CreateTicketFrame extends javax.swing.JFrame {
             LendTicketForm ltf = new LendTicketForm((LendTicket) ticket, this);
             pn_main.add(ltf);
         }
-        else if(ticket instanceof PenaltyTicket){
-            PenaltyTicketForm ptf = new PenaltyTicketForm((PenaltyTicket) ticket, this);
-            pn_main.add(ptf);
-        }
         else {
             BookRequestTicketForm brtf = new BookRequestTicketForm((BookRequestTicket) ticket, this);
             pn_main.add(brtf);
         }
-        pack();
+        this.pack();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +94,7 @@ public class CreateTicketFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE))
+                .addComponent(pn_main, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -113,7 +105,7 @@ public class CreateTicketFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
