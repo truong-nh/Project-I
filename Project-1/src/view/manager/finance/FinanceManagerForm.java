@@ -24,7 +24,7 @@ public class FinanceManagerForm extends javax.swing.JPanel {
      */
     public FinanceManagerForm() {
         initComponents();
-        tb_finance.setVisible(false);
+//        tb_finance.setVisible(false);
     }
 
     /**
@@ -204,12 +204,12 @@ public class FinanceManagerForm extends javax.swing.JPanel {
             System.out.println(fromTime + " - " + endTime);
             System.out.println(fromDate + " - " + endDate);
             
-            List<Finance> financeList = fc.getFinanceReport(fromDate,endDate);
-            Iterator<Finance> i = financeList.iterator();
+//            List<Finance> financeList = fc.getFinanceReport(fromDate,endDate);
+//            Iterator<Finance> i = financeList.iterator();
             
-            while(i.hasNext()){
-                
-            }
+//            while(i.hasNext()){
+//                
+//            }
         } catch (ParseException ex) {
             Logger.getLogger(FinanceManagerForm.class.getName()).log(Level.SEVERE, null, ex);
         }

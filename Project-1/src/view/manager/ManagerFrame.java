@@ -413,15 +413,11 @@ public class ManagerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_ticketmanagerMouseClicked
 
     private void lb_financemanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_financemanagerMouseClicked
-<<<<<<< HEAD
-        // TODO add your handling code here:
-=======
         pn_main.removeAll();
         FinanceManagerForm fmf = new FinanceManagerForm();
         pn_main.add(fmf);
         pack();
         DisInfoFrame();
->>>>>>> e76d3cd5100333abe45c1db4fd36ed79c4d802aa
     }//GEN-LAST:event_lb_financemanagerMouseClicked
 
     /**
