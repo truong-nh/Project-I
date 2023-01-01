@@ -4,6 +4,8 @@
  */
 package view.manager.ticket.form;
 
+import controller.BookController;
+import controller.FinanceController;
 import controller.TicketController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +19,7 @@ import model.ticket.LendTicket;
 public class PenaltyTicketInfor extends javax.swing.JFrame {
 
     private BorrowTicket borrowTicket;
+    long penaltyValue;
 
     /**
      * Creates new form CheckInfoFrame
@@ -43,13 +46,13 @@ public class PenaltyTicketInfor extends javax.swing.JFrame {
         tf_dateborrow.setText(formatter.format(borrowTicket.getBorrowedDate()));
         tf_datelend1.setText(formatter.format(new Date()));
         long currentDate = new Date().getTime();
-        long returnDate = borrowTicket.getReturnDate().getTime();
-        long dateLate = (returnDate-currentDate) / 86400000;
+        long returnDate = lendTicket.getLendDate().getTime();
+        long dateLate = (currentDate-returnDate) / 86400000;
         if (dateLate <= 0) {
             dateLate = 0;
         }
         tf_dateLate.setText(String.valueOf(dateLate));
-        long penaltyValue = 0;
+         penaltyValue = 0;
         if (dateLate >= 14) {
             penaltyValue = 55000;
         } else {
@@ -59,7 +62,7 @@ public class PenaltyTicketInfor extends javax.swing.JFrame {
                 if (dateLate >= 3) {
                     penaltyValue = 10000;
                 } else {
-                    if (dateLate >= 3) {
+                    if (dateLate >0) {
                         penaltyValue = 3000;
                     }
                 }
@@ -438,6 +441,20 @@ public class PenaltyTicketInfor extends javax.swing.JFrame {
 
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
         // TODO add your handling code here:
+        FinanceController financeController = new FinanceController();
+        TicketController ticketController = new TicketController();
+        BookController bookController = new BookController();
+        try {
+            ticketController.updateStatusLendTicket(borrowTicket);
+       
+            if (penaltyValue >0){
+            ticketController.addPenaltyTicket(penaltyValue, borrowTicket.getId());
+            financeController.addFinance(penaltyValue, "thu", "tiền phạt nộp muộn "+String.valueOf(borrowTicket.getId()));
+            }
+             this.setVisible(false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+"999");
+        }
     }//GEN-LAST:event_myButton3ActionPerformed
 
     /**

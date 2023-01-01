@@ -5,6 +5,7 @@
 package view.manager.ticket.form;
 
 import controller.TicketController;
+import model.ticket.BorrowTicket;
 import model.ticket.ExtendTicket;
 import model.ticket.Ticket;
 import view.manager.ticket.CreateTicketFrame;
@@ -159,12 +160,17 @@ public class ExtendTicketForm extends javax.swing.JPanel {
     private void myButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton1ActionPerformed
         int idBorrowTicket = Integer.parseInt(tf_idborrowticket.getText());
         TicketController ticketController = new TicketController();
-        Ticket ticket = TicketController.getBorrowTicketById(idBorrowTicket);
+        BorrowTicket ticket = TicketController.getBorrowTicketById(idBorrowTicket);
         if (ticket == null) {
             NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin phiếu mượn");
             nd.setVisible(true);
         }
         else{
+            if (TicketController.getExtendTicketByIDBorrow(ticket.getId())!= null ) {
+            NofiDialog nd = new NofiDialog("Phiếu mượn đã được gia hạn");
+            nd.setVisible(true);
+            }            
+            else{
             try {
                 ticketController.addExtendTicket(idBorrowTicket);
                 this.setVisible(false);
@@ -174,6 +180,9 @@ public class ExtendTicketForm extends javax.swing.JPanel {
                 nd.setVisible(true);
             }
         }
+        }
+        
+        
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed

@@ -5,6 +5,8 @@
 package view.manager.user;
 
 import controller.AccountController;
+import controller.FinanceController;
+import model.finance.Finance;
 import model.user.User;
 import view.other.NofiDialog;
 
@@ -438,7 +440,10 @@ public class CreateUserFrame extends javax.swing.JFrame {
                 NofiDialog nd = new NofiDialog(errorString);
                 nd.setVisible(true);
             } else {
+                ///// tạo tài khooản
                 if (accountController.addUser(name, Integer.parseInt(yearbd), phone, idCard, mail, userName, password, role)) {
+                    FinanceController financeController= new FinanceController();
+                    financeController.addFinance(50000, "thu", "tạo tài khoản "+phone);
                     this.setVisible(false);
                 } else {
                     NofiDialog nd = new NofiDialog("Nhập thông tin không hợp lệ");

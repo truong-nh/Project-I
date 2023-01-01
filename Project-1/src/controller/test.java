@@ -39,7 +39,9 @@ public class test {
 //     for(Finance finance:financeController.getFinanceReport("2022-12-11", "2022-12-11")){
 //        System.out.println(finance.getId());
 //        } 
-        System.out.println(TicketController.getTicketById(3));
+        TicketController ticketController = new TicketController();
+        ticketController.updateStatusLendTicket(TicketController.getBorrowTicketById(11));
+        System.out.println(TicketController.getTicketById(12).getStatus());
    }
         
 }

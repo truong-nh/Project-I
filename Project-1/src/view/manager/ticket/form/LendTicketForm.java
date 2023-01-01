@@ -16,21 +16,22 @@ import view.other.NofiDialog;
  * @author Administrator
  */
 public class LendTicketForm extends javax.swing.JPanel {
+
     private LendTicket lendticket;
     private CreateTicketFrame ctf;
+
     /**
      * Creates new form LendTicketEditForm
      */
     public LendTicketForm() {
         initComponents();
     }
-    
-    
-    
-    public LendTicketForm(LendTicket ticket,CreateTicketFrame ctf) {
+
+    public LendTicketForm(LendTicket ticket, CreateTicketFrame ctf) {
         initComponents();
         this.ctf = ctf;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,23 +157,30 @@ public class LendTicketForm extends javax.swing.JPanel {
         if (ticket == null) {
             NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin phiếu mượn");
             nd.setVisible(true);
-        }
-        else{
-            try {
-                PenaltyTicketInfor penaltyTicketInfor = new PenaltyTicketInfor((BorrowTicket) ticket);
-                penaltyTicketInfor.setVisible(true);
-                this.setVisible(false);
-            } catch (Exception e) {
-                NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin ");
+        } else {
+            if (TicketController.getLendTicketByIdBorrow(ticket.getId()).getStatus().equals("Đã xử lý")) {
+                NofiDialog nd = new NofiDialog("Phiếu trả đã được xử lý");
                 nd.setVisible(true);
-                System.out.println(e.getMessage());
+
+            } else {
+                try {
+                    PenaltyTicketInfor penaltyTicketInfor = new PenaltyTicketInfor((BorrowTicket) ticket);
+                    penaltyTicketInfor.setVisible(true);
+                    this.setVisible(false);
+                } catch (Exception e) {
+                    NofiDialog nd = new NofiDialog("Vui lòng kiểm tra lại thông tin ");
+                    nd.setVisible(true);
+                    System.out.println(e.getMessage());
+                }
             }
-        }  
+
+        }
+
 
     }//GEN-LAST:event_myButton1ActionPerformed
 
     private void myButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton2ActionPerformed
-       // this.etf.dispose();
+        // this.etf.dispose();
     }//GEN-LAST:event_myButton2ActionPerformed
 
 

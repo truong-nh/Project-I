@@ -60,13 +60,22 @@ public class TicketController {
         }
         return null;
     }
-    
     public static LendTicket getLendTicketByIdBorrow(int idBorrow){
         for (LendTicket lendTicket : DBTicket.getListLendTicket()){
             if (lendTicket.getBorrowTicket().getId() == idBorrow) return lendTicket;
         }
         return null;
     }
+    
+        public static ExtendTicket getExtendTicketByIDBorrow(int idborrow){
+        for (ExtendTicket extendTicket : DBTicket.getListExtendTicket()){
+            if (extendTicket.getBorrowTicket().getId() == idborrow) return extendTicket;
+        }
+        return null;
+    }
+
+    
+    
     
     public static int getCurrentIdTicket(){
         int maxz = 0;
@@ -165,7 +174,7 @@ public class TicketController {
         lendTicket.setLendDate(new Date(lendTicket.getLendDate().getTime() + 604800000L));
         DBTicket.updateLendTicket(lendTicket);
     }
-    
+   
     public void addLendTicket( String status, Date lendDate, int idBorrowTicket){
         LendTicket LendTicket = new LendTicket();
         LendTicket.setId(TicketController.getCurrentIdTicket()+1);
@@ -177,7 +186,7 @@ public class TicketController {
     }
     public void addPenaltyTicket(long penalty, int idticket){
         PenaltyTicket PenaltyTicket = new PenaltyTicket();
-        PenaltyTicket.setId(TicketController.getCurrentIdTicket());
+        PenaltyTicket.setId(TicketController.getCurrentIdTicket()+1);
         PenaltyTicket.setStatus("Đã xử lý");
         PenaltyTicket.setDateCreate(new Date());
         PenaltyTicket.setPenalty(penalty);
@@ -218,6 +227,19 @@ public class TicketController {
            return false;
        }
     }
+    
+    public boolean updateStatusLendTicket(BorrowTicket borrowTicket){
+        try {
+           LendTicket lendTicket= getLendTicketByIdBorrow(borrowTicket.getId());
+           lendTicket.setStatus("Đã xử lý");
+           DBTicket.updateLendTicket(lendTicket);
+           DBBook.updateStatusBook(borrowTicket.getBook().getId(), "Khả dụng");
+           return true;
+       } catch (Exception e) {
+           return false;
+       }
+    }
+    
     public boolean updateBookRequestTicket(BookRequestTicket BookRequestTicket){
         try {
            DBTicket.updateBookRequestTicket(BookRequestTicket);

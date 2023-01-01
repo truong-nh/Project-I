@@ -31,8 +31,26 @@ public class LoginFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public User user;
-    public Account account;
+
+    
+    public User user = new User();
+    public Account account = new Account();
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setAccount(Account account){
+        this.account = account;
+    }
+
+    public Account getAccount(){
+        return account;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

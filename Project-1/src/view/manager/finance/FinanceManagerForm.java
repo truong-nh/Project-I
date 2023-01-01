@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import model.finance.Finance;
 import util.DateUtil;
 /**
@@ -193,28 +194,50 @@ public class FinanceManagerForm extends javax.swing.JPanel {
 
     private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
         try {
+                       
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String from = formatter.format(j_fromdate.getDate());
             String end = formatter.format(j_enddate.getDate());
-            long fromTime = DateUtil.sdf.parse(from).getTime();
-            long endTime = DateUtil.atEndOfDay(DateUtil.sdf.parse(end)).getTime();
-            String fromDate = String.valueOf(fromTime);
-            String endDate = String.valueOf(endTime);
-            System.out.println(from + " - " + end);
-            System.out.println(fromTime + " - " + endTime);
-            System.out.println(fromDate + " - " + endDate);
+
             
-//            List<Finance> financeList = fc.getFinanceReport(fromDate,endDate);
-//            Iterator<Finance> i = financeList.iterator();
+            fc  = new FinanceController();
+            List<Finance> financeList = fc.getFinanceReport(from,end);
+            ClearDataTable();
+            DefaultTableModel tbmodel =  (DefaultTableModel) tb_finance.getModel();
             
-//            while(i.hasNext()){
-//                
-//            }
+            long  thu =0;
+            long  chi= 0;
+            
+            for(Finance finance:financeList ){
+                String id = String.valueOf( finance.getId());
+                String value = String.valueOf(finance.getValue());
+                String date = formatter.format(finance.getDate());
+                String type = finance.getType();
+                if ( type.equals("thu") ){
+                thu += finance.getValue();
+                }
+                else{
+                chi+= finance.getValue();
+                }
+                String description    = finance.getDescription();
+                
+                String tmpData[] = {id, value, date, type, description};
+
+                tbmodel.addRow(tmpData);
+                
+            }
+            tf_thu.setText(String.valueOf(thu));
+            tf_chi.setText(String.valueOf(chi));
+
         } catch (ParseException ex) {
             Logger.getLogger(FinanceManagerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_okActionPerformed
 
+    public void ClearDataTable() {
+        DefaultTableModel tbmodel = (DefaultTableModel) tb_finance.getModel();
+        tbmodel.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ok;
